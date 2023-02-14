@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Back" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/01.TileMaps/TileMap.png?fileID=627789610&amp;guid=5c1fdbd3ce6a67f408021095b0b3ff3e&amp;type=3#TileMap_0&apos;); background-color: rgb(0, 0, 0);">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
