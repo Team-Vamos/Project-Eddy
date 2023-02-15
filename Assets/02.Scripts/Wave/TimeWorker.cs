@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TimeWorker : MonoBehaviour
 {
+    public delegate void OnTimeResetDelegate();
+    
+    public event OnTimeResetDelegate OnTimeReset;
+
     public float time;
     public float timeScale = 1;
     public bool isPause;
@@ -31,6 +35,12 @@ public class TimeWorker : MonoBehaviour
     public void AddTime(float time)
     {
         this.time += time;
+    }
+    
+    public void ResetTime()
+    {
+        time = 0;
+        OnTimeReset?.Invoke();
     }
 
     public void Update()
