@@ -1,23 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public enum DayState
-{
-    Day,
-    Night,
-}
-
 public class DayWorker : MonoBehaviour
 {
-    public delegate void OnNightComingDelegate();
-    public delegate void OnDayComingDelegate();
-    public delegate void OnNightComeDelegate();
-    public delegate void OnDayComeDelegate();
+    public delegate void OnStatusChangingDelegate(DayState dayState);
+    public delegate void OnStatusChangedDelegate(DayState dayState);
 
-    public event OnNightComingDelegate OnNightComing;
-    public event OnDayComingDelegate OnDayComing;
-    public event OnNightComeDelegate OnNightCome;
-    public event OnDayComeDelegate OnDayCome;
+    public event OnStatusChangingDelegate OnStatusChanging;
+    public event OnStatusChangedDelegate OnStatusChanged;
 
     public float dayTime = 60;
     public float nightTime = 60;
@@ -38,7 +28,7 @@ public class DayWorker : MonoBehaviour
             if (!(timeWorker.time >= dayTime)) return;
             
             _dayState = DayState.Night;
-            OnNightComing?.Invoke();
+            OnStatusChanging?.Invoke(_dayState);
             StartCoroutine(ChangeState());
         }
         else
@@ -46,7 +36,7 @@ public class DayWorker : MonoBehaviour
             if (!(timeWorker.time >= nightTime)) return;
             
             _dayState = DayState.Day;
-            OnDayComing?.Invoke();
+            OnStatusChanging?.Invoke(_dayState);
             StartCoroutine(ChangeState());
         }
     }
@@ -57,13 +47,15 @@ public class DayWorker : MonoBehaviour
         
         if (_dayState == DayState.Day)
         {
-            OnDayCome?.Invoke();
+            OnStatusChanged?.Invoke(_dayState);
             timeWorker.SetTimeScale(dayTimeScale);
         }
         else
         {
-            OnNightCome?.Invoke();
+            OnStatusChanged?.Invoke(_dayState);
             timeWorker.SetTimeScale(nightTimeScale);
         }
+        
+        timeWorker.ResetTime();
     }
 }
