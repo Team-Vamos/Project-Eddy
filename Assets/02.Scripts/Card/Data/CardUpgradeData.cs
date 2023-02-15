@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Card
 {
 	[System.Serializable]
-	public class CardUpgrade
+	public class CardUpgradeData
 	{
         public Sprite weaponImage;
 
