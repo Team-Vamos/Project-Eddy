@@ -12,32 +12,21 @@ public class Ore : Entity, IDamageTaker
     private int _oreHp = 5;
 
     private SpriteRenderer _spriteRenderer;
-    private Slider _slider;
     private float _currentOreGauge;
     private int _currentOreHp;
 
     private void Awake()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _slider = transform.Find("Canvas/Slider").GetComponent<Slider>();
 
         if (_spriteRenderer == null)
         {
             Debug.LogError("SpriteRenderer is Null");
         }
-
-        if (_slider == null)
-        {
-            Debug.LogError("Slider is Null");
-        }
     }
 
     private void Start()
     {
-        _slider.minValue = 0f;
-        _slider.maxValue = _oreGauge;
-        _slider.value = _oreGauge;
-
         _currentOreGauge = _oreGauge;
         _currentOreHp = _oreHp;
 
@@ -67,8 +56,6 @@ public class Ore : Entity, IDamageTaker
                 _currentOreGauge = _oreGauge;
             }
         }
-
-        _slider.value = _currentOreGauge;
     }
 
     // private void ChangeSprite()
