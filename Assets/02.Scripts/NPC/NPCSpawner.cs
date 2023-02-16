@@ -37,7 +37,6 @@ public class NPCSpawner : MonoBehaviour
         BaseNPC npc = Instantiate(_npcPrefabs[Random.Range(0, _npcPrefabs.Count)], startPos, Quaternion.identity);
         npc.gameObject.SetActive(true);
         npc.Move(startPos);
-        // npc.transform.position = startPos;
         npc.SetDestination(destination);
 
 #if UNITY_EDITOR

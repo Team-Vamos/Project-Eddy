@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class Ore : Entity, IDamageTaker
+public class Ore : MonoBehaviour, IDamageTaker
 {
     [SerializeField]
     private float _oreGauge = 100;
@@ -11,9 +13,18 @@ public class Ore : Entity, IDamageTaker
     [SerializeField]
     private int _oreHp = 5;
 
+    [SerializeField]
+    private OreSpawner _oreSpawner;
+
+    [SerializeField]
+    private Vector2 _uiOffset = new Vector2(0f, -100f);
+
+    private VisualElement _gaugeBar;
+
     private SpriteRenderer _spriteRenderer;
     private float _currentOreGauge;
     private int _currentOreHp;
+
 
     private void Awake()
     {
@@ -29,20 +40,34 @@ public class Ore : Entity, IDamageTaker
     {
         _currentOreGauge = _oreGauge;
         _currentOreHp = _oreHp;
+    }
 
-        //ChangeSprite();
+    private void OnDisable() {
+        _oreSpawner.Root.Remove(_gaugeBar);
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 uiPos = RuntimePanelUtils.CameraTransformWorldToPanel(_oreSpawner.Root.panel, transform.position, Define.MainCam);
+
+        _gaugeBar.style.left = uiPos.x - _gaugeBar.layout.width * 0.5f + _uiOffset.x;
+        _gaugeBar.style.top = uiPos.y + _gaugeBar.layout.height + _uiOffset.y;
+    }
+
+    public void SetGaugeBar(VisualElement gaugeBar)
+    {
+        _gaugeBar = gaugeBar;
     }
 
     public void TakeDamage(float damage)
     {
         _currentOreGauge -= damage;
-
         if (_currentOreGauge <= 0)
         {
             _currentOreHp--;
 
+            _oreSpawner.SpawnHoldOre(transform.position);
             // 원석 소환
-            //OreManager.Instance.SpawnHoldOre(transform.position);
             if (_currentOreHp <= 0)
             {
                 // TODO: 풀링
@@ -51,10 +76,12 @@ public class Ore : Entity, IDamageTaker
             else
             {
                 // 스프라이트 변경
-                //ChangeSprite();
-
+                _spriteRenderer.sprite = _oreSpawner.OreSprites[_currentOreHp - 1];
                 _currentOreGauge = _oreGauge;
             }
+
+            _gaugeBar.style.width = new Length(_currentOreGauge / _oreGauge * 100f, LengthUnit.Percent);
+
         }
     }
 
