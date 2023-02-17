@@ -9,7 +9,7 @@ public class LobbyButton : MonoBehaviour
         UIDocument ui = GetComponent<UIDocument>();
         VisualElement root = ui.rootVisualElement;
 
-        Button button = root.Q<Button>("button");
+        Button button = root.Q<Button>("host");
         button.RegisterCallback<ClickEvent>(OnClick);
     }
     private void OnClick(ClickEvent evt) {
