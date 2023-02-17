@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class LobbiesListManager : MonoSingleton<LobbiesListManager>
 {
-
     public GameObject lobbiesMenu;
     public GameObject lobbyDateItemPrefab;
     public GameObject lobbyListContent;

@@ -8,11 +8,21 @@ using System.Linq;
 
 public class LobbyController : MonoSingleton<LobbyController>
 {
-    public Text LobbyNameText;
+    public Text lobbyNameText;
 
-    public GameObject PlayerListViewContent;
-    public GameObject PlayerListItemPrefab;
-    public GameObject LocalPlayerObject;
+    
+    public GameObject PlayerListViewContent=>playerListViewContent;
+    [SerializeField]
+    private GameObject playerListViewContent;
+    
+    public GameObject PlayerListItemPrefab=>playerListItemPrefab;
+    [SerializeField]
+    private GameObject playerListItemPrefab;
+    
+    public GameObject LocalPlayerObject=>localPlayerObject;
+    [SerializeField]
+    private GameObject localPlayerObject;
+    
 
     public ulong CurrentLobbyID;
     public bool PlayerItemCreated = false;
@@ -73,7 +83,7 @@ public class LobbyController : MonoSingleton<LobbyController>
     public void CheckIfAllReady()
     {
         bool AllReady = false;
-        foreach (PlayerObjectControler player in Manager.GamePlayers)
+        foreach (PlayerObjectControler player in Manager.gamePlayers)
         {
             if (player.Ready)
             {
@@ -109,7 +119,7 @@ public class LobbyController : MonoSingleton<LobbyController>
         // SteamAuth.LobbyId = CurrentLobbyID;
         string name = SteamMatchmaking.GetLobbyData(new CSteamID(CurrentLobbyID), "name");
         string[] spstring = name.Split('$');
-        LobbyNameText.text = spstring[1];
+        lobbyNameText.text = spstring[1];
     }
 
     public void UpdatePlayerList()
@@ -119,17 +129,17 @@ public class LobbyController : MonoSingleton<LobbyController>
             CreatHostPlayerItem();
         }
 
-        if (PlayerListItems.Count < Manager.GamePlayers.Count)
+        if (PlayerListItems.Count < Manager.gamePlayers.Count)
         {
             CreatClientPlayerItem();
         }
 
-        if (PlayerListItems.Count > Manager.GamePlayers.Count)
+        if (PlayerListItems.Count > Manager.gamePlayers.Count)
         {
             RemovePlayerItem();
         }
 
-        if (PlayerListItems.Count == Manager.GamePlayers.Count)
+        if (PlayerListItems.Count == Manager.gamePlayers.Count)
         {
             UpdatePlayerItem();
         }
@@ -137,14 +147,14 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     public void FindLovalPlayer()
     {
-        LocalPlayerObject = GameObject.Find("LocalGamePlayer");
-        LocalPlayerController = LocalPlayerObject.GetComponent<PlayerObjectControler>();
+        localPlayerObject = GameObject.Find("LocalGamePlayer");
+        LocalPlayerController = localPlayerObject.GetComponent<PlayerObjectControler>();
         UpdateAddressButton();
     }
 
     public void CreatHostPlayerItem()
     {
-        foreach (PlayerObjectControler player in Manager.GamePlayers)
+        foreach (PlayerObjectControler player in Manager.gamePlayers)
         {
             GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
             PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
@@ -166,7 +176,7 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     public void CreatClientPlayerItem()
     {
-        foreach (PlayerObjectControler player in Manager.GamePlayers)
+        foreach (PlayerObjectControler player in Manager.gamePlayers)
         {
             if (!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID))
             {
@@ -189,7 +199,7 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     public void UpdatePlayerItem()
     {
-        foreach (PlayerObjectControler player in Manager.GamePlayers)
+        foreach (PlayerObjectControler player in Manager.gamePlayers)
         {
             foreach (PlayerListItem PlayerListItemScript in PlayerListItems)
             {
@@ -215,7 +225,7 @@ public class LobbyController : MonoSingleton<LobbyController>
 
         foreach (PlayerListItem playerListItem in PlayerListItems)
         {
-            if (!Manager.GamePlayers.Any(b => b.ConnectionID == playerListItem.ConnectionID))
+            if (!Manager.gamePlayers.Any(b => b.ConnectionID == playerListItem.ConnectionID))
             {
                 playerListItemToRemove.Add(playerListItem);
             }

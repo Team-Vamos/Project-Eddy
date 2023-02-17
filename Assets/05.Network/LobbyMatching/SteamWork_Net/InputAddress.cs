@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class InputAddress : MonoBehaviour
 {
     
-    private string address;
+    private string _address;
     public void SetAddress(string _address){
-        address = _address;
+        this._address = _address;
     }
     public void Input_Address(){
-        SteamLobby.Instance.Input_SurverAddress(address);
+        SteamLobby.Instance.Input_SurverAddress(_address);
     }
     public void CopyAddress(){
         CopyToClipboard(SteamLobby.Instance.GetAddress());
