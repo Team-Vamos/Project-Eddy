@@ -1,6 +1,6 @@
 ﻿public class Monster : Entity, IDamageTaker
 {
-    public delegate void OnDamageTaken(int damage);
+    public delegate void OnDamageTaken(float damage);
     public delegate void OnDeath();
     
     public OnDamageTaken onDamageTaken;
@@ -8,14 +8,14 @@
     
     public MonsterStats monsterStats;
 
-    public int Health { get; private set; }
+    public float Health { get; private set; }
     
     public void Init()
     {
         Health = monsterStats.health;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         Health -= damage;
         onDamageTaken?.Invoke(damage);

@@ -36,7 +36,7 @@ public static class EntityExtensions
         EntityManager.Instance.UnregisterEntity(entity);
     }
 
-    public static void Damage<T>(this T entity, int damage) where T : Entity, IDamageTaker
+    public static void Damage<T>(this T entity, float damage) where T : Entity, IDamageTaker
     {
         entity.TakeDamage(damage);
     }

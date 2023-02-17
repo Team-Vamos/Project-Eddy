@@ -1,0 +1,26 @@
+#GaugeBar {
+    position: absolute;
+    background-color: rgba(43, 43, 43, 255);
+    width: 200px;
+    height: 30px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#GaugeBar > #Bar {
+    width: 100%;
+    background-color: rgba(197, 190, 1, 255);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition-property: width;
+    flex-basis: 100%;
+    transition-duration: 0.1s;
+}

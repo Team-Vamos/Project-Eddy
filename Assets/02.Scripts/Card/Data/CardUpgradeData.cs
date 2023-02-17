@@ -5,9 +5,9 @@ namespace Card
 	[System.Serializable]
 	public class CardUpgradeData
 	{
-        public Sprite weaponImage;
+        public Sprite cardImage;
 
-		// TODO : 스텟
-		// public 
+        // TODO : 스텟
+        public Stat[] _stat;
     }
 }
