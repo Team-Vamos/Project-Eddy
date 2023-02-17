@@ -1,4 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/07.UIToolkit/Ore/OreGaugeBar.uss?fileID=7433441132597879392&amp;guid=bd9044bb364675d499331ee44a755b2a&amp;type=3#OreGaugeBar" />
-    <ui:VisualElement name="Canvas" style="width: 100%; height: 100%;" />
+    <ui:VisualElement name="OreCanvas" style="width: 100%; height: 100%;" />
 </ui:UXML>
