@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Steamworks;
+using UnityEngine.UIElements;
 
 public class LobbyDataEntry : MonoBehaviour
 {
@@ -19,5 +20,9 @@ public class LobbyDataEntry : MonoBehaviour
     }
     public void JoinLobby(){
         SteamLobby.Instance.JoinLobby(lobbyID);
+    }
+    public void SetLobbyLable()
+    {
+        LobbyButton.lobbyListView.makeItem = () => new Label();
     }
 }
