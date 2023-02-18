@@ -63,6 +63,8 @@ public class OreSpawner : MonoBehaviour
 
     [SerializeField]
     private CheckOre _debugOre;
+    [SerializeField]
+    private float _testDamage = 30f;
 
     private Coroutine _checkOreCoroutine;
 #endif
@@ -84,10 +86,11 @@ public class OreSpawner : MonoBehaviour
             g.transform.DOScale(_oreSpawnScale, _oreSpawnDuration).SetEase(Ease.InOutElastic);
 
             VisualElement gaugeBar = _oreGaugeBarPrefab.Instantiate().Q<VisualElement>("GaugeBar");
+            
+            
             Root.Add(gaugeBar);
+
             g.SetGaugeBar(gaugeBar);
-
-
 
             _oreList.Add(g);
 
@@ -101,6 +104,16 @@ public class OreSpawner : MonoBehaviour
             RemoveOres();
             SpawnOre();
         }
+
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            foreach(var ore in _oreList)
+            {
+                Debug.Log("데미지 줌");
+                ore.TakeDamage(_testDamage);
+            }
+        }
+
     }
 
 
