@@ -1,9 +1,27 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EntityManager : MonoBehaviour
 {
+    #region static methods
     public static EntityManager Instance { get; private set; }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void Initialize()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (Instance != null || mode != LoadSceneMode.Single) return;
+        
+        var go = new GameObject("EntityManager");
+        Instance = go.AddComponent<EntityManager>();
+    }
+    #endregion
+    
     public IReadOnlyList<Entity> Entities => _entities;
     
     private readonly List<Entity> _entities = new();
@@ -11,6 +29,7 @@ public class EntityManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        gameObject.hideFlags = HideFlags.HideAndDontSave;
     }
 
     public void RegisterEntity(Entity entity)
