@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
+// TODO: Monobehaviour -> Entity
 public class Ore : MonoBehaviour, IDamageTaker
 {
     [SerializeField]
@@ -20,6 +21,7 @@ public class Ore : MonoBehaviour, IDamageTaker
     private Vector2 _uiOffset = new Vector2(0f, -100f);
 
     private VisualElement _gaugeBar;
+    private VisualElement _bar;
 
     private SpriteRenderer _spriteRenderer;
     private float _currentOreGauge;
@@ -42,7 +44,8 @@ public class Ore : MonoBehaviour, IDamageTaker
         _currentOreHp = _oreHp;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         _oreSpawner.Root.Remove(_gaugeBar);
     }
 
@@ -57,6 +60,9 @@ public class Ore : MonoBehaviour, IDamageTaker
     public void SetGaugeBar(VisualElement gaugeBar)
     {
         _gaugeBar = gaugeBar;
+        _bar = gaugeBar.Q<VisualElement>("Bar");
+        Debug.Log(gaugeBar.style.transitionDuration);
+        Debug.Log(_bar.style.transitionDuration);
     }
 
     public void TakeDamage(float damage)
@@ -79,10 +85,8 @@ public class Ore : MonoBehaviour, IDamageTaker
                 _spriteRenderer.sprite = _oreSpawner.OreSprites[_currentOreHp - 1];
                 _currentOreGauge = _oreGauge;
             }
-
-            _gaugeBar.style.width = new Length(_currentOreGauge / _oreGauge * 100f, LengthUnit.Percent);
-
         }
+        _bar.style.width = new Length(_currentOreGauge / _oreGauge * 100f, LengthUnit.Percent);
     }
 
     // private void ChangeSprite()

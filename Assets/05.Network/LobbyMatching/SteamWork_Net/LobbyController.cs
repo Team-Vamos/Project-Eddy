@@ -8,29 +8,18 @@ using System.Linq;
 
 public class LobbyController : MonoSingleton<LobbyController>
 {
-    public Text lobbyNameText;
+    //public Text LobbyNameText;
 
-    
-    public GameObject PlayerListViewContent=>playerListViewContent;
-    [SerializeField]
-    private GameObject playerListViewContent;
-    
-    public GameObject PlayerListItemPrefab=>playerListItemPrefab;
-    [SerializeField]
-    private GameObject playerListItemPrefab;
-    
-    public GameObject LocalPlayerObject=>localPlayerObject;
-    [SerializeField]
-    private GameObject localPlayerObject;
-    
-
+    //public GameObject PlayerListViewContent;
+    //public GameObject PlayerListItemPrefab;
+    public GameObject LocalPlayerObject;
     public ulong CurrentLobbyID;
     public bool PlayerItemCreated = false;
     private List<PlayerListItem> PlayerListItems = new List<PlayerListItem>();
     public PlayerObjectControler LocalPlayerController;
-    public Button StartGameButton;
-    public Button addressButton;
-    public Text ReadyButtonText;
+    //public Button StartGameButton;
+    //public Button addressButton;
+    //public Text ReadyButtonText;
     private CustomNetworkManager manager;
 
     private CustomNetworkManager Manager
@@ -60,7 +49,7 @@ public class LobbyController : MonoSingleton<LobbyController>
     public void UpdateAddressButton()
     {
         if (LocalPlayerController == null) return;
-        addressButton.interactable = (LocalPlayerController.PlayerIdNumber == 1);
+        //addressButton.interactable = (LocalPlayerController.PlayerIdNumber == 1);
     }
 
     public void ReadyPlayer()
@@ -72,11 +61,11 @@ public class LobbyController : MonoSingleton<LobbyController>
     {
         if (LocalPlayerController.Ready)
         {
-            ReadyButtonText.text = "Unready";
+            //ReadyButtonText.text = "Unready";
         }
         else
         {
-            ReadyButtonText.text = "Ready";
+            //ReadyButtonText.text = "Ready";
         }
     }
 
@@ -100,16 +89,16 @@ public class LobbyController : MonoSingleton<LobbyController>
         {
             if (LocalPlayerController.PlayerIdNumber == 1)
             {
-                StartGameButton.interactable = true;
+                //StartGameButton.interactable = true;
             }
             else
             {
-                StartGameButton.interactable = false;
+                //StartGameButton.interactable = false;
             }
         }
         else
         {
-            StartGameButton.interactable = false;
+            //StartGameButton.interactable = false;
         }
     }
 
@@ -119,7 +108,7 @@ public class LobbyController : MonoSingleton<LobbyController>
         // SteamAuth.LobbyId = CurrentLobbyID;
         string name = SteamMatchmaking.GetLobbyData(new CSteamID(CurrentLobbyID), "name");
         string[] spstring = name.Split('$');
-        lobbyNameText.text = spstring[1];
+        //LobbyNameText.text = spstring[0];
     }
 
     public void UpdatePlayerList()
@@ -147,54 +136,54 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     public void FindLovalPlayer()
     {
-        localPlayerObject = GameObject.Find("LocalGamePlayer");
-        LocalPlayerController = localPlayerObject.GetComponent<PlayerObjectControler>();
+        LocalPlayerObject = GameObject.Find("LocalGamePlayer");
+        LocalPlayerController = LocalPlayerObject.GetComponent<PlayerObjectControler>();
         UpdateAddressButton();
     }
 
     public void CreatHostPlayerItem()
     {
-        foreach (PlayerObjectControler player in Manager.gamePlayers)
-        {
-            GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
-            PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
+        // foreach (PlayerObjectControler player in Manager.gamePlayers)
+        // {
+        //     GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
+        //     PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
 
-            NewPlayerItemScript.PlayerName = player.PlayerName;
-            NewPlayerItemScript.ConnectionID = player.ConnectionID;
-            NewPlayerItemScript.PlayerSteamID = player.PlayerSteamID;
-            NewPlayerItemScript.Ready = player.Ready;
-            NewPlayerItemScript.SetPlayerValues();
+        //     NewPlayerItemScript.PlayerName = player.PlayerName;
+        //     NewPlayerItemScript.ConnectionID = player.ConnectionID;
+        //     NewPlayerItemScript.PlayerSteamID = player.PlayerSteamID;
+        //     NewPlayerItemScript.Ready = player.Ready;
+        //     NewPlayerItemScript.SetPlayerValues();
 
-            NewPlayerItem.transform.SetParent(PlayerListViewContent.transform);
-            NewPlayerItem.transform.localScale = Vector3.one;
+        //     NewPlayerItem.transform.SetParent(PlayerListViewContent.transform);
+        //     NewPlayerItem.transform.localScale = Vector3.one;
 
-            PlayerListItems.Add(NewPlayerItemScript);
-        }
+        //     PlayerListItems.Add(NewPlayerItemScript);
+        // }
 
-        PlayerItemCreated = true;
+         PlayerItemCreated = true;
     }
 
     public void CreatClientPlayerItem()
     {
-        foreach (PlayerObjectControler player in Manager.gamePlayers)
-        {
-            if (!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID))
-            {
-                GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
-                PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
+        // foreach (PlayerObjectControler player in Manager.gamePlayers)
+        // {
+        //     if (!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID))
+        //     {
+        //         GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
+        //         PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
 
-                NewPlayerItemScript.PlayerName = player.PlayerName;
-                NewPlayerItemScript.ConnectionID = player.ConnectionID;
-                NewPlayerItemScript.PlayerSteamID = player.PlayerSteamID;
-                NewPlayerItemScript.Ready = player.Ready;
-                NewPlayerItemScript.SetPlayerValues();
+        //         NewPlayerItemScript.PlayerName = player.PlayerName;
+        //         NewPlayerItemScript.ConnectionID = player.ConnectionID;
+        //         NewPlayerItemScript.PlayerSteamID = player.PlayerSteamID;
+        //         NewPlayerItemScript.Ready = player.Ready;
+        //         NewPlayerItemScript.SetPlayerValues();
 
-                NewPlayerItem.transform.SetParent(PlayerListViewContent.transform);
-                NewPlayerItem.transform.localScale = Vector3.one;
+        //         NewPlayerItem.transform.SetParent(PlayerListViewContent.transform);
+        //         NewPlayerItem.transform.localScale = Vector3.one;
 
-                PlayerListItems.Add(NewPlayerItemScript);
-            }
-        }
+        //         PlayerListItems.Add(NewPlayerItemScript);
+        //     }
+        // }
     }
 
     public void UpdatePlayerItem()

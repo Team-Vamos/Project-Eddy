@@ -38,7 +38,7 @@ public class PlayerObjectControler : NetworkBehaviour
         this.PlayerReadyUpdate(this.Ready, !this.Ready);
     }
     public void ChangeReady(){
-        if(hasAuthority){
+        if(isOwned){
             CmdSetPlayerReady();
         }
     }
@@ -77,7 +77,7 @@ public class PlayerObjectControler : NetworkBehaviour
 
     //게임시작
     public void CanStartGame(string sceneName){
-        if(hasAuthority){
+        if(isOwned){
             CmdCanStartGame(sceneName);
         }
     }

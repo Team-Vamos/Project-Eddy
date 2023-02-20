@@ -41,7 +41,12 @@ public class ToolbarScene
 
     private static void MakeSceneMenus(string path, GenericMenu menu, string addPath = "")
     {
-        string[] scenes = Directory.GetFileSystemEntries(path);
+        string[] scenes = {};
+        try
+        {
+            scenes = Directory.GetFileSystemEntries(path);
+        }
+        catch{}
 
         foreach (var scene in scenes)
         {
@@ -64,13 +69,12 @@ public class ToolbarScene
                 }
                 else
                 {
-                    if(addPath == "")
+                    if (addPath == "")
                     {
                         MakeSceneMenus(scene, menu, extension + "/");
                     }
                     else
                     {
-                        Debug.Log(addPath + extension + "/");
                         MakeSceneMenus(scene, menu, addPath + extension + "/");
                     }
                 }

@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/07.UIToolkit/Lobby/LobbyUI.uss?fileID=7433441132597879392&amp;guid=263b1a398bba93147b340e7510eb6bd8&amp;type=3#LobbyUI" />
+    <ui:VisualElement name="Root" style="width: 100%; height: 100%; align-items: center;">
+        <ui:VisualElement name="Back" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/01.TileMaps/TileMap.png?fileID=627789610&amp;guid=5c1fdbd3ce6a67f408021095b0b3ff3e&amp;type=3#TileMap_0&apos;); width: 100%; height: 100%; align-items: center; visibility: visible; display: flex;">
+            <ui:VisualElement name="Eddy" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Title.png?fileID=21300000&amp;guid=de6d30ebdf23dae46a04c22517b2080d&amp;type=3#Title&apos;); width: 656px; height: 365px; flex-grow: 1;" />
+            <ui:Button text="Host" display-tooltip-when-elided="true" name="Button" style="width: 600px; height: 300px; align-items: center; justify-content: center; flex-shrink: 1; flex-grow: 1; font-size: 70px; margin-top: 30px; margin-bottom: 30px; color: rgb(255, 255, 255);" />
+            <ui:Button text="Client" display-tooltip-when-elided="true" name="Button" style="width: 600px; height: 300px; align-items: center; justify-content: center; flex-shrink: 1; flex-grow: 1; font-size: 70px; margin-top: 30px; margin-bottom: 30px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="List" style="flex-shrink: 0; width: 100%; height: 100%; position: relative; opacity: 1; display: none; visibility: visible; align-items: center; flex-direction: column; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/01.TileMaps/TileMap.png?fileID=627789610&amp;guid=5c1fdbd3ce6a67f408021095b0b3ff3e&amp;type=3#TileMap_0&apos;);">
+            <ui:ListView name="Servers" style="height: 674px; background-color: rgba(137, 137, 137, 0.52); width: 1224px; -unity-text-align: upper-left; position: relative; margin-top: 84px;" />
+            <ui:GroupBox style="align-items: center; justify-content: center; flex-direction: row; display: flex;">
+                <ui:Button text="Menu" display-tooltip-when-elided="true" name="Button" style="position: relative; width: 170px; height: 115px; margin-right: 10px; margin-left: 0; font-size: 40px;" />
+                <ui:Button text="Refresh" display-tooltip-when-elided="true" name="Button" style="position: relative; width: 170px; height: 115px; margin-left: 10px; margin-right: 10px; font-size: 40px;" />
+                <ui:TextField picking-mode="Ignore" value="none" text="주소를 입력하세요" style="height: 118px; font-size: 50px; -unity-text-align: middle-left; flex-direction: row; position: relative; width: 609px; margin-left: 52px; margin-right: 10px;" />
+                <ui:Button text="Join" display-tooltip-when-elided="true" name="Button" style="position: relative; width: 170px; height: 115px; margin-left: 10px; margin-right: 0; font-size: 40px;" />
+            </ui:GroupBox>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

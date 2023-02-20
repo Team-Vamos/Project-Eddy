@@ -6,10 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LobbiesListManager : MonoSingleton<LobbiesListManager>
 {
-    public GameObject lobbiesMenu;
     public GameObject lobbyDateItemPrefab;
     public GameObject lobbyListContent;
-    public GameObject lobbiesButton, hostButton, soloButton;
 
     public List<GameObject> listOfLobbys = new List<GameObject>();
     private void OnEnable() {
@@ -22,24 +20,23 @@ public class LobbiesListManager : MonoSingleton<LobbiesListManager>
         }
     }
     public void GetListOfLobbys(){
-        lobbiesButton.SetActive(false);
-        hostButton.SetActive(false);
-        soloButton.SetActive(false);
 
-        lobbiesMenu.SetActive(true);
-
+        DestroyLobbies();
         SteamLobby.Instance.GetLobbiesList();
     }
+    private void Start() {
+        lobbyListContent = gameObject;
+    }
     public void DisaplayLobbies(List<CSteamID> lobbyIDs, LobbyDataUpdate_t result){
-        //DestroyLobbies();
         for(int i=0;i<lobbyIDs.Count;i++){
             if(lobbyIDs[i].m_SteamID == result.m_ulSteamIDLobby){
-                Debug.Log("GOGOGOGOGGOO");
                 GameObject createdItem = Instantiate(lobbyDateItemPrefab);
                 LobbyDataEntry lobbyDataEntry = createdItem.GetComponent<LobbyDataEntry>();
                 lobbyDataEntry.lobbyID = (CSteamID)lobbyIDs[i].m_SteamID;
+                string name = SteamMatchmaking.GetLobbyData((CSteamID)lobbyIDs[i].m_SteamID, "name");
+                string[] spstring = name.Split('$');
                 lobbyDataEntry.lobbyName 
-                    = SteamMatchmaking.GetLobbyData((CSteamID)lobbyIDs[i].m_SteamID, "name");
+                    = spstring[0];
 
                 lobbyDataEntry.SetLobbyData();
 
@@ -57,7 +54,7 @@ public class LobbiesListManager : MonoSingleton<LobbiesListManager>
         listOfLobbys.Clear();
     }
     public void ReFreshLobbies(){
-        DestroyLobbies();
+        
         GetListOfLobbys();
     }
 }
