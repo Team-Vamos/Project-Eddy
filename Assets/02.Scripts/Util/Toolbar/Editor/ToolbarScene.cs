@@ -1,4 +1,3 @@
-#if Editor
 using System.Linq;
 using System;
 using UnityEditor;
@@ -14,7 +13,6 @@ public class ToolbarScene
     private const string SCENES_FILE_PATH = "/01.Scenes";
     static ToolbarScene()
     {
-        Debug.Log("ㅁㅁㄴㅇㄹ");
         ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
     }
 
@@ -85,4 +83,3 @@ public class ToolbarScene
 
     }
 }
-#endif 
