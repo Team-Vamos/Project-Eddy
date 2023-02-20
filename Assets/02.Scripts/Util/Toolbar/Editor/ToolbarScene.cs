@@ -1,3 +1,4 @@
+#if Editor
 using System.Linq;
 using System;
 using UnityEditor;
@@ -83,3 +84,4 @@ public class ToolbarScene
 
     }
 }
+#endif 
