@@ -110,7 +110,9 @@ public class OreSpawner : MonoBehaviour
             foreach(var ore in _oreList)
             {
                 Debug.Log("데미지 줌");
+                #if Editor
                 ore.TakeDamage(_testDamage);
+                #endif
             }
         }
 

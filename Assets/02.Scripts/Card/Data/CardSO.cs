@@ -4,11 +4,10 @@ using System;
 
 namespace Card
 {
-
+    [CreateAssetMenu(fileName = "CardGrade", menuName = "SO/Card/CardSO", order = 0)]
     public abstract class CardSO : ScriptableObject
     {
-        public Color color;
-        public CardImageData cardImage;
+        public Sprite cardImage;
         [Space]
         public new string name;
         public RankType rank;
