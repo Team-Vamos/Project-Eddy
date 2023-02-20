@@ -24,7 +24,7 @@
     color: rgb(50, 50, 50);
     -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
     white-space: normal;
-    -unity-font-definition: none;
+    -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.asset?fileID=11400000&guid=32d4eab7e4ad9b847900af3e2a29af07&type=2#KyoboHandwriting2021sjy');
 }
 
 .card > #Description {

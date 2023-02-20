@@ -72,6 +72,7 @@ public class OreSpawner : MonoBehaviour
     public void SetRootVisualElement(VisualElement root)
     {
         Root = root;
+        // GameObject.FindObjectOfType<Card>();
     }
 
     public void SpawnOre()
@@ -110,9 +111,7 @@ public class OreSpawner : MonoBehaviour
             foreach(var ore in _oreList)
             {
                 Debug.Log("데미지 줌");
-                #if Editor
                 ore.TakeDamage(_testDamage);
-                #endif
             }
         }
 
