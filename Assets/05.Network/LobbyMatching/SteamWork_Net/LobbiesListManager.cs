@@ -21,7 +21,7 @@ public class LobbiesListManager : MonoSingleton<LobbiesListManager>
     }
     public void GetListOfLobbys(){
 
-        DestroyLobbies();
+        
         SteamLobby.Instance.GetLobbiesList();
     }
     private void Start() {
@@ -48,13 +48,14 @@ public class LobbiesListManager : MonoSingleton<LobbiesListManager>
         }
     }
     public void DestroyLobbies(){
+        LobbyButton.lobbyScrollView.Clear();
         foreach(GameObject lobbyItem in listOfLobbys){
             Destroy(lobbyItem);
         }
         listOfLobbys.Clear();
     }
     public void ReFreshLobbies(){
-        
+        DestroyLobbies();
         GetListOfLobbys();
     }
 }

@@ -1,3 +1,4 @@
+#if Editor
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -167,3 +168,4 @@ namespace UnityToolbarExtender
 		}
 	}
 }
+#endif 

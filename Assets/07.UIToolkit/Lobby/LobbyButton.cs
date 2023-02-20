@@ -9,16 +9,15 @@ public class LobbyButton : MonoBehaviour
     private SteamLobby steamLobby;
     [SerializeField]
     private LobbiesListManager lobbiesListManager;
-    [SerializeField]
-    private LobbyController lobbyController;
+
 
     private VisualElement list;
-    public static ListView lobbyListView;
+    public static ScrollView lobbyScrollView;
 
     private void Awake() {
         steamLobby = FindObjectOfType<SteamLobby>();
         lobbiesListManager = FindObjectOfType<LobbiesListManager>();
-        lobbyController = FindObjectOfType<LobbyController>();
+
 
 
 
@@ -43,7 +42,8 @@ public class LobbyButton : MonoBehaviour
         join.RegisterCallback<ClickEvent>(OnClickJoin);
 
 
-        lobbyListView = list.Q<ListView>("Servers");
+        lobbyScrollView = list.Q<ScrollView>("Servers");
+        Debug.Log(lobbyScrollView);
         //lobbyListView.makeItem = () => new Label();
         
     }
