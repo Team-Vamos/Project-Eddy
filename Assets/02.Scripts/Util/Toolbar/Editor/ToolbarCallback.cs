@@ -1,4 +1,3 @@
-#if Editor
 using System;
 using UnityEngine;
 using UnityEditor;
@@ -118,4 +117,3 @@ namespace UnityToolbarExtender
 		}
 	}
 }
-#endif
