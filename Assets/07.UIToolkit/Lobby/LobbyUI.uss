@@ -1,11 +1,23 @@
 #Button {
-    background-color: rgba(88, 88, 88, 255);
+    background-color: rgb(88, 88, 88);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
 }
 
 #Button:hover {
     background-color: rgb(108, 108, 108);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
 }
 
 #Button:active {
     background-color: rgb(77, 77, 77);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
 }
