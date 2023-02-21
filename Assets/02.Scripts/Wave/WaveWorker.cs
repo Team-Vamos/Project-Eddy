@@ -12,7 +12,6 @@ public class WaveWorker : MonoBehaviour
     #endregion
 
     [SerializeField] private DayWorker dayWorker;
-    [SerializeField] private Vector2 spawnRange;
     [SerializeField] private LightController globalLight;
     
     [SerializeField] private int bloodMoonWave = 5;
@@ -77,12 +76,4 @@ public class WaveWorker : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(dayState), dayState, null);
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        var center = transform.position;
-        var size = new Vector3(spawnRange.x, spawnRange.y, 0);
-        Gizmos.color = WaveProcessing ? Color.green : Color.red;
-        Gizmos.DrawWireCube(center, size);
-    }    
 }
