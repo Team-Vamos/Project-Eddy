@@ -70,4 +70,5 @@ public class SpawnWorker : MonoBehaviour
         Gizmos.color = waveWorker.WaveProcessing ? Color.green : Color.red;
         Gizmos.DrawWireCube(center, size);
     }
+    
 }
