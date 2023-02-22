@@ -7,10 +7,8 @@ namespace Card
 {
     public class ChestCard
     {
-        private VisualElement _cardRoot;
-        private CardBaseSO _cardSO;
-
-
+        private VisualElement _cardTemplate;
+        private VisualElement _card;
         private VisualElement _icon;
 
         private Label _nameText;
@@ -18,27 +16,35 @@ namespace Card
 
         private Label _effect;
 
-        private CardGrade _grade;
-        public ChestCard(VisualElement root, CardBaseSO so, CardGrade grade)
+        public ChestCard(VisualElement root)
         {
-            _cardSO = so;
-            _cardRoot = root;
+            _cardTemplate = root;
+            _card = root.Q<VisualElement>("Card");
 
-            _icon = _cardRoot.Q<VisualElement>("Icon");
+            _icon = _card.Q<VisualElement>("Icon");
 
-            _nameText = _cardRoot.Q<Label>("Name");
-            _descText = _cardRoot.Q<Label>("Description");
-            _effect = _cardRoot.Q<Label>("Effect");
+            _nameText = _card.Q<Label>("Name");
+            _descText = _card.Q<Label>("Description");
+            _effect = _card.Q<Label>("Effect");
 
-            _grade = grade;
         }
 
-        public void UpdateInfo()
+        public void AddToClassList(string className)
         {
-            _nameText.text = _cardSO.name;
-            _descText.text = _cardSO.description;
-            _icon.style.backgroundImage = new StyleBackground(_cardSO.cardIcon);
-            _cardRoot.style.backgroundColor = _grade.color;
+            _cardTemplate.AddToClassList(className);
+        }
+
+        public void RemoveFromClassList(string className)
+        {
+            _cardTemplate.RemoveFromClassList(className);
+        }
+
+        public void UpdateInfo(CardBaseSO so, CardGrade grade)
+        {
+            _nameText.text = so.name;
+            _descText.text = so.description;
+            _icon.style.backgroundImage = new StyleBackground(so.cardIcon);
+            _cardTemplate.style.backgroundColor = grade.color;
         }
 
     }

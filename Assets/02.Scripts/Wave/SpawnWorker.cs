@@ -38,7 +38,7 @@ public class SpawnWorker : MonoBehaviour
 
     private IEnumerator SpawnMonster(MonsterData monsterData, float waveTime)
     {
-        for (int i = 0; i < monsterData.count; i++)
+        for (var i = 0; i < monsterData.count; i++)
         {
             SpawnMonster(monsterData);
             yield return new WaitForSeconds(waveTime / monsterData.count);
@@ -49,7 +49,7 @@ public class SpawnWorker : MonoBehaviour
     {
         var spawnPoint = GetSpawnPoint();
         var monsterObject = Instantiate(monsterData.Prefab, spawnPoint, Quaternion.identity);
-        var monster = monsterObject.GetComponent<Monster>(); // TODO: Set monster stats
+        var monster = monsterObject.GetComponent<Monster>();
         monster.Init();
     }
 
@@ -70,5 +70,4 @@ public class SpawnWorker : MonoBehaviour
         Gizmos.color = waveWorker.WaveProcessing ? Color.green : Color.red;
         Gizmos.DrawWireCube(center, size);
     }
-    
 }

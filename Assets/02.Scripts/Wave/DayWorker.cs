@@ -36,7 +36,7 @@ public class DayWorker : MonoBehaviour
                 return;
             case DayState.Day:
                 DayState = DayState.Night;
-                OnStatusChanging?.Invoke(DayState, changeDuration);
+                OnStatusChanging?.SafeInvoke(DayState, changeDuration);
                 StartCoroutine(ChangeState());
                 break;
             
@@ -44,7 +44,7 @@ public class DayWorker : MonoBehaviour
                 return;
             case DayState.Night:
                 DayState = DayState.Day;
-                OnStatusChanging?.Invoke(DayState, changeDuration);
+                OnStatusChanging?.SafeInvoke(DayState, changeDuration);
                 StartCoroutine(ChangeState());
                 break;
             
@@ -62,12 +62,12 @@ public class DayWorker : MonoBehaviour
         
         if (DayState == DayState.Day)
         {
-            OnStatusChanged?.Invoke(DayState);
+            OnStatusChanged?.SafeInvoke(DayState);
             timeWorker.SetTimeScale(dayTimeScale);
         }
         else
         {
-            OnStatusChanged?.Invoke(DayState);
+            OnStatusChanged?.SafeInvoke(DayState);
             timeWorker.SetTimeScale(nightTimeScale);
         }
         

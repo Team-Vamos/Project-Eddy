@@ -1,18 +1,24 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class LivingEntity : Entity, IDamageTaker
+public class StructureEntity : Entity, IDamageTaker
 {
+    
     public delegate void OnDamageTakenDelegate(float damage);
-    public delegate void OnDeathDelegate();
+    public delegate void OnDestroyedDelegate();
     
     public OnDamageTakenDelegate OnDamageTaken;
-    public OnDeathDelegate OnDeath;
+    public OnDestroyedDelegate OnDestroyed;
     
     [SerializeField] private Renderer[] _renderers;
     
     public float Health { get; protected set; }
     
+    protected StructureEntity(float health)
+    {
+        Health = health;
+    }
+
     public virtual void TakeDamage(float damage)
     {
         foreach (var bodyRenderer in _renderers)
@@ -26,7 +32,7 @@ public class LivingEntity : Entity, IDamageTaker
         
         if (Health <= 0)
         {
-            OnDeath?.SafeInvoke();
+            OnDestroyed?.SafeInvoke();
         }
     }
 }
