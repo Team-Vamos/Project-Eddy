@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using Steamworks;
 using System.Linq;
 
 public class LobbyController : MonoSingleton<LobbyController>
 {
+    [SerializeField]
+    private VisualTreeAsset playerInfoAsset;
+    private LobbyRoomButton lobbyRoomButton;
     //public Text LobbyNameText;
 
     //public GameObject PlayerListViewContent;
@@ -39,6 +42,7 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     private void Start()
     {
+        lobbyRoomButton = FindObjectOfType<LobbyRoomButton>();
         if (fastGameStart)
         {
             Invoke("ReadyPlayer", 1f);
@@ -49,6 +53,7 @@ public class LobbyController : MonoSingleton<LobbyController>
     public void UpdateAddressButton()
     {
         if (LocalPlayerController == null) return;
+        lobbyRoomButton.copyButton.style.display = (LocalPlayerController.PlayerIdNumber == 1)?DisplayStyle.Flex:DisplayStyle.None;
         //addressButton.interactable = (LocalPlayerController.PlayerIdNumber == 1);
     }
 
@@ -61,10 +66,13 @@ public class LobbyController : MonoSingleton<LobbyController>
     {
         if (LocalPlayerController.Ready)
         {
+            lobbyRoomButton.readyButton.text = "Unready";
             //ReadyButtonText.text = "Unready";
+            
         }
         else
         {
+            lobbyRoomButton.readyButton.text = "Ready";
             //ReadyButtonText.text = "Ready";
         }
     }
@@ -89,15 +97,18 @@ public class LobbyController : MonoSingleton<LobbyController>
         {
             if (LocalPlayerController.PlayerIdNumber == 1)
             {
+                lobbyRoomButton.startButton.style.display = DisplayStyle.Flex;
                 //StartGameButton.interactable = true;
             }
             else
             {
+                lobbyRoomButton.startButton.style.display = DisplayStyle.None;
                 //StartGameButton.interactable = false;
             }
         }
         else
         {
+            lobbyRoomButton.startButton.style.display = DisplayStyle.None;
             //StartGameButton.interactable = false;
         }
     }
@@ -143,47 +154,54 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     public void CreatHostPlayerItem()
     {
-        // foreach (PlayerObjectControler player in Manager.gamePlayers)
-        // {
-        //     GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
-        //     PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
+        foreach (PlayerObjectControler player in Manager.gamePlayers)
+        {
+            PlayerListItem NewPlayerItem = new PlayerListItem();
 
-        //     NewPlayerItemScript.PlayerName = player.PlayerName;
-        //     NewPlayerItemScript.ConnectionID = player.ConnectionID;
-        //     NewPlayerItemScript.PlayerSteamID = player.PlayerSteamID;
-        //     NewPlayerItemScript.Ready = player.Ready;
-        //     NewPlayerItemScript.SetPlayerValues();
+            AddPlayerInfo(NewPlayerItem);
 
-        //     NewPlayerItem.transform.SetParent(PlayerListViewContent.transform);
-        //     NewPlayerItem.transform.localScale = Vector3.one;
+            NewPlayerItem.PlayerName = player.PlayerName;
+            NewPlayerItem.ConnectionID = player.ConnectionID;
+            NewPlayerItem.PlayerSteamID = player.PlayerSteamID;
+            NewPlayerItem.Ready = player.Ready;
+            NewPlayerItem.SetPlayerValues();
 
-        //     PlayerListItems.Add(NewPlayerItemScript);
-        // }
+            NewPlayerItem.transform.SetParent(transform);
+            NewPlayerItem.transform.localScale = Vector3.one;
+
+            PlayerListItems.Add(NewPlayerItem);
+        }
 
          PlayerItemCreated = true;
     }
 
+    public void AddPlayerInfo(PlayerListItem NewPlayerItem) {
+        VisualElement playerInfo = playerInfoAsset.Instantiate();
+        NewPlayerItem.PlayerNameText = playerInfo.Q<Label>("Name");
+        NewPlayerItem.PlayerReadyText = playerInfo.Q<Label>("Ready");
+        NewPlayerItem.PlayerIcon = playerInfo.Q<VisualElement>("UserImage");
+    }
+
     public void CreatClientPlayerItem()
     {
-        // foreach (PlayerObjectControler player in Manager.gamePlayers)
-        // {
-        //     if (!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID))
-        //     {
-        //         GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
-        //         PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
+        foreach (PlayerObjectControler player in Manager.gamePlayers)
+        {
+            if (!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID))
+            {
+                PlayerListItem NewPlayerItem = new PlayerListItem();
 
-        //         NewPlayerItemScript.PlayerName = player.PlayerName;
-        //         NewPlayerItemScript.ConnectionID = player.ConnectionID;
-        //         NewPlayerItemScript.PlayerSteamID = player.PlayerSteamID;
-        //         NewPlayerItemScript.Ready = player.Ready;
-        //         NewPlayerItemScript.SetPlayerValues();
+                NewPlayerItem.PlayerName = player.PlayerName;
+                NewPlayerItem.ConnectionID = player.ConnectionID;
+                NewPlayerItem.PlayerSteamID = player.PlayerSteamID;
+                NewPlayerItem.Ready = player.Ready;
+                NewPlayerItem.SetPlayerValues();
 
-        //         NewPlayerItem.transform.SetParent(PlayerListViewContent.transform);
-        //         NewPlayerItem.transform.localScale = Vector3.one;
+                NewPlayerItem.transform.SetParent(transform);
+                NewPlayerItem.transform.localScale = Vector3.one;
 
-        //         PlayerListItems.Add(NewPlayerItemScript);
-        //     }
-        // }
+                PlayerListItems.Add(NewPlayerItem);
+            }
+        }
     }
 
     public void UpdatePlayerItem()
