@@ -1,9 +1,17 @@
-﻿public class Monster : LivingEntity, IDamageTaker
+﻿using UnityEngine;
+
+public class Monster : LivingEntity, IDamageTaker
 {
-    public MonsterStats monsterStats;
+    public MonsterStats stats;
     
     public void Init()
     {
-        Health = monsterStats.health;
+        if (stats is null)
+        {
+            Debug.LogWarning("Monster stats is null");
+            return;
+        }
+        
+        Health = stats.health;
     }
 }

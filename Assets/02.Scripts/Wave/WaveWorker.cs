@@ -66,11 +66,11 @@ public class WaveWorker : MonoBehaviour
         {
             case DayState.Night:
                 WaveProcessing = true;
-                OnWaveStart?.Invoke(_waveCount, _waveCount % bloodMoonWave == 0);
+                OnWaveStart?.SafeInvoke(_waveCount, _waveCount % bloodMoonWave == 0);
                 break;
             case DayState.Day:
                 WaveProcessing = false;
-                OnWaveEnd?.Invoke();
+                OnWaveEnd?.SafeInvoke();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(dayState), dayState, null);
