@@ -34,7 +34,8 @@ public class StatController
             stat.value = CalcStat(stat, addStat, calcType);
         else
             _statDict.Add(addStat.name, addStat);
-
+        
+        // TODO: 생각해보기
         // OnStatChanged?.Invoke();
     }
 
