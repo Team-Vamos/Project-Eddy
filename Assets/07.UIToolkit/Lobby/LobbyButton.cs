@@ -43,8 +43,6 @@ public class LobbyButton : MonoBehaviour
 
 
         lobbyScrollView = list.Q<ScrollView>("Servers");
-        Debug.Log(lobbyScrollView);
-        //lobbyListView.makeItem = () => new Label();
         
     }
     private void OnClickHost(ClickEvent evt) {

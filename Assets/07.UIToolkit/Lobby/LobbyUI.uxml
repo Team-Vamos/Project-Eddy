@@ -7,7 +7,7 @@
             <ui:Button text="Client" display-tooltip-when-elided="true" name="Button" style="width: 600px; height: 300px; align-items: center; justify-content: center; flex-shrink: 1; flex-grow: 1; font-size: 70px; margin-top: 30px; margin-bottom: 30px; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement name="List" style="flex-shrink: 0; width: 100%; height: 100%; position: relative; opacity: 1; display: none; visibility: visible; align-items: center; flex-direction: column; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/01.TileMaps/TileMap.png?fileID=627789610&amp;guid=5c1fdbd3ce6a67f408021095b0b3ff3e&amp;type=3#TileMap_0&apos;);">
-            <ui:ScrollView name="Servers" style="width: 63%; height: 67%; margin-top: 136px; background-color: rgba(255, 255, 255, 0.18);" />
+            <ui:ScrollView name="Servers" focusable="false" style="width: 63%; height: 67%; margin-top: 136px; background-color: rgba(255, 255, 255, 0.18); display: flex;" />
             <ui:GroupBox style="align-items: center; justify-content: center; flex-direction: row; display: flex;">
                 <ui:Button text="Menu" display-tooltip-when-elided="true" name="Button" style="position: relative; width: 170px; height: 115px; margin-right: 10px; margin-left: 0; font-size: 40px;" />
                 <ui:Button text="Refresh" display-tooltip-when-elided="true" name="Button" style="position: relative; width: 170px; height: 115px; margin-left: 10px; margin-right: 10px; font-size: 40px;" />

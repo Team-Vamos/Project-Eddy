@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Steamworks;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class LobbiesListManager : MonoSingleton<LobbiesListManager>
 {
     public GameObject lobbyDateItemPrefab;
     public GameObject lobbyListContent;
+    [SerializeField]
+    private VisualTreeAsset lobbyItem;
 
     public List<GameObject> listOfLobbys = new List<GameObject>();
     private void OnEnable() {
@@ -38,12 +41,19 @@ public class LobbiesListManager : MonoSingleton<LobbiesListManager>
                 lobbyDataEntry.lobbyName 
                     = spstring[0];
 
-                lobbyDataEntry.SetLobbyData();
+                
 
                 createdItem.transform.SetParent(lobbyListContent.transform);
                 createdItem.transform.localScale = Vector3.one;
 
                 listOfLobbys.Add(createdItem);
+
+                TemplateContainer templateContainer = lobbyItem.CloneTree();
+                templateContainer.Q<Button>("JoinButton").clicked += lobbyDataEntry.JoinLobby;
+                templateContainer.Q<Label>("LobbyName").text = lobbyDataEntry.lobbyName;
+                LobbyButton.lobbyScrollView.Add(templateContainer);
+
+                
             }
         }
     }

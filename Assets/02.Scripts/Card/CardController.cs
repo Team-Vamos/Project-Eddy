@@ -6,12 +6,12 @@ namespace Card
 {
     public abstract class CardController
     {
-        public readonly CardSO CardBase;
+        public readonly CardBaseSO CardBase;
 
         protected CardHandler _cardHandler { get; private set; }
 
 
-        protected CardController(CardSO cardBase, CardHandler cardHandler)
+        protected CardController(CardBaseSO cardBase, CardHandler cardHandler)
         {
             CardBase = cardBase;
             _cardHandler = cardHandler;

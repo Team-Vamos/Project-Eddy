@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TimeWorker : MonoBehaviour
 {
+    #region Events
     public delegate void OnTimeResetDelegate();
     
     public event OnTimeResetDelegate OnTimeReset;
+    #endregion
 
     public float time;
     public float timeScale = 1;

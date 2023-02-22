@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class DayWorker : MonoBehaviour
 {
-    public delegate void OnStatusChangingDelegate(DayState dayState);
+    #region Events
+    public delegate void OnStatusChangingDelegate(DayState dayState, float duration);
     public delegate void OnStatusChangedDelegate(DayState dayState);
 
     public event OnStatusChangingDelegate OnStatusChanging;
     public event OnStatusChangedDelegate OnStatusChanged;
+    #endregion
 
     public float dayTime = 60;
     public float nightTime = 60;
@@ -19,43 +22,56 @@ public class DayWorker : MonoBehaviour
 
     [SerializeField] private TimeWorker timeWorker;
 
-    private DayState _dayState = DayState.Day;
+    [field:SerializeField] public DayState DayState { get; private set; } = DayState.Day;
+    
+    private bool _isChanging;
 
     private void Update()
     {
-        if (_dayState == DayState.Day)
+        if (_isChanging) return;
+
+        switch (DayState)
         {
-            if (!(timeWorker.time >= dayTime)) return;
+            case DayState.Day when !(timeWorker.time >= dayTime):
+                return;
+            case DayState.Day:
+                DayState = DayState.Night;
+                OnStatusChanging?.SafeInvoke(DayState, changeDuration);
+                StartCoroutine(ChangeState());
+                break;
             
-            _dayState = DayState.Night;
-            OnStatusChanging?.Invoke(_dayState);
-            StartCoroutine(ChangeState());
-        }
-        else
-        {
-            if (!(timeWorker.time >= nightTime)) return;
+            case DayState.Night when !(timeWorker.time >= nightTime):
+                return;
+            case DayState.Night:
+                DayState = DayState.Day;
+                OnStatusChanging?.SafeInvoke(DayState, changeDuration);
+                StartCoroutine(ChangeState());
+                break;
             
-            _dayState = DayState.Day;
-            OnStatusChanging?.Invoke(_dayState);
-            StartCoroutine(ChangeState());
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
     private IEnumerator ChangeState()
     {
+        timeWorker.ResetTime();
+        timeWorker.Pause();
+        _isChanging = true;
         yield return new WaitForSeconds(changeDuration);
         
-        if (_dayState == DayState.Day)
+        if (DayState == DayState.Day)
         {
-            OnStatusChanged?.Invoke(_dayState);
+            OnStatusChanged?.SafeInvoke(DayState);
             timeWorker.SetTimeScale(dayTimeScale);
         }
         else
         {
-            OnStatusChanged?.Invoke(_dayState);
+            OnStatusChanged?.SafeInvoke(DayState);
             timeWorker.SetTimeScale(nightTimeScale);
         }
         
-        timeWorker.ResetTime();
+        timeWorker.Resume();
+        _isChanging = false;
     }
 }

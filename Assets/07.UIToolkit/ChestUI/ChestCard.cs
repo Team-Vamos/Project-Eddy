@@ -8,7 +8,7 @@ namespace Card
     public class ChestCard
     {
         private VisualElement _cardRoot;
-        private CardSO _cardSO;
+        private CardBaseSO _cardSO;
 
 
         private VisualElement _icon;
@@ -19,7 +19,7 @@ namespace Card
         private Label _effect;
 
         private CardGrade _grade;
-        public ChestCard(VisualElement root, CardSO so, CardGrade grade)
+        public ChestCard(VisualElement root, CardBaseSO so, CardGrade grade)
         {
             _cardSO = so;
             _cardRoot = root;
@@ -37,7 +37,7 @@ namespace Card
         {
             _nameText.text = _cardSO.name;
             _descText.text = _cardSO.description;
-            _icon.style.backgroundImage = new StyleBackground(_cardSO.cardImage);
+            _icon.style.backgroundImage = new StyleBackground(_cardSO.cardIcon);
             _cardRoot.style.backgroundColor = _grade.color;
         }
 

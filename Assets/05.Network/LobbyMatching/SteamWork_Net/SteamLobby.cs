@@ -138,6 +138,7 @@ public class SteamLobby : MonoSingleton<SteamLobby>
             
             if (SteamMatchmaking.GetLobbyData((CSteamID)lobbyID.m_SteamID, "name") != "")
             {
+                Debug.Log(SteamMatchmaking.GetLobbyData((CSteamID)lobbyID.m_SteamID, "name"));
                 lobbyIDs.Add(lobbyID);
                 SteamMatchmaking.RequestLobbyData(lobbyID);
             }
