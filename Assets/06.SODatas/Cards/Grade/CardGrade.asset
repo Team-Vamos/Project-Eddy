@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1785b5632a70254d8a65554be949094, type: 3}
-  m_Name: ShopNPC
+  m_Script: {fileID: 11500000, guid: 4648082a1ff9eae4fa0f8a610378d793, type: 3}
+  m_Name: CardGrade
   m_EditorClassIdentifier: 
-  name: "\uBC14\uBCF4"
-  description: "\uBC14\uBCF4\uAC19\uC774 \uB6F0\uC5B4\uAC10"
-  statController:
-    _defaultStats:
-    - name: Spd
-      value: 7
-    - name: RunSpd
-      value: 7
+  color: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.5377358, g: 0.058339275, b: 0.058339275, a: 1}
+  rank: 0

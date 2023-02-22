@@ -7,7 +7,7 @@ namespace Card
     //[CreateAssetMenu(fileName = "CardGrade", menuName = "SO/Card/CardSO", order = 0)]
     public abstract class CardBaseSO : ScriptableObject
     {
-        public Sprite cardIcon;
+        public CardImage cardImage;
         [Space]
         public new string name;
         public RankType rank;

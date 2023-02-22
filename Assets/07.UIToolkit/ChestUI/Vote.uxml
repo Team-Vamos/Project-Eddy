@@ -1,3 +1,3 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="Vote" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/02.Player/01.Body/Idle_Player.png?fileID=464440006&amp;guid=ab3f5ba9cfe86d6488c643a0c0227510&amp;type=3#Idle_Player_1&apos;); max-height: 40px; -unity-background-scale-mode: scale-to-fit;" />
+    <ui:VisualElement name="Vote" />
 </ui:UXML>

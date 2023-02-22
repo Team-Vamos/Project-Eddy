@@ -8,7 +8,9 @@ namespace Card
     {
         //[NonSerialized] public PlayerStat PlayerStat;
 
-        public StatController StatController { get; set; }
+        // TODO: 여기서 플레이어의 스텟 가지기
+
+        //public StatController StatController { get; set; }
         public Transform WeaponHolder { get; set; }
         private readonly List<CardController> _cards = new();
 

@@ -9,7 +9,7 @@ namespace Card
         S,
         A,
         B,
-        C
-
+        C,
+        LENGTH
     }
 }

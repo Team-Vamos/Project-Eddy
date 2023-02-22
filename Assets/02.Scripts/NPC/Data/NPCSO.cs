@@ -11,5 +11,5 @@ public class NPCSO : ScriptableObject
     public string description;
 
     [Header("스텟")]
-    public StatController statController;
+    public NPCStatController statController;
 }

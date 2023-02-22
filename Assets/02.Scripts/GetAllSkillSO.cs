@@ -16,7 +16,7 @@ public partial class GetAllSOEditor
             Debug.LogError("CardManager is Null Check your hierarchy");
             return;
         }
-        cardManager.AddSO(list);
+        cardManager.SetSOList(list);
         EditorUtility.SetDirty(cardManager);
     }
 }
