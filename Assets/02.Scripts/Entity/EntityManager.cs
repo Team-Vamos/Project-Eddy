@@ -60,8 +60,8 @@ public static class EntityExtensions
         entity.TakeDamage(damage);
     }
 
-    public static void GiveExp<T>(this T entity, int exp) where T : Entity, IExpGiver
+    public static void GiveExp<T>(this T entity, int exp) where T : Entity, IExpTaker
     {
-        entity.GiveExp(exp);
+        entity.TakeExp(exp);
     }
 }
