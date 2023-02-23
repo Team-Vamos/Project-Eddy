@@ -15,8 +15,8 @@ MonoBehaviour:
   name: "\uBC14\uBCF4"
   description: "\uBC14\uBCF4\uAC19\uC774 \uB6F0\uC5B4\uAC10"
   statController:
-    _stats:
-    - name: RunSpd
-      value: 7
+    _defaultStats:
     - name: Spd
+      value: 7
+    - name: RunSpd
       value: 7

@@ -1,8 +1,12 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="Card" class="card" style="align-items: center;">
-        <ui:VisualElement name="Icon" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/06.Cards/02.Active/Heart.png?fileID=21300000&amp;guid=681beabc142c6bc46a9986faa1a37350&amp;type=3#Heart&apos;);" />
-        <ui:Label text="매혹" name="Name" />
-        <ui:Label text=" 적에게 사용시 매혹 효과를 입힙니다." name="Description" />
-        <ui:Label text="매혹 - 적이 자신을 때리도록 만든다." display-tooltip-when-elided="true" name="Effect" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/07.UIToolkit/ChestUI/ChestCard.uss?fileID=7433441132597879392&amp;guid=5c564a0c09f488044bd7f3801303542c&amp;type=3#ChestCard" />
+    <ui:VisualElement name="CardTemplate" class="card-template">
+        <ui:VisualElement name="Card" class="card">
+            <ui:VisualElement name="Icon" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/06.Cards/02.Active/Heart.png?fileID=21300000&amp;guid=681beabc142c6bc46a9986faa1a37350&amp;type=3#Heart&apos;);" />
+            <ui:Label text="매혹" name="Name" />
+            <ui:Label text=" 적에게 사용시 매혹 효과를 입힙니다." name="Description" />
+            <ui:Label text="매혹 - 적이 자신을 때리도록 만든다." display-tooltip-when-elided="true" name="Effect" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VoteContainer" style="left: -100px; width: 40px; height: 160px; top: 50px;" />
     </ui:VisualElement>
 </ui:UXML>

@@ -123,3 +123,9 @@ public static class Define
         return bounds[rand];
     }
 }
+
+namespace System.Runtime.CompilerServices
+{
+    public static class IsExternalInit
+    {}
+}

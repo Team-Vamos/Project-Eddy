@@ -7,7 +7,6 @@ namespace Card
 	{
         public Sprite cardImage;
 
-        // TODO : 스텟
-        public Stat[] _stat;
+        // TODO : 스텟클래스가지고 있기
     }
 }

@@ -33,6 +33,9 @@ public class WaveWorker : MonoBehaviour
         
         WaveProcessing = dayWorker.DayState == DayState.Night;
         
+    }
+
+    private void Start() {
         globalLight.SetIntensity(WaveProcessing ? nightIntensity : dayIntensity);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Card
 {
 
-    public class PassiveCardBaseSO : CardBaseSO
+    public abstract class PassiveCardBaseSO : CardBaseSO
     {
         public CardUpgrade[] upgrades = new CardUpgrade[1];
 
@@ -14,16 +14,15 @@ namespace Card
         [Range(0f, 1f)]
         public float weaponHardness;
 
-        public List<Stat> _addStats;
-        public StatController _statController;
+        // TODO: 먹었을 때 적용될 스텟들(List or Array) 가지고 있기
 
         protected PassiveCardBaseSO(string t) : base(t) {}
         protected PassiveCardBaseSO() : base(Passive) {}
 
-        public override CardController CreateCardController(CardHandler cardHandler)
-        {
-            throw new System.NotImplementedException();
-        }
+        // public override CardController CreateCardController(CardHandler cardHandler)
+        // {
+        //     return new PassiveCardController(this, cardHandler);
+        // }
     }
 
 }
