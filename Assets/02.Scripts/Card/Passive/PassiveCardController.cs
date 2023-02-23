@@ -66,7 +66,8 @@ namespace Card
 
         public override void ApplyMultipleValue(float value)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("대충 Stat들에 value를 곱했다고 칩시다");
+            // throw new System.NotImplementedException();
         }
 
         public override void RemoveCard()

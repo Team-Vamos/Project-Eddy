@@ -5,10 +5,9 @@ using UnityEngine;
 namespace Card
 {
     [CreateAssetMenu(fileName = "CardGrade", menuName = "SO/Card/CardGradeSO", order = 1)]
-    public class CardGrade : ScriptableObject
+    public class CardGradeSO : ScriptableObject
     {
-        public Color color;
-        public Color hoverColor;
+        public Color color  = new Color(0f,0f,0f,1f);
         public RankType rank;
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardImage:
     icon: {fileID: 21300000, guid: 25f8fff9a2d17da49a4d8a4d690e272e, type: 3}
-    offset: {x: 0, y: 0}
+    offset: {x: 0, y: -0.3}
     scale: {x: 1, y: 1}
   name: "\uAC80"
   rank: 0

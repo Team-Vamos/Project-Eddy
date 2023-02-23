@@ -9,13 +9,18 @@ namespace Card
         [SerializeField]
         private List<CardBaseSO> _cardSOList;
         [SerializeField]
-        private CardGrade[] _cardGrades = new CardGrade[(int)RankType.LENGTH];
-        private Dictionary<RankType, CardGrade> _cardGradeDict = new Dictionary<RankType, CardGrade>();
+        private List<CardGradeSO> _cardGrades;
+        private Dictionary<RankType, CardGradeSO> _cardGradeDict = new Dictionary<RankType, CardGradeSO>();
 
         private List<CardBaseSO> _tempCardList;
         public void SetSOList(List<CardBaseSO> soList)
         {
             _cardSOList = soList;
+        }
+
+        public void SetCardGradeSOList(List<CardGradeSO> gradeList)
+        {
+            _cardGrades = gradeList;
         }
 
 
@@ -27,7 +32,7 @@ namespace Card
 
         private void InitCardGrade()
         {
-            for (int i = 0; i < _cardGrades.Length; ++i)
+            for (int i = 0; i < _cardGrades.Count; ++i)
             {
                 if (!_cardGradeDict.TryAdd(_cardGrades[i].rank, _cardGrades[i]))
                 {
@@ -51,9 +56,9 @@ namespace Card
             _tempCardList = new List<CardBaseSO>(_cardSOList);
         }
 
-        public CardGrade GetGrade(RankType type)
+        public CardGradeSO GetGrade(RankType type)
         {
-            if (_cardGradeDict.TryGetValue(type, out CardGrade grade))
+            if (_cardGradeDict.TryGetValue(type, out CardGradeSO grade))
             {
                 return grade;
             }

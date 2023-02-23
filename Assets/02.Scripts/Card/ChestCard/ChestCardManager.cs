@@ -10,6 +10,7 @@ namespace Card
         private int _cardCount;
         public int CardCount => _cardCount;
 
+        // TODO: DayWorker 연동하기
         [SerializeField]
         private DayWorker _dayWorker;
 
@@ -30,6 +31,7 @@ namespace Card
         public int VotePersonMaxCount => _votePersonMaxCount;
         public int CurrentVotePersonCount { get; private set; } = 0;
 
+        [field:SerializeField]
         public bool IsVote { get; private set; } = true;
 
         public void ResetVotePerson()
