@@ -35,6 +35,14 @@ public class PlayerStatStorage : MonoBehaviour
         level++;
         statPoint += StatPointPerLevel;
 
+        if (playerStatData[level] is null)
+        {
+            level--;
+            statPoint -= StatPointPerLevel;
+            exp = expToNextLevel;
+            throw new Exception("Not enough level data");
+        }
+
         expToNextLevel = playerStatData[level].expToNextLevel;
 
         CalculateStats();
@@ -92,6 +100,40 @@ public class PlayerStatStorage : MonoBehaviour
     public void RemoveAllStatModifiersFromSource(object source)
     {
         _statModifiers.RemoveAll(x => x.Source == source);
+        CalculateStats();
+    }
+    
+    public void UpgradeStat(StatType statType)
+    {
+        if (statPoint <= 0) 
+            throw new Exception("Not enough stat point");
+
+        statPoint--;
+
+        switch (statType)
+        {
+            case StatType.Atk:
+                _stat.Atk.Level++;
+                break;
+            case StatType.Spd:
+                _stat.Spd.Level++;
+                break;
+            case StatType.AtkSpd:
+                _stat.AtkSpd.Level++;
+                break;
+            case StatType.Hp:
+                _stat.Hp.Level++;
+                break;
+            case StatType.Armor:
+                _stat.Armor.Level++;
+                break;
+            case StatType.Mine:
+                _stat.Mine.Level++;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(statType), statType, null);
+        }
+
         CalculateStats();
     }
 }
