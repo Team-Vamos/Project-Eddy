@@ -40,7 +40,7 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     [Header("디버그용")] [SerializeField] private bool fastGameStart;
 
-    private void Start()
+    private void Awake()
     {
         lobbyRoomButton = FindObjectOfType<LobbyRoomButton>();
         if (fastGameStart)
@@ -156,19 +156,16 @@ public class LobbyController : MonoSingleton<LobbyController>
     {
         foreach (PlayerObjectControler player in Manager.gamePlayers)
         {
-            PlayerListItem NewPlayerItem = new PlayerListItem();
-
+            GameObject NewPlayerItemObject = new GameObject("PlayerListItem");
+            PlayerListItem NewPlayerItem = NewPlayerItemObject.AddComponent<PlayerListItem>();
             AddPlayerInfo(NewPlayerItem);
-
             NewPlayerItem.PlayerName = player.PlayerName;
             NewPlayerItem.ConnectionID = player.ConnectionID;
             NewPlayerItem.PlayerSteamID = player.PlayerSteamID;
             NewPlayerItem.Ready = player.Ready;
             NewPlayerItem.SetPlayerValues();
-
             NewPlayerItem.transform.SetParent(transform);
             NewPlayerItem.transform.localScale = Vector3.one;
-
             PlayerListItems.Add(NewPlayerItem);
         }
 
@@ -177,9 +174,11 @@ public class LobbyController : MonoSingleton<LobbyController>
 
     public void AddPlayerInfo(PlayerListItem NewPlayerItem) {
         VisualElement playerInfo = playerInfoAsset.Instantiate();
-        NewPlayerItem.PlayerNameText = playerInfo.Q<Label>("Name");
-        NewPlayerItem.PlayerReadyText = playerInfo.Q<Label>("Ready");
+        NewPlayerItem.PlayerNameText = playerInfo.Q<Label>("UserName");
+        NewPlayerItem.PlayerReadyText = playerInfo.Q<Label>("UserReady");
         NewPlayerItem.PlayerIcon = playerInfo.Q<VisualElement>("UserImage");
+        lobbyRoomButton.list.Add(playerInfo);
+
     }
 
     public void CreatClientPlayerItem()
@@ -188,8 +187,9 @@ public class LobbyController : MonoSingleton<LobbyController>
         {
             if (!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID))
             {
-                PlayerListItem NewPlayerItem = new PlayerListItem();
-
+                GameObject NewPlayerItemObject = new GameObject("PlayerListItem");
+                PlayerListItem NewPlayerItem = NewPlayerItemObject.AddComponent<PlayerListItem>();
+                AddPlayerInfo(NewPlayerItem);
                 NewPlayerItem.PlayerName = player.PlayerName;
                 NewPlayerItem.ConnectionID = player.ConnectionID;
                 NewPlayerItem.PlayerSteamID = player.PlayerSteamID;
