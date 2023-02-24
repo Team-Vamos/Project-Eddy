@@ -98,12 +98,12 @@ public class PlayerStatStorage : MonoBehaviour
 
 public class PlayerStat
 {
-    public UpgradableStat Atk;
-    public UpgradableStat Spd;
-    public UpgradableStat AtkSpd;
-    public UpgradableStat Hp;
-    public UpgradableStat Armor;
-    public UpgradableStat Mine;
+    public UpgradableStat Atk = new();
+    public UpgradableStat Spd = new();
+    public UpgradableStat AtkSpd = new();
+    public UpgradableStat Hp = new();
+    public UpgradableStat Armor = new();
+    public UpgradableStat Mine = new();
 }
 
 public class UpgradableStat
