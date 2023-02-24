@@ -21,12 +21,13 @@ public class SteamLobby : MonoSingleton<SteamLobby>
     //Variables
     public ulong CurrentLobbyID;
 
-    private const string HostAddresskey = "DeadWay";
+    private const string HostAddresskey = "Eddy";
 
     private CustomNetworkManager manager;
 
     private bool JoinWithAddress = false;
     private string joinAddress;
+    private bool isLobby = false;
 
     public void Input_SurverAddress(string address)
     {
@@ -76,6 +77,7 @@ public class SteamLobby : MonoSingleton<SteamLobby>
 
     public void OnLobbyCreated(LobbyCreated_t callback)
     {
+        isLobby = true;
         if (callback.m_eResult != EResult.k_EResultOK) return;
 
         manager.StartHost();
@@ -99,6 +101,7 @@ public class SteamLobby : MonoSingleton<SteamLobby>
 
     private void OnLobbyEntered(LobbyEnter_t callback)
     {
+        isLobby = true;
         CurrentLobbyID = callback.m_ulSteamIDLobby;
         if (NetworkServer.active) return;
 
@@ -111,6 +114,7 @@ public class SteamLobby : MonoSingleton<SteamLobby>
     {
         SteamMatchmaking.JoinLobby(lobbyID);
         LobbiesListManager.Instance.ReFreshLobbies();
+        isLobby = true;
     }
 
     public void GetLobbiesList()
@@ -149,6 +153,7 @@ public class SteamLobby : MonoSingleton<SteamLobby>
 
     void OnGetLobbyData(LobbyDataUpdate_t result)
     {
+        if(isLobby)return;
         LobbiesListManager.Instance.DisaplayLobbies(lobbyIDs, result);
     }
 }

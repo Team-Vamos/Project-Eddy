@@ -5,34 +5,38 @@ using UnityEngine.UIElements;
 
 public class LobbyRoomButton : MonoBehaviour
 {
-    private VisualElement list;
- 
-
+    private LobbyController lobbyController;
+    private InputAddress inputAddress;
+    public VisualElement list;
     public Button readyButton;
     public Button startButton;
     public Button copyButton;
     private void Awake() {
+        lobbyController = FindObjectOfType<LobbyController>();
+        inputAddress = FindObjectOfType<InputAddress>();
+    }
+    private void OnEnable() {
         UIDocument ui = GetComponent<UIDocument>();
 
         VisualElement root = ui.rootVisualElement;
 
         list = root.Q<ListView>("Servers");
-        Button ready = root.Query<Button>("Button").AtIndex(0);
-        Button start = root.Query<Button>("Button").AtIndex(1);
-        Button copy = root.Query<Button>("Button").AtIndex(2);
-        ready.RegisterCallback<ClickEvent>(OnClickReady);
-        start.RegisterCallback<ClickEvent>(OnClickStart);
-        copy.RegisterCallback<ClickEvent>(OnClickCopy);
+        readyButton = root.Query<Button>("Button").AtIndex(0);
+        startButton = root.Query<Button>("Button").AtIndex(1);
+        copyButton = root.Query<Button>("Button").AtIndex(2);
+        readyButton.RegisterCallback<ClickEvent>(OnClickReady);
+        startButton.RegisterCallback<ClickEvent>(OnClickStart);
+        copyButton.RegisterCallback<ClickEvent>(OnClickCopy);
     }
     
     private void OnClickReady(ClickEvent evt) {
-        
+        lobbyController.ReadyPlayer();
     }
     private void OnClickStart(ClickEvent evt) {
-
+        lobbyController.StartGame();
     }
     private void OnClickCopy(ClickEvent evt) {
-        
+        inputAddress.CopyAddress();
     }
     
 }

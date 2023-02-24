@@ -14,7 +14,7 @@ public class LobbyButton : MonoBehaviour
     private VisualElement list;
     public static ScrollView lobbyScrollView;
 
-    private void Awake() {
+    private void OnEnable() {
         steamLobby = FindObjectOfType<SteamLobby>();
         lobbiesListManager = FindObjectOfType<LobbiesListManager>();
 
