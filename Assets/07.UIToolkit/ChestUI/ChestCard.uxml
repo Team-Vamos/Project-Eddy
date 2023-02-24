@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/07.UIToolkit/ChestUI/ChestCard.uss?fileID=7433441132597879392&amp;guid=5c564a0c09f488044bd7f3801303542c&amp;type=3#ChestCard" />
     <ui:VisualElement name="CardTemplate" class="card-template">
         <ui:VisualElement name="Card" class="card">
             <ui:VisualElement name="Icon" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/06.Cards/02.Active/Heart.png?fileID=21300000&amp;guid=681beabc142c6bc46a9986faa1a37350&amp;type=3#Heart&apos;);" />

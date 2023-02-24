@@ -10,8 +10,6 @@ public class NexusUI : MonoBehaviour
     [SerializeField] private NexusHpUI hpBar;
     [SerializeField] private NexusUpgradeUI upgradeUI;
     [SerializeField] private GlobalNexusHpUI globalHpBar;
-    
-    [SerializeField] private float uiRange;
 
     private void Awake()
     {

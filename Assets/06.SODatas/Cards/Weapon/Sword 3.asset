@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardImage:
     icon: {fileID: 21300000, guid: 25f8fff9a2d17da49a4d8a4d690e272e, type: 3}
-    offset: {x: 0, y: 0}
+    offset: {x: 0, y: -0.3}
     scale: {x: 1, y: 1}
   name: "\uAC80"
-  rank: 0
-  description: "\uD5C8\uC811\uD574\uBCF4\uC774\uC9C0\uB9CC \uAC1C\uCA4C\uB294 \uAC80"
+  rank: 2
+  description: "\uD5C8\uC811\uD574\uBCF4\uC774\uC9C0\uB9CC \uC0DD\uAC01\uBCF4\uB2E4
+    \uC88B\uC740 \uAC80"
   upgrades:
   - cardImage: {fileID: 0}
   weaponHardness: 0

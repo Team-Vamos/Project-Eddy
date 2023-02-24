@@ -8,9 +8,9 @@ namespace Card
     public class ChestCardClick
     {
         private CardBaseSO _so;
-        private ChestUIDocument _document{ get; init; }
+        private ChestUIDocument _document { get; init; }
 
-        private ChestCardManager _manager{ get; init; }
+        private ChestCardManager _manager { get; init; }
 
         private float _voteMultipleValue;
 
@@ -32,7 +32,7 @@ namespace Card
         {
             CardController controller = _so.CreateCardController(null);
 
-            if(voteMultipleValue != null)
+            if (voteMultipleValue != null)
             {
                 controller.ApplyMultipleValue(voteMultipleValue.Value);
             }
@@ -43,27 +43,26 @@ namespace Card
 
         public void SelectCard(ClickEvent evt)
         {
-            if(_document.IsTweening)return;
+            if (_document.IsTweening) return;
 
             bool isDaddyTurn = _manager.CurrentVotePersonCount >= _manager.VotePersonMaxCount;
 
             CardController controller = _so.CreateCardController(null);
 
-            if(isDaddyTurn)
+            if (isDaddyTurn)
             {
                 controller.ApplyMultipleValue(_voteMultipleValue);
 
                 _manager.ResetVotePerson();
-
-                // TODO: 타임스케일 되돌리기
+                Time.timeScale = 1f;
             }
-            else if(_manager.IsVote)
+            else if (_manager.IsVote)
             {
                 _card.AddVotePerson();
-                
+
                 _manager.AddVotePerson();
                 _voteMultipleValue += _manager.VoteMultipleValue;
-
+                return;
             }
 
             _manager.BottleSpawner.SpawnBabyBottle(controller);

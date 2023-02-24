@@ -75,6 +75,7 @@ namespace Card
 
         private void Update()
         {
+            Debug.Log("업데이트");
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("눌림");
@@ -86,15 +87,22 @@ namespace Card
         {
 
             if (_isDisplayed || IsTweening) return;
-            // TODO: 타임스케일 멈춰주기
 
-            //_chestCardManager.UpdateIsVote();
+
+            _chestCardManager.UpdateIsVote();
+
+            if(_chestCardManager.IsVote)
+                Time.timeScale = 0f;
+
             _chestCardManager.ResetVotePerson();
 
             _isDisplayed = true;
 
+            _cardContainer.AddToClassList("on");
             _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-            _cardContainer.style.opacity = new StyleFloat(1f);
+
+            // _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+            // _cardContainer.style.opacity = new StyleFloat(1f);
 
             for (int i = 0; i < _cardList.Count; ++i)
             {
@@ -117,8 +125,7 @@ namespace Card
             IsTweening = true;
             _isDisplayed = false;
 
-            _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-            _cardContainer.style.opacity = new StyleFloat(0f);
+            _cardContainer.RemoveFromClassList("on");
 
             yield return Yields.WaitForSeconds(0.5f);
             IsTweening = false;
@@ -128,6 +135,8 @@ namespace Card
                 card.RemoveFromClassList("on");
                 card.DisableVotePerson();
             });
+
+            _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 
             _cardManager.ResetCardList();
         }

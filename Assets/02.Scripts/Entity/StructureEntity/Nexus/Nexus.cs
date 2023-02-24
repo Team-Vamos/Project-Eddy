@@ -1,4 +1,7 @@
-﻿/// <summary>
+﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+/// <summary>
 /// 글로벌로 동작하는 스크립트 입니다.
 /// </summary>
 public class Nexus : StructureEntity
@@ -19,6 +22,9 @@ public class Nexus : StructureEntity
 
     #endregion
     
+    [SerializeField] private ResourceStorage resourceStorage;
+    public ResourceStorage ResourceStorage => resourceStorage;
+    
     public Nexus() : base(1000)
     {
         OnDestroyed += () => OnNexusDestroyed?.SafeInvoke();
@@ -32,7 +38,6 @@ public class Nexus : StructureEntity
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        
         OnNexusDamaged?.SafeInvoke(damage);
     }
     
@@ -41,4 +46,6 @@ public class Nexus : StructureEntity
         // TODO: Upgrade the nexus
         OnNexusUpgraded?.SafeInvoke();
     }
+
+    public bool CanUpgrade => true;
 }

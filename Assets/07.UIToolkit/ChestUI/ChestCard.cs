@@ -54,14 +54,6 @@ namespace Card
         public void AddVotePerson()
         {
             _voteContainer[_manager.CurrentVotePersonCount].style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-            // foreach (VisualElement child in _voteContainer.Children())
-            // {
-            //     if(child.style.display.value.Equals(DisplayStyle.None))
-            //     {
-            //         child.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-            //         break;
-            //     }
-            // }
         }
 
         public void DisableVotePerson()
@@ -82,12 +74,12 @@ namespace Card
             _cardTemplate.RemoveFromClassList(className);
         }
 
-        public void UpdateInfo(CardGrade grade)
+        public void UpdateInfo(CardGradeSO grade)
         {
             _nameText.text = _so.name;
             _descText.text = _so.description;
             _icon.style.backgroundImage = new StyleBackground(_so.cardImage.icon);
-            _cardTemplate.style.unityBackgroundImageTintColor = grade.color;
+            _card.style.unityBackgroundImageTintColor = grade.color;
         }
 
     }

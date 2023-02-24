@@ -1,3 +1,4 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="Vote" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/07.UIToolkit/ChestUI/ChestCard.uss?fileID=7433441132597879392&amp;guid=5c564a0c09f488044bd7f3801303542c&amp;type=3#ChestCard" />
+    <ui:VisualElement name="Vote" class="vote" />
 </ui:UXML>

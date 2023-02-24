@@ -1152,12 +1152,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardSOList:
   - {fileID: 11400000, guid: a405a07e5faa5da47bbe82d741873c18, type: 2}
-  - {fileID: 11400000, guid: 81120bc45043e4f4d818b3af24ea2e80, type: 2}
-  - {fileID: 11400000, guid: 019adccdf34a0cb4aaf69113a8148baa, type: 2}
-  - {fileID: 11400000, guid: 52ab3a9dcc301fa4bbea248e952ca0d2, type: 2}
-  - {fileID: 11400000, guid: 4b46492e820a1f241b8dae8b8d431f26, type: 2}
+  - {fileID: 11400000, guid: 303ee0e3d57cd324f8de3568706fd79e, type: 2}
+  - {fileID: 11400000, guid: 0788f3743826a594996bab35240fd01e, type: 2}
+  - {fileID: 11400000, guid: 9346c9d581de63545889edbc8a499114, type: 2}
+  - {fileID: 11400000, guid: 50be8b2539452094090a52a951279ff4, type: 2}
   _cardGrades:
-  - {fileID: 11400000, guid: 62948324f3227c94e8f301fc56fff6c6, type: 2}
+  - {fileID: 11400000, guid: 4cbaf305a59c08f4eabb22db279218c6, type: 2}
+  - {fileID: 11400000, guid: 09c3d67f77cd8674aa1a89e6b2ddbba8, type: 2}
+  - {fileID: 11400000, guid: 16eb095e5dcf56f4984726b58022aa7b, type: 2}
+  - {fileID: 11400000, guid: 2beb629393ded9c428dbf8af938174d3, type: 2}
 --- !u!114 &878581348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,10 +1174,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardCount: 3
-  _dayWorker: {fileID: 0}
+  _dayWorker: {fileID: 1502115070}
   _voteMultipleValue: 0.1
   _bottleSpawner: {fileID: 1068801668}
   _votePersonMaxCount: 4
+  <IsVote>k__BackingField: 1
 --- !u!1 &899163495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 925421045}
   - component: {fileID: 925421044}
+  - component: {fileID: 925421046}
   m_Layer: 0
   m_Name: Global Light 2D
   m_TagString: Untagged
@@ -1387,6 +1392,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &925421046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925421043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263f51609f294801ac9c4fd955b6c6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1025326913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +1851,110 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 688124964}
+--- !u!1 &1502115067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502115072}
+  - component: {fileID: 1502115071}
+  - component: {fileID: 1502115070}
+  - component: {fileID: 1502115069}
+  - component: {fileID: 1502115068}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1502115068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502115067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c35468832a4bf4a2c7c164d1b4582f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayWorker: {fileID: 1502115070}
+  waveWorker: {fileID: 1502115069}
+  spawnRange: {x: 30, y: 30}
+  waveData: {fileID: 0}
+--- !u!114 &1502115069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502115067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3af2dae7a344a7ace4ce8d62e4c87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayWorker: {fileID: 1502115070}
+  globalLight: {fileID: 925421046}
+  bloodMoonWave: 5
+  dayIntensity: 1
+  nightIntensity: 0.3
+  bloodMoonColor: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  bloodMoonIntensity: 0.1
+--- !u!114 &1502115070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502115067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8ca6d578f8fac499bf1bdb893015cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayTime: 10
+  nightTime: 10
+  changeDuration: 1
+  dayTimeScale: 1
+  nightTimeScale: 1
+  timeWorker: {fileID: 1502115071}
+  <DayState>k__BackingField: 0
+--- !u!114 &1502115071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502115067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5ea6bc34addc64fbf51187ae2a4d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  timeScale: 1
+  isPause: 0
+--- !u!4 &1502115072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502115067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1670421871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,8 +2100,8 @@ Transform:
   m_GameObject: {fileID: 1753459135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.0754478, y: -1.7310295, z: -0.19757324}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1990337670}
   m_Father: {fileID: 0}
