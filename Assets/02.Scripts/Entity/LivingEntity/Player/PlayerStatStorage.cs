@@ -17,7 +17,7 @@ public class PlayerStatStorage : MonoBehaviour
 
     private readonly PlayerStat _stat = new();
 
-    private readonly List<StatModifier> _statModifiers = new();
+    private List<StatModifier> _statModifiers = new();
 
     public int Level => level;
     public int Exp => exp;
@@ -57,7 +57,7 @@ public class PlayerStatStorage : MonoBehaviour
         _stat.Armor.SetPlayerStatData(playerStatData[level]);
         _stat.Mine.SetPlayerStatData(playerStatData[level]);
 
-        _statModifiers.OrderByDescending(x => x.Order).ToList().ForEach(x =>
+        _statModifiers.ForEach(x =>
         {
             switch (x.StatType)
             {
@@ -88,6 +88,7 @@ public class PlayerStatStorage : MonoBehaviour
     public void AddStatModifier(StatModifier statModifier)
     {
         _statModifiers.Add(statModifier);
+        _statModifiers = _statModifiers.OrderByDescending(x => x.Order).ToList();
         CalculateStats();
     }
 
@@ -102,10 +103,10 @@ public class PlayerStatStorage : MonoBehaviour
         _statModifiers.RemoveAll(x => x.Source == source);
         CalculateStats();
     }
-    
+
     public void UpgradeStat(StatType statType)
     {
-        if (statPoint <= 0) 
+        if (statPoint <= 0)
             throw new Exception("Not enough stat point");
 
         statPoint--;
@@ -140,24 +141,39 @@ public class PlayerStatStorage : MonoBehaviour
 
 public class PlayerStat
 {
-    public UpgradableStat Atk = new();
-    public UpgradableStat Spd = new();
-    public UpgradableStat AtkSpd = new();
-    public UpgradableStat Hp = new();
-    public UpgradableStat Armor = new();
-    public UpgradableStat Mine = new();
+    public UpgradableStat Atk = new(StatType.Atk);
+    public UpgradableStat Spd = new(StatType.Spd);
+    public UpgradableStat AtkSpd = new(StatType.AtkSpd);
+    public UpgradableStat Hp = new(StatType.Hp);
+    public UpgradableStat Armor = new(StatType.Armor);
+    public UpgradableStat Mine = new(StatType.Mine);
 }
 
 public class UpgradableStat
 {
     public int Level;
     public float Value;
-    
+
     private StaticPlayerStat _playerStatData;
-    
+    public StatType StatType { get; private set; }
+
+    public UpgradableStat(StatType statType)
+    {
+        StatType = statType;
+    }
+
     public void SetPlayerStatData(StaticPlayerStat playerStatData)
     {
         _playerStatData = playerStatData;
-        Value = playerStatData.atk;
+        Value = StatType switch
+        {
+            StatType.Atk => _playerStatData.atk,
+            StatType.Spd => _playerStatData.spd,
+            StatType.AtkSpd => _playerStatData.atkSpd,
+            StatType.Hp => _playerStatData.hp,
+            StatType.Armor => _playerStatData.armor,
+            StatType.Mine => _playerStatData.mine,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }
