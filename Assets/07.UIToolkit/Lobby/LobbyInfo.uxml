@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="UserInfo" style="background-color: rgba(106, 106, 106, 0.69); height: 85px; font-size: 85px; flex-direction: row; flex-shrink: 0; align-items: center; justify-content: flex-start;">
-        <ui:VisualElement name="UserImage" />
-        <ui:Label text="NoName" display-tooltip-when-elided="true" name="UserName" style="height: 100%; -unity-text-align: middle-left; font-size: 55px;" />
+    <ui:VisualElement name="LobbyInfo" style="background-color: rgba(106, 106, 106, 0.69); height: 85px; font-size: 85px; flex-direction: row; flex-shrink: 0; align-items: center; justify-content: space-between;">
+        <ui:Label text="NoName" display-tooltip-when-elided="true" name="LobbyName" style="height: 100%; -unity-text-align: middle-left; font-size: 55px;" />
+        <ui:Button text="Join" display-tooltip-when-elided="true" name="JoinButton" style="height: 71%; width: 276px; justify-content: flex-start; margin-right: 14px; background-color: rgb(94, 94, 94); font-size: 41px;" />
     </ui:VisualElement>
 </ui:UXML>
