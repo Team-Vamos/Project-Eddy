@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 public class PlayerStatData : ScriptableObject
 {
-    [SerializeField] private PlayerStat[] playerStats;
+    [SerializeField] private StaticPlayerStat[] playerStats;
     
-    public PlayerStat this[int level] => playerStats[level - 1];
+    public StaticPlayerStat this[int level] => playerStats[level - 1];
 }
