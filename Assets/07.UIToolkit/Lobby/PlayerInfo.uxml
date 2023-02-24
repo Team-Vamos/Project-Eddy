@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="UserInfo" style="background-color: rgba(106, 106, 106, 0.69); height: 85px; font-size: 85px; flex-direction: row; flex-shrink: 0; align-items: center; justify-content: flex-start;">
-        <ui:VisualElement name="UserImage" style="width: 100px; height: 100px;" />
-        <ui:Label text="NoName" display-tooltip-when-elided="true" name="UserName" style="height: 100%; -unity-text-align: middle-left; font-size: 55px;" />
-        <ui:Label text="UnReady" display-tooltip-when-elided="true" name="UserReady" style="height: 100%; -unity-text-align: middle-left; font-size: 55px; margin-left: 144px;" />
+        <ui:VisualElement name="UserImage" style="width: 85px; height: 100%;" />
+        <ui:Label text="NoName" display-tooltip-when-elided="true" name="UserName" style="height: 100%; -unity-text-align: middle-left; font-size: 29px;" />
+        <ui:Label text="UnReady" display-tooltip-when-elided="true" name="UserReady" style="height: 100%; -unity-text-align: middle-right; font-size: 29px; margin-left: auto; position: absolute; white-space: nowrap; left: 100%; align-items: stretch; right: 526px;" />
     </ui:VisualElement>
 </ui:UXML>

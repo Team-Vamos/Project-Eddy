@@ -177,6 +177,7 @@ public class LobbyController : MonoSingleton<LobbyController>
         NewPlayerItem.PlayerNameText = playerInfo.Q<Label>("UserName");
         NewPlayerItem.PlayerReadyText = playerInfo.Q<Label>("UserReady");
         NewPlayerItem.PlayerIcon = playerInfo.Q<VisualElement>("UserImage");
+        
         lobbyRoomButton.list.Add(playerInfo);
 
     }
