@@ -75,10 +75,8 @@ namespace Card
 
         private void Update()
         {
-            Debug.Log("업데이트");
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("눌림");
                 ShowCard();
             }
         }
