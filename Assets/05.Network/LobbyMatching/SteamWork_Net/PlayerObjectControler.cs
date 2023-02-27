@@ -6,6 +6,8 @@ using Steamworks;
 
 public class PlayerObjectControler : NetworkBehaviour
 {
+    public bool isHost { get { return isServer; } }
+    public bool isLocal { get { return isLocalPlayer; } }
     //Player data
     [SyncVar] public int ConnectionID;
     [SyncVar] public int PlayerIdNumber;
@@ -25,6 +27,7 @@ public class PlayerObjectControler : NetworkBehaviour
 
     private void Start(){
         DontDestroyOnLoad(this.gameObject);
+        NetManager.Instance.Go();
     }
     private void PlayerReadyUpdate(bool oldValue, bool newValue){
         if(isServer){

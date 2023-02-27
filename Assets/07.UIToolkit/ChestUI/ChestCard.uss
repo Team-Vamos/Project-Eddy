@@ -1,10 +1,11 @@
 .card {
     background-image: url('project://database/Assets/03.Graphics/01.Sprites/06.Cards/00.Frame/CardTmp.png?fileID=21300000&guid=d71eab62e9e87a54086f154e26ed1b32&type=3#CardTmp');
-    width: 500px;
-    height: 500px;
+    width: 304px;
+    height: 512px;
     transition-property: left;
     transition-duration: 0.5s;
     align-items: center;
+    -unity-background-scale-mode: stretch-to-fill;
 }
 
 .card > #Icon {
@@ -55,7 +56,6 @@
 }
 
 #Canvas > #CardContainer {
-    opacity: 0;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -65,6 +65,7 @@
     transition-property: opacity;
     transition-duration: 0.4s;
     transition-delay: 0.1s;
+    opacity: 0;
 }
 
 #Canvas > #CardContainer.on {
@@ -79,6 +80,7 @@
     left: 100%;
     transition-property: left;
     transition-duration: 0.5s;
+    margin-right: 100px;
 }
 
 .card-template.on {

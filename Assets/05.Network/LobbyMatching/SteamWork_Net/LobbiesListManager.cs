@@ -19,7 +19,7 @@ public class LobbiesListManager : MonoSingleton<LobbiesListManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(scene.name != "MainMenu"&&scene.name != "Lobby"){
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
     public void GetListOfLobbys(){
