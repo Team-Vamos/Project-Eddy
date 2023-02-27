@@ -1173,9 +1173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295e5898adbcba845ae9b92da9d68430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardCount: 3
+  <CardCount>k__BackingField: 3
   _dayWorker: {fileID: 1502115070}
-  _voteMultipleValue: 0.1
+  <VoteMultipleValue>k__BackingField: 0.1
   _bottleSpawner: {fileID: 1068801668}
   _votePersonMaxCount: 4
   <IsVote>k__BackingField: 1

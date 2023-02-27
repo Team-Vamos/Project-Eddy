@@ -6,18 +6,14 @@ namespace Card
 {
     public class ChestCardManager : MonoBehaviour
     {
-        [SerializeField]
-        private int _cardCount;
-        public int CardCount => _cardCount;
+        [field: SerializeField] public int CardCount { get; set; } = 3;
 
         // TODO: DayWorker 연동하기
         [SerializeField]
         private DayWorker _dayWorker;
 
-        [Header("한명당 어느정도로 추가 스텟을 줄 것인가")]
-        [SerializeField]
-        private float _voteMultipleValue = 0.1f;
-        public float VoteMultipleValue => _voteMultipleValue;
+        //[Tooltip("한명당 어느정도로 추가 스텟을 줄 것인가")]
+        [field: SerializeField] public float VoteMultipleValue { get; set; } = 0.1f;
 
         [SerializeField]
         private BabyBottleSpawner _bottleSpawner;
