@@ -1,9 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/07.UIToolkit/ShopUI/Shop.uss?fileID=7433441132597879392&amp;guid=524489ce71ecc364b8a7437bf9fbe925&amp;type=3#Shop" />
     <ui:VisualElement name="Canvas" style="width: 100%; height: 100%;">
-        <ui:VisualElement name="Container">
-            <ui:VisualElement name="Card" class="card" />
-            <ui:VisualElement name="Card" class="card" />
+        <ui:VisualElement name="Container" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Store.png?fileID=21300000&amp;guid=d3bfd715021503f41a3b0460f65b620f&amp;type=3#Store&apos;);">
+            <ui:VisualElement name="Card" class="card">
+                <ui:VisualElement name="IconMask" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/00.Etc/Label.png?fileID=21300000&amp;guid=47cd5b4fe6ed27e48b809b5e5e639fdf&amp;type=3#Label&apos;); width: 350px; height: 350px; -unity-background-scale-mode: scale-and-crop;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="Price" />
+            </ui:VisualElement>
             <ui:VisualElement name="Card" class="card" />
             <ui:VisualElement name="Card" class="card" />
             <ui:VisualElement name="Card" class="card" />

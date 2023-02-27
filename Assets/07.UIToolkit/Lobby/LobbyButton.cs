@@ -27,8 +27,8 @@ public class LobbyButton : MonoBehaviour
 
         VisualElement back = root.Q<VisualElement>("Back");
         GroupBox groupBox = back.Q<GroupBox>("GroupBox");
-        Button host = back.Query<Button>("Button").AtIndex(0);
-        Button client = back.Query<Button>("Button").AtIndex(1);
+        Button host = back.Q<Button>("HostBtn");
+        Button client = back.Q<Button>("JoinBtn");
         host.RegisterCallback<ClickEvent>(OnClickHost);
         client.RegisterCallback<ClickEvent>(OnClickClient);
 
