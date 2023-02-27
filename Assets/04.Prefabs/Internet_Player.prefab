@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 3455870303350631361}
   - component: {fileID: 7582323079745734672}
   - component: {fileID: 4375559739651690860}
+  - component: {fileID: 5164943189130932251}
   m_Layer: 10
   m_Name: Internet_Player
   m_TagString: Player
@@ -294,6 +295,18 @@ MonoBehaviour:
   compressRotation: 0
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &5164943189130932251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121089938371734311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd91208130867247adf2b2d502efde4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4467091404021652539
 GameObject:
   m_ObjectHideFlags: 0
