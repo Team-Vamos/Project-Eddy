@@ -3,142 +3,133 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Card;
 
-namespace Card
+[RequireComponent(typeof(UIDocument))]
+public class ChestUIDocument : MonoBehaviour
 {
-    [RequireComponent(typeof(UIDocument))]
-    public class ChestUIDocument : MonoBehaviour
+    [SerializeField]
+    private VisualTreeAsset _card;
+    [SerializeField]
+    private VisualTreeAsset _vote;
+
+    [SerializeField]
+    private CardManager _cardManager;
+    [SerializeField]
+    private ChestManager _chestCardManager;
+
+    private UIDocument _document;
+    private VisualElement _cardContainer;
+    private VisualElement _root;
+
+    public bool IsTweening { get; private set; } = false;
+
+    private List<ChestCard> _cardList;
+    private List<ChestCardClick> _cardClickList;
+    private void Awake()
     {
-        [SerializeField]
-        private VisualTreeAsset _card;
-        [SerializeField]
-        private VisualTreeAsset _vote;
+        _document = GetComponent<UIDocument>();
+        _cardList = new List<ChestCard>();
+        _cardClickList = new List<ChestCardClick>();
+    }
 
-        [SerializeField]
-        private CardManager _cardManager;
-        [SerializeField]
-        private ChestCardManager _chestCardManager;
+    private void OnEnable()
+    {
+        _root = _document.rootVisualElement;
+        _cardContainer = _root.Q<VisualElement>("CardContainer");
+        InitCard();
+    }
 
-        private UIDocument _document;
-        private VisualElement _cardContainer;
+    private void OnDisable()
+    {
+        _cardList.Clear();
+        _cardContainer.Clear();
+        _cardClickList.Clear();
+    }
 
-        private bool _isDisplayed = false;
-        public bool IsTweening { get; private set; } = false;
-
-        private List<ChestCard> _cardList;
-        private List<ChestCardClick> _cardClickList;
-        private void Awake()
+    private void InitCard()
+    {
+        for (int i = 0; i < _chestCardManager.CardCount; ++i)
         {
-            _document = GetComponent<UIDocument>();
-            _cardList = new List<ChestCard>();
-            _cardClickList = new List<ChestCardClick>();
+            AddCard();
         }
+        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 
-        private void OnEnable()
+    }
+
+    /// TODO: 카드 갯수가 늘어나면 AddCard 호출해주기
+    /// <summary>
+    /// 카드 갯수 늘려주는 함수
+    /// </summary>
+    public void AddCard()
+    {
+        VisualElement cardRoot = _card.Instantiate().Q<VisualElement>("CardTemplate");
+        ChestCard card = new ChestCard(cardRoot, _chestCardManager, _vote);
+        ChestCardClick click = new ChestCardClick(this, _chestCardManager, card);
+
+        _cardList.Add(card);
+        _cardClickList.Add(click);
+        _cardContainer.Add(cardRoot);
+
+        cardRoot.RegisterCallback<ClickEvent>(click.SelectCard);
+    }
+
+    public void ShowCard()
+    {
+
+        if (_cardManager.IsOpen || IsTweening) return;
+
+
+        _chestCardManager.UpdateIsVote();
+
+        if (_chestCardManager.IsVote)
+            Time.timeScale = 0f;
+
+        _chestCardManager.ResetVotePerson();
+
+        _cardManager.IsOpen = true;
+
+        _cardContainer.AddToClassList("on");
+        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+
+        // _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+        // _cardContainer.style.opacity = new StyleFloat(1f);
+
+        for (int i = 0; i < _cardList.Count; ++i)
         {
-            VisualElement root = _document.rootVisualElement;
-            _cardContainer = root.Q<VisualElement>("CardContainer");
-            InitCard();
-        }
+            _cardList[i].AddToClassList("on");
+            CardBaseSO so = _cardManager.GetRandomCardSO();
+            _cardList[i].SetCardSO(so);
+            _cardList[i].UpdateInfo(_cardManager.GetGrade(so.rank));
 
-        private void OnDisable()
+            _cardClickList[i].SetCardSO(so);
+        }
+    }
+
+    public void DisableContainer()
+    {
+        StartCoroutine(DisableUI());
+    }
+
+    private IEnumerator DisableUI()
+    {
+        IsTweening = true;
+        _cardManager.IsOpen = false;
+
+        _cardContainer.RemoveFromClassList("on");
+
+        yield return Yields.WaitForSeconds(0.5f);
+        IsTweening = false;
+
+        _cardList.ForEach(card =>
         {
-            _cardList.Clear();
-            _cardContainer.Clear();
-            _cardClickList.Clear();
-        }
+            card.RemoveFromClassList("on");
+            card.DisableVotePerson();
+        });
 
-        private void InitCard()
-        {
-            for (int i = 0; i < _chestCardManager.CardCount; ++i)
-            {
-                AddCard();
-            }
-        }
+        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 
-        /// TODO: 카드 갯수가 늘어나면 AddCard 호출해주기
-        /// <summary>
-        /// 카드 갯수 늘려주는 함수
-        /// </summary>
-        public void AddCard()
-        {
-            VisualElement cardRoot = _card.Instantiate().Q<VisualElement>("CardTemplate");
-            ChestCard card = new ChestCard(cardRoot, _chestCardManager, _vote);
-            ChestCardClick click = new ChestCardClick(this, _chestCardManager, card);
-
-            _cardList.Add(card);
-            _cardClickList.Add(click);
-            _cardContainer.Add(cardRoot);
-
-            cardRoot.RegisterCallback<ClickEvent>(click.SelectCard);
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ShowCard();
-            }
-        }
-
-        public void ShowCard()
-        {
-
-            if (_isDisplayed || IsTweening) return;
-
-
-            _chestCardManager.UpdateIsVote();
-
-            if(_chestCardManager.IsVote)
-                Time.timeScale = 0f;
-
-            _chestCardManager.ResetVotePerson();
-
-            _isDisplayed = true;
-
-            _cardContainer.AddToClassList("on");
-            _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-
-            // _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-            // _cardContainer.style.opacity = new StyleFloat(1f);
-
-            for (int i = 0; i < _cardList.Count; ++i)
-            {
-                _cardList[i].AddToClassList("on");
-                CardBaseSO so = _cardManager.GetRandomCardSO();
-                _cardList[i].SetCardSO(so);
-                _cardList[i].UpdateInfo(_cardManager.GetGrade(so.rank));
-
-                _cardClickList[i].SetCardSO(so);
-            }
-        }
-
-        public void DisableContainer()
-        {
-            StartCoroutine(DisableUI());
-        }
-
-        private IEnumerator DisableUI()
-        {
-            IsTweening = true;
-            _isDisplayed = false;
-
-            _cardContainer.RemoveFromClassList("on");
-
-            yield return Yields.WaitForSeconds(0.5f);
-            IsTweening = false;
-
-            _cardList.ForEach(card =>
-            {
-                card.RemoveFromClassList("on");
-                card.DisableVotePerson();
-            });
-
-            _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-
-            _cardManager.ResetCardList();
-        }
-
+        _cardManager.ResetCardList();
     }
 
 }

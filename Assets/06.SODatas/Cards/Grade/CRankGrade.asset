@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0.4117647, g: 0.4117647, b: 0.4117647, a: 1}
   rank: 3
+  price: 1000

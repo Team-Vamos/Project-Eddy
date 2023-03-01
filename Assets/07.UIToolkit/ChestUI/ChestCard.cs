@@ -22,8 +22,8 @@ namespace Card
 
         private CardBaseSO _so;
 
-        private ChestCardManager _manager;
-        public ChestCard(VisualElement root, ChestCardManager manager, VisualTreeAsset vote)
+        private ChestManager _manager;
+        public ChestCard(VisualElement root, ChestManager manager, VisualTreeAsset vote)
         {
             _manager = manager;
 
