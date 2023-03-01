@@ -5,7 +5,7 @@ using EventManagers;
 
 public class PlayerMove : MonoBehaviour
 {
-    private Rigidbody _rb;
+    private Rigidbody2D _rb;
     private Vector3 inputDir;
     private Vector3 realMove = Vector3.zero;
     [SerializeField]
@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     private PlayerObjectControler playerObjectControler;
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody2D>();
         playerObjectControler = GetComponent<PlayerObjectControler>();
         Debug.Log("Start");
         EventManager.StartListening(NetManager.StartNetworkCallback, SetNetwork);
@@ -37,6 +37,6 @@ public class PlayerMove : MonoBehaviour
     private void Move()
     {
         inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        realMove = /* [stat *] */inputDir.normalized;// * Time.deltaTime;
+        realMove = /* stat * */inputDir.normalized;
     }
 }
