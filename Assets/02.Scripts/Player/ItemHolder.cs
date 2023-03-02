@@ -3,6 +3,17 @@ using UnityEngine;
 
 public class ItemHolder : MonoBehaviour
 {
+    #region Events
+
+    public delegate void OnItemAddedDelegate(Item item);
+
+    public delegate void OnItemRemovedDelegate(Item item);
+
+    public event OnItemAddedDelegate OnItemAdded;
+    public event OnItemRemovedDelegate OnItemRemoved;
+
+    #endregion
+
     [SerializeField] private Transform holdingPoint;
     [SerializeField] private float heightPerItem = 0.5f;
     [SerializeField] private float pickupRange = 1f;
@@ -18,8 +29,7 @@ public class ItemHolder : MonoBehaviour
         item.transform.position = holdingPoint.position + Vector3.up * (heightPerItem * _itemStack.Count);
         item.transform.SetParent(holdingPoint);
         item.SetHolder(this);
-
-        Debug.Log($"Add item: {item.name}");
+        OnItemAdded?.SafeInvoke(item);
     }
 
     private Item RemoveItem()
@@ -33,32 +43,14 @@ public class ItemHolder : MonoBehaviour
         var item = _itemStack.Pop();
         item.transform.SetParent(null);
         item.ClearHolder();
+        OnItemRemoved?.SafeInvoke(item);
 
-        Debug.Log($"Remove item: {item.name}");
         return item;
     }
 
-    public Item PeekItem()
-    {
-        return _itemStack.Count == 0 ? null : _itemStack.Peek();
-    }
-
-    public bool HasItem()
+    private bool HasItem()
     {
         return _itemStack.Count > 0;
-    }
-
-    public int GetItemCount()
-    {
-        return _itemStack.Count;
-    }
-
-    public void Clear()
-    {
-        while (HasItem())
-        {
-            RemoveItem();
-        }
     }
 
     private float _lastTime;
@@ -84,6 +76,7 @@ public class ItemHolder : MonoBehaviour
     }
 
     private readonly Collider2D[] _results = new Collider2D[10];
+
     private void PickupItem()
     {
         // TODO: GC를 줄이기 위해 재사용할 수 있는 배열을 만들어서 사용
