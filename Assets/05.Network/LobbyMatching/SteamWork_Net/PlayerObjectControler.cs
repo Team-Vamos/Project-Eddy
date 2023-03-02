@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Steamworks;
+using System.Reflection;
 
 public class PlayerObjectControler : NetworkBehaviour
 {
+    
+    
     public bool isHost { get { return isServer; } }
     public bool isLocal { get { return isLocalPlayer; } }
     //Player data

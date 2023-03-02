@@ -9,6 +9,7 @@ public class NetManager : NetworkSingleton<NetManager>
     public static string StartNetworkCallback = "StartNetworkCallback";
 
     private bool isHost = false;
+    public bool networkStarted = false;
     public void Go()
     {
         Debug.Log("NetManager Go");
@@ -16,17 +17,29 @@ public class NetManager : NetworkSingleton<NetManager>
     private void Awake() {
         EventManager.StartListening(StartNetworkCallback, SetNetwork);
     }
+    private void Start() {
+        if(!networkStarted)
+            StartNetwork();
+    }
     private void SetNetwork()
     {
         isHost = isServer;
+        networkStarted = true;
     }
     public override void OnStartServer()
     {
-        EventManager.TriggerEvent(StartNetworkCallback);
+        StartNetwork();
     }
     public override void OnStartClient()
     {
+        StartNetwork();
+    }
+    private void StartNetwork()
+    {
+        EventManager.StopListening(StartNetworkCallback, SetNetwork);
+        EventManager.StartListening(StartNetworkCallback, SetNetwork);
         EventManager.TriggerEvent(StartNetworkCallback);
+        SetNetwork();
     }
 
 
