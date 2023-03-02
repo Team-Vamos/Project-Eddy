@@ -46,11 +46,15 @@ public class WaveWorker : MonoBehaviour
             case DayState.Night:
                 _waveCount++;
                 WaveProcessing = true;
-                globalLight.SetIntensity(nightIntensity, duration);
                 
                 if (_waveCount % bloodMoonWave == 0)
                 {
+                    globalLight.SetIntensity(bloodMoonIntensity, duration);
                     globalLight.SetColor(bloodMoonColor, duration);
+                }
+                else
+                {
+                    globalLight.SetIntensity(nightIntensity, duration);
                 }
                 break;
             case DayState.Day:
