@@ -77,7 +77,7 @@
 
 .card-template {
     flex-direction: row;
-    left: 100%;
+    left: 800%;
     transition-property: left;
     transition-duration: 0.5s;
     margin-right: 100px;

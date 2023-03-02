@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Card;
+using UnityEngine.UIElements;
+
+public class StoreCardClick
+{
+    private CardBaseSO _so;
+    private StoreUIDocument _uiDocument;
+    private StoreManager _manager;
+    private VisualElement _cardRoot;
+
+    public int Price { get; set; }
+
+    public StoreCardClick(VisualElement cardRoot, StoreUIDocument document, StoreManager manager)
+    {
+        _cardRoot = cardRoot;
+        _uiDocument = document;
+        _manager = manager;
+    }
+
+    public void SetCardSO(CardBaseSO so)
+    {
+        _so = so;
+    }
+
+    public void SelectCard(ClickEvent evt)
+    {
+        if(_uiDocument.IsTween) return;
+        if(_manager.Cash < Price)return;
+        Debug.Log("눌림");
+
+        _manager.Cash -= Price;
+
+        _cardRoot.RemoveFromClassList("on");
+        CardController controller = _so.CreateCardController(null);
+        _manager.BottleSpawner.SpawnBabyBottle(controller);
+    }
+}

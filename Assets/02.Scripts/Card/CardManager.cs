@@ -12,6 +12,8 @@ namespace Card
         private List<CardGradeSO> _cardGrades;
         private Dictionary<RankType, CardGradeSO> _cardGradeDict = new Dictionary<RankType, CardGradeSO>();
 
+        public bool IsOpen { get; set; } = false;
+
         private List<CardBaseSO> _tempCardList;
         public void SetSOList(List<CardBaseSO> soList)
         {
@@ -22,7 +24,6 @@ namespace Card
         {
             _cardGrades = gradeList;
         }
-
 
         private void Start()
         {
@@ -43,6 +44,10 @@ namespace Card
 
         public CardBaseSO GetRandomCardSO()
         {
+            if(_tempCardList.Count <=0)
+            {
+                ResetCardList();
+            }
             int random = Random.Range(0, _tempCardList.Count);
 
             CardBaseSO so = _tempCardList[random];
