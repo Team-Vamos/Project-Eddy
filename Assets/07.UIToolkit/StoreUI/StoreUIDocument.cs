@@ -16,9 +16,12 @@ public class StoreUIDocument : MonoBehaviour
     private StoreManager _storeManager;
 
     [SerializeField]
-    private float _verticalDuration = 0.3f;
-    [SerializeField]
-    private float _horizontalDuration = 0.3f;
+    private float _storeAnimationDuration = 0.5f;
+
+    // [SerializeField]
+    // private float _verticalDuration = 0.3f;
+    // [SerializeField]
+    // private float _horizontalDuration = 0.3f;
     [SerializeField]
     private float _cardAnimationDuration = 0.2f;
 
@@ -55,17 +58,21 @@ public class StoreUIDocument : MonoBehaviour
     private IEnumerator RemoveContainerClass()
     {
         IsTween = true;
-        _cardContainer.RemoveFromClassList("horizontal-on");
-        yield return WaitForSeconds(_horizontalDuration);
-        _cardContainer.RemoveFromClassList("vertical-on");
-        yield return WaitForSeconds(_verticalDuration);
+        _cardContainer.RemoveFromClassList("on");
+        yield return WaitForSeconds(_storeAnimationDuration);
+        // _cardContainer.RemoveFromClassList("horizontal-on");
+        // yield return WaitForSeconds(_horizontalDuration);
+        // _cardContainer.RemoveFromClassList("vertical-on");
+        // yield return WaitForSeconds(_verticalDuration);
 
         for (int i = 0; i < _cardList.Count; ++i)
         {
             _cardList[i].RemoveFromClassListAtRoot("on");
         }
+        
         _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
         IsTween = false;
+        _cardManager.IsOpen = false;
     }
 
     private void ResetCardList()
@@ -89,6 +96,7 @@ public class StoreUIDocument : MonoBehaviour
 
     public void ShowStore()
     {
+        if(_cardManager.IsOpen)return;
         _cardManager.IsOpen = true;
 
         for (int i = 0; i < _cardList.Count; ++i)
@@ -110,10 +118,12 @@ public class StoreUIDocument : MonoBehaviour
     private IEnumerator AddClassToCardContainer()
     {
         IsTween = true;
-        _cardContainer.AddToClassList("vertical-on");
-        yield return WaitForSeconds(_verticalDuration);
-        _cardContainer.AddToClassList("horizontal-on");
-        yield return WaitForSeconds(_horizontalDuration);
+        _cardContainer.AddToClassList("on");
+        yield return WaitForSeconds(_storeAnimationDuration);
+        // _cardContainer.AddToClassList("vertical-on");
+        // yield return WaitForSeconds(_verticalDuration);
+        // _cardContainer.AddToClassList("horizontal-on");
+        // yield return WaitForSeconds(_horizontalDuration);
         for (int i = 0; i < _cardList.Count; ++i)
         {
             _cardList[i].AddToClassListAtRoot("on");
