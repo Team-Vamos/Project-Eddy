@@ -26,10 +26,15 @@ public class LobbyButton : MonoBehaviour
         VisualElement root = ui.rootVisualElement;
 
         VisualElement back = root.Q<VisualElement>("Back");
-        Button host = back.Query<Button>("Button").AtIndex(0);
-        Button client = back.Query<Button>("Button").AtIndex(1);
+        GroupBox groupBox = back.Q<GroupBox>("GroupBox");
+        Button host = back.Q<Button>("HostBtn");
+        Button client = back.Q<Button>("JoinBtn");
+        Button settings = back.Q<Button>("SettingBtn");
+        Button quit = back.Q<Button>("QuitBtn");
         host.RegisterCallback<ClickEvent>(OnClickHost);
         client.RegisterCallback<ClickEvent>(OnClickClient);
+        settings.RegisterCallback<ClickEvent>(OnClickSetting);
+        quit.RegisterCallback<ClickEvent>(OnClickQuit);
 
 
 
@@ -51,6 +56,14 @@ public class LobbyButton : MonoBehaviour
     private void OnClickClient(ClickEvent evt) {
         list.style.display = DisplayStyle.Flex;
         lobbiesListManager.GetListOfLobbys();
+    }
+    private void OnClickSetting(ClickEvent evt)
+    {
+        //설정 패널
+    }
+    private void OnClickQuit(ClickEvent evt)
+    {
+        Application.Quit();
     }
     private void OnClickRefresh(ClickEvent evt) {
         lobbiesListManager.ReFreshLobbies();

@@ -9,6 +9,7 @@ namespace Card
     {
         public Color color  = new Color(0f,0f,0f,1f);
         public RankType rank;
+        public int price;
     }
 
 }
