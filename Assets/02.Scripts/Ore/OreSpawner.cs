@@ -63,11 +63,11 @@ public class OreSpawner : MonoBehaviour
 
     [SerializeField]
     private CheckOre _debugOre;
-    [SerializeField]
-    private float _testDamage = 30f;
 
     private Coroutine _checkOreCoroutine;
 #endif
+    [SerializeField]
+    private float _testDamage = 30f;
 
     public void SetRootVisualElement(VisualElement root)
     {

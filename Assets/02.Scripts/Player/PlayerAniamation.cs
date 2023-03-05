@@ -33,6 +33,7 @@ public class PlayerAniamation : NetworkBehaviour
     public void SetDir(float dir)
     {
         moveDir = dir;
+        if(!isServer) CmdSetDir(moveDir);
     }
     private void UpdateAnimation()
     {

@@ -18,7 +18,7 @@ public class NetManager : NetworkSingleton<NetManager>
         EventManager.StartListening(StartNetworkCallback, SetNetwork);
     }
     private void Start() {
-        if(!networkStarted)
+        if(networkStarted)
             StartNetwork();
     }
     private void SetNetwork()
@@ -36,6 +36,7 @@ public class NetManager : NetworkSingleton<NetManager>
     }
     private void StartNetwork()
     {
+        networkStarted = true;
         EventManager.StopListening(StartNetworkCallback, SetNetwork);
         EventManager.StartListening(StartNetworkCallback, SetNetwork);
         EventManager.TriggerEvent(StartNetworkCallback);
