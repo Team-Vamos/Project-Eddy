@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7332557463635955830}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2485182497717162823}
   - component: {fileID: 3765351891752449427}
-  m_Layer: 0
-  m_Name: Triangle
+  - component: {fileID: 7663670807075747740}
+  m_Layer: 3
+  m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244674824901770375}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.87, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,7 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb583a154ebc66241b644dfb076c190f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,6 +118,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7663670807075747740
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244674824901770375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8737f9025bf66549818f5471911d1a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3121089938371734311
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +156,8 @@ GameObject:
   - component: {fileID: 8402368035872655597}
   - component: {fileID: 3349344509359142779}
   - component: {fileID: 5000189682279932266}
-  m_Layer: 10
+  - component: {fileID: 4426633733839371188}
+  m_Layer: 3
   m_Name: Internet_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -356,7 +378,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerAnimator: {fileID: 3121089939309759054}
-  attackAnimator: {fileID: 0}
+  attackAnimator: {fileID: 7663670807075747740}
 --- !u!114 &3349344509359142779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +431,28 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
+--- !u!114 &4426633733839371188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121089938371734311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019934c58d54dda4faa05dbb6972a770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 8437709009137989615}
+  attackAngle: 0
+  attackRange: 1.5
+  attackArc: 94.5
+  minAnimationAngle: -52.67
+  maxAnimationAngle: 67.8
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  attackDamage: 15
 --- !u!1 &4467091404021652539
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +465,7 @@ GameObject:
   - component: {fileID: 4467091404021652538}
   - component: {fileID: 3121089939309759054}
   - component: {fileID: 7178872644159471481}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Base Player_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6933122386031244829}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HeadPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8437709009137989615}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
