@@ -43,7 +43,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2485182497717162823}
   - component: {fileID: 3765351891752449427}
-  - component: {fileID: 7663670807075747740}
   m_Layer: 3
   m_Name: Hand
   m_TagString: Untagged
@@ -58,14 +57,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244674824901770375}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.87, y: -0.22, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.10214437, w: 0.9947696}
+  m_LocalPosition: {x: -1.7, y: -0.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8437709009137989615}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.725}
 --- !u!212 &3765351891752449427
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,26 +117,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7663670807075747740
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244674824901770375}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d8737f9025bf66549818f5471911d1a7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3121089938371734311
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +357,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerAnimator: {fileID: 3121089939309759054}
-  attackAnimator: {fileID: 7663670807075747740}
+  attackAnimator: {fileID: 2112174829709473124}
 --- !u!114 &3349344509359142779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,8 +426,8 @@ MonoBehaviour:
   attackAngle: 0
   attackRange: 1.5
   attackArc: 94.5
-  minAnimationAngle: -52.67
-  maxAnimationAngle: 67.8
+  minAnimationAngle: -22.29
+  maxAnimationAngle: 66.4
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -616,6 +595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8437709009137989615}
+  - component: {fileID: 2112174829709473124}
   m_Layer: 3
   m_Name: Center
   m_TagString: Untagged
@@ -639,3 +619,23 @@ Transform:
   m_Father: {fileID: 4467091404021652537}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2112174829709473124
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8736083584985321517}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8737f9025bf66549818f5471911d1a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

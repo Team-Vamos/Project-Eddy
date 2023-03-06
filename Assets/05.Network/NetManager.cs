@@ -7,7 +7,6 @@ using EventManagers;
 public class NetManager : NetworkSingleton<NetManager>
 {
     public static string StartNetworkCallback = "StartNetworkCallback";
-
     private bool isHost = false;
     public bool networkStarted = false;
     public void Go()
@@ -18,29 +17,23 @@ public class NetManager : NetworkSingleton<NetManager>
         EventManager.StartListening(StartNetworkCallback, SetNetwork);
     }
     private void Start() {
-        if(networkStarted)
-            StartNetwork();
+        StartCoroutine(WaitForNetwork());
     }
     private void SetNetwork()
     {
         isHost = isServer;
-        networkStarted = true;
     }
-    public override void OnStartServer()
+    private IEnumerator WaitForNetwork()
     {
-        StartNetwork();
-    }
-    public override void OnStartClient()
-    {
+        while(!NetworkServer.active || !NetworkClient.isConnected)
+            yield return null;
         StartNetwork();
     }
     private void StartNetwork()
     {
+        Debug.Log("NetManager StartNetwork");
         networkStarted = true;
-        EventManager.StopListening(StartNetworkCallback, SetNetwork);
-        EventManager.StartListening(StartNetworkCallback, SetNetwork);
         EventManager.TriggerEvent(StartNetworkCallback);
-        SetNetwork();
     }
 
 

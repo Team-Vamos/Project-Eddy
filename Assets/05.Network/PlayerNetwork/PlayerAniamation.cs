@@ -17,6 +17,7 @@ public class PlayerAniamation : NetworkBehaviour
     }
     private void SetLocal()
     {
+        Debug.Log("PlayerAniamation SetLocal");
         if(isLocal)
             EventManager.StartListening("Attack", AttackTrigger);
     }

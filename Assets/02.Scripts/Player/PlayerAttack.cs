@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventManagers;
 
 
 public class PlayerAttack : MonoBehaviour
@@ -49,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
     }
     public void Attack()
     {
-
+        
     }
     private void OnDrawGizmos()
     {
@@ -179,7 +180,6 @@ public class PlayerAttack : MonoBehaviour
         }
         angle = Mathf.Clamp(angle, -maxAnimationAngle, -minAnimationAngle);
 
-        Debug.Log(angle);
         center.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
     public static float GetAnglesFromDir(Vector3 position, Vector3 dir)
