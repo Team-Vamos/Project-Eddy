@@ -43,15 +43,12 @@ public class StoreCardEvent
 
     public void EnterEvent(MouseEnterEvent evt)
     {
-        Debug.Log("들어옴");
         _infoBox.Root.AddToClassList("on");
         _infoBox.UpdateInfo(_so);
     }
 
     public void LeaveEvent(MouseLeaveEvent evt)
     {
-        Debug.Log("나감");
-
         _infoBox.Root.RemoveFromClassList("on");
         
     }

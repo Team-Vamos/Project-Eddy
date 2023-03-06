@@ -85,7 +85,7 @@
 
 .info-box {
     width: 300px;
-    height: 500px;
+    height: 362px;
     background-color: rgb(255, 223, 223);
     position: absolute;
     padding-left: 15px;
@@ -109,7 +109,7 @@
 
 .info-box > #Description {
     color: rgb(34, 34, 34);
-    font-size: 18px;
+    font-size: 24px;
     -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
     -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&guid=c4ec3fe475c822c42bd611d516f301bd&type=2#KyoboHandwriting2021sjy SDF');
     white-space: normal;
@@ -117,7 +117,7 @@
 
 .info-box > #EffectInfo {
     color: rgb(34, 34, 34);
-    font-size: 18px;
+    font-size: 16px;
     -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
     -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&guid=c4ec3fe475c822c42bd611d516f301bd&type=2#KyoboHandwriting2021sjy SDF');
     white-space: normal;

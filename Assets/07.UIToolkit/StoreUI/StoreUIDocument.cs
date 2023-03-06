@@ -68,8 +68,9 @@ public class StoreUIDocument : MonoBehaviour
 
         Vector3 uiPos = RuntimePanelUtils.ScreenToPanel(_root.panel, Input.mousePosition);
 
-        _storeInfoBox.Root.style.left = uiPos.x - _storeInfoBox.Root.layout.width * 0.5f;
-        _storeInfoBox.Root.style.top = -uiPos.y + _storeInfoBox.Root.layout.height * 2f;
+        Debug.Log(uiPos);
+        _storeInfoBox.Root.style.left = uiPos.x - _storeInfoBox.Root.layout.width;
+        _storeInfoBox.Root.style.top = -uiPos.y + _root.layout.height - _storeInfoBox.Root.layout.height * 0.5f;
     }
 
     private void ExitContainer(ClickEvent evt)
