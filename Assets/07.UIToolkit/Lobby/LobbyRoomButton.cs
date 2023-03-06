@@ -21,7 +21,6 @@ public class LobbyRoomButton : MonoBehaviour
         VisualElement root = ui.rootVisualElement;
 
         list = root.Q<ScrollView>("Servers");
-        Debug.Log(list);
         readyButton = root.Query<Button>("Button").AtIndex(0);
         startButton = root.Query<Button>("Button").AtIndex(1);
         copyButton = root.Query<Button>("Button").AtIndex(2);

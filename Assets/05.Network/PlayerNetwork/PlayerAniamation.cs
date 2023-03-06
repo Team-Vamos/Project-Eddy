@@ -17,9 +17,9 @@ public class PlayerAniamation : NetworkBehaviour
     }
     private void SetLocal()
     {
-        Debug.Log("PlayerAniamation SetLocal");
-        if(isLocal)
+        if(isLocal){
             EventManager.StartListening("Attack", AttackTrigger);
+        }
     }
     void Update()
     {
@@ -27,7 +27,9 @@ public class PlayerAniamation : NetworkBehaviour
     }
     private void AttackTrigger()
     {
-        attackAnimator?.SetTrigger("Attack");
+        attackAnimator.SetTrigger("Attack");
+        SendAttack();
+        // SendAttackHit( new int[]{1,2,3}, 10);
     }
     private void UpdateAnimation()
     {
@@ -68,6 +70,54 @@ public class PlayerAniamation : NetworkBehaviour
     {
         return mousePos;
     }
-    // ------------------ SyncVar End ------------------
-    
+    // ------------------ AttackHit SyncVar ------------------
+    public void SendAttackHit(int[] targets, int damage)
+    {
+        if(!isServer) CmdAttackHit(targets, damage);
+        else RpcAttackHit(targets, damage);
+    }
+    [Command]
+    private void CmdAttackHit(int[] targets, int damage)
+    {
+        if(!isLocal)
+            DoAttack(targets, damage);
+        RpcAttackHit(targets, damage);
+    }
+    [ClientRpc]
+    private void RpcAttackHit(int[] targets, int damage)
+    {
+        if(!isLocal)
+            DoAttack(targets, damage);
+    }
+    private void DoAttack(int[] targets, int damage)
+    {
+        attackAnimator.SetTrigger("Attack");
+
+        foreach (var target in targets)
+        {
+            // get target by id
+            // take damage
+            // if dead, remove from targets
+        }
+
+    }
+    // ------------------ AttackAni SyncVar ------------------
+    public void SendAttack()
+    {
+        if(!isServer) CmdAttack();
+        else RpcAttack();
+    }
+    [Command]
+    private void CmdAttack()
+    {
+        if(!isLocal)
+            attackAnimator.SetTrigger("Attack");
+        RpcAttack();
+    }
+    [ClientRpc]
+    private void RpcAttack()
+    {
+        if(!isLocal)
+            attackAnimator.SetTrigger("Attack");
+    }
 }

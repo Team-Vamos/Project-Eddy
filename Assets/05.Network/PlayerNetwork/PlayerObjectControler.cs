@@ -28,7 +28,7 @@ public class PlayerObjectControler : NetworkBehaviour
         }
     }
 
-    private void Start(){
+    private void Awake(){
         DontDestroyOnLoad(this.gameObject);
         NetManager.Instance.Go();
     }

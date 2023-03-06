@@ -42,15 +42,20 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         LookMouse2D();
+        UpdateAttact();
+        
+    }
+    private void UpdateAttact()
+    {
+        if(!playerAniamation.isLocal) return;
         if(Input.GetMouseButtonDown(0))
         {
             Attack();
         }
-        
     }
     public void Attack()
     {
-        
+        EventManager.TriggerEvent("Attack");
     }
     private void OnDrawGizmos()
     {
