@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Card;
 using UnityEngine.UIElements;
+using System;
 
-public class StoreCardClick
+public class StoreCardEvent
 {
     private CardBaseSO _so;
     private StoreUIDocument _uiDocument;
@@ -13,11 +14,13 @@ public class StoreCardClick
 
     public int Price { get; set; }
 
-    public StoreCardClick(VisualElement cardRoot, StoreUIDocument document, StoreManager manager)
+    private StoreInfoBox _infoBox{ get; init; }
+    public StoreCardEvent(VisualElement cardRoot, StoreUIDocument document, StoreManager manager, StoreInfoBox infoBox)
     {
         _cardRoot = cardRoot;
         _uiDocument = document;
         _manager = manager;
+        _infoBox = infoBox;
     }
 
     public void SetCardSO(CardBaseSO so)
@@ -36,5 +39,20 @@ public class StoreCardClick
         _cardRoot.RemoveFromClassList("on");
         CardController controller = _so.CreateCardController(null);
         _manager.BottleSpawner.SpawnBabyBottle(controller);
+    }
+
+    public void EnterEvent(MouseEnterEvent evt)
+    {
+        Debug.Log("들어옴");
+        _infoBox.Root.AddToClassList("on");
+        _infoBox.UpdateInfo(_so);
+    }
+
+    public void LeaveEvent(MouseLeaveEvent evt)
+    {
+        Debug.Log("나감");
+
+        _infoBox.Root.RemoveFromClassList("on");
+        
     }
 }

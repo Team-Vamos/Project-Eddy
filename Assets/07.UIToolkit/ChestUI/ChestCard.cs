@@ -18,7 +18,7 @@ namespace Card
         private Label _nameText;
         private Label _descText;
 
-        private Label _effect;
+        private Label _effectInfo;
 
         private CardBaseSO _so;
 
@@ -36,7 +36,7 @@ namespace Card
 
             _nameText = _card.Q<Label>("Name");
             _descText = _card.Q<Label>("Description");
-            _effect = _card.Q<Label>("Effect");
+            _effectInfo = _card.Q<Label>("Effect");
 
             _voteContainer.Clear();
 
@@ -78,6 +78,7 @@ namespace Card
         {
             _nameText.text = _so.name;
             _descText.text = _so.description;
+            _effectInfo.text = _so.effectInfo;
             _icon.style.backgroundImage = new StyleBackground(_so.cardImage.icon);
             _card.style.unityBackgroundImageTintColor = grade.color;
         }

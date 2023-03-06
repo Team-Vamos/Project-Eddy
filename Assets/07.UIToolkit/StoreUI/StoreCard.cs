@@ -24,6 +24,8 @@ public class StoreCard
         _price = _root.Q<Label>("Price");
     }
 
+    
+
     public void AddToClassListAtRoot(string className)
     {
         _root.AddToClassList(className);

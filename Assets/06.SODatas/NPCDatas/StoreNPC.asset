@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1785b5632a70254d8a65554be949094, type: 3}
-  m_Name: ShopNPC
+  m_Name: StoreNPC
   m_EditorClassIdentifier: 
   name: "\uBC14\uBCF4"
   description: "\uBC14\uBCF4\uAC19\uC774 \uB6F0\uC5B4\uAC10"

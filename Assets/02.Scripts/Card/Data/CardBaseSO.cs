@@ -16,6 +16,7 @@ namespace Card
         public string Type{ get; protected set; }
 
         [Multiline] public string description;
+        [Multiline] public string effectInfo;
 
         protected CardBaseSO(string t) { Type = t; }
 

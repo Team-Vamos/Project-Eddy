@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Canvas" picking-mode="Ignore" style="width: 100%; height: 100%;">
+        <ui:VisualElement name="Cash" style="flex-direction: row; height: 80px;">
+            <ui:VisualElement name="Icon" style="width: 80px; height: 80px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/03.Buildings/02.Ore/CrystalOre_Broken%20Bold.png?fileID=730990721&amp;guid=9e0f4bbfeabffa148bac8d6915ec4f91&amp;type=3#CrystalOre_Broken Bold_0&apos;);" />
+            <ui:Label text=": 1000" display-tooltip-when-elided="true" name="Count" style="-unity-text-align: middle-left; font-size: 45px; color: rgba(255, 242, 0, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Chest" style="height: 80px; flex-direction: row;">
+            <ui:VisualElement name="Icon" style="width: 80px; height: 80px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/00.Etc/Chest.png?fileID=21300000&amp;guid=ba0a36a049834c742b87e0cc097eb67f&amp;type=3#Chest&apos;);" />
+            <ui:Label text=": 1000" display-tooltip-when-elided="true" name="Count" style="-unity-text-align: middle-left; font-size: 45px; color: rgb(255, 242, 0);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

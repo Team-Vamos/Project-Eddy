@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc0ff33b9b527e40ac2a58dbb0cc61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CardCount>k__BackingField: 3
+  _chestCount: 0
   _dayWorker: {fileID: 1502115070}
   <VoteMultipleValue>k__BackingField: 0.1
   <BottleSpawner>k__BackingField: {fileID: 1068801668}
@@ -1424,7 +1424,7 @@ MonoBehaviour:
   - _lt: {x: -16, y: -19}
     _rb: {x: 16, y: -21}
   _npcPrefabs:
-  - {fileID: 2005541807}
+  - {fileID: 2005541809}
   _isDebug: 1
 --- !u!1 &1048667433
 GameObject:
@@ -1706,6 +1706,69 @@ MonoBehaviour:
   _babyBottleSpawnScale: {x: 1, y: 1, z: 1}
   _bottlePrefab: {fileID: 1753459138}
   _isDebug: 1
+--- !u!1 &1141116095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1141116096}
+  - component: {fileID: 1141116098}
+  - component: {fileID: 1141116097}
+  m_Layer: 0
+  m_Name: ResourceInfoUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1141116096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141116095}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1912699782}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1141116097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141116095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861b84f5eeca2af4f8521d87c6c276cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _storeManager: {fileID: 878581348}
+  _chestManager: {fileID: 878581349}
+--- !u!114 &1141116098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141116095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 9ffc1a395a2bbca46a9d7f7f3d2eb399, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 2593ce61d06090b47b8bd44a8f86a43f, type: 3}
+  m_SortingOrder: 0
 --- !u!1 &1158881338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,6 +2297,7 @@ Transform:
   - {fileID: 1369066089}
   - {fileID: 1955428661}
   - {fileID: 1158881341}
+  - {fileID: 1141116096}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2399,9 +2463,9 @@ GameObject:
   - component: {fileID: 2005541804}
   - component: {fileID: 2005541806}
   - component: {fileID: 2005541808}
-  - component: {fileID: 2005541807}
+  - component: {fileID: 2005541809}
   m_Layer: 6
-  m_Name: PasserPrefab
+  m_Name: StoreNPCPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2470,22 +2534,6 @@ CompositeCollider2D:
       - {x: -0.1499707, y: -0.15}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
---- !u!114 &2005541807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005541803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b2826344f5b53479db589a6789157a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _so: {fileID: 11400000, guid: cc6b8053f086f0648844fed74b45a4e4, type: 2}
-  _hitLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!195 &2005541808
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2508,6 +2556,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2005541809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005541803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54471e4aa1adc5348943c70e9d4f8010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _so: {fileID: 11400000, guid: cc6b8053f086f0648844fed74b45a4e4, type: 2}
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &2030208850
 GameObject:
   m_ObjectHideFlags: 0

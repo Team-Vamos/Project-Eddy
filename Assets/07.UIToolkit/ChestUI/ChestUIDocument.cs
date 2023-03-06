@@ -49,7 +49,7 @@ public class ChestUIDocument : MonoBehaviour
 
     private void InitCard()
     {
-        for (int i = 0; i < _chestCardManager.CardCount; ++i)
+        for (int i = 0; i < _chestCardManager.ChestCount; ++i)
         {
             AddCard();
         }

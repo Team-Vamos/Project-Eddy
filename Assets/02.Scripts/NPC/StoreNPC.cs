@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using EventManagers;
 using UnityEngine;
 
-public class ShopNPC : BaseNPC
+public class StoreNPC : BaseNPC
 {
     private bool _isCollide = false;
 

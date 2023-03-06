@@ -44,14 +44,6 @@
     -unity-text-align: middle-center;
 }
 
-#Canvas > #Container.vertical-on {
-    scale: 0 1;
-}
-
-#Canvas > #Container.vertical-on.horizontal-on {
-    scale: 1 1;
-}
-
 .card.on {
     scale: 1 1;
 }
@@ -89,4 +81,51 @@
     border-bottom-left-radius: 100%;
     border-top-right-radius: 100%;
     border-bottom-right-radius: 100%;
+}
+
+.info-box {
+    width: 300px;
+    height: 500px;
+    background-color: rgb(255, 223, 223);
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    opacity: 0;
+}
+
+.info-box > #Title {
+    color: rgb(34, 34, 34);
+    -unity-text-align: middle-center;
+    font-size: 35px;
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
+    -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&guid=c4ec3fe475c822c42bd611d516f301bd&type=2#KyoboHandwriting2021sjy SDF');
+}
+
+.info-box > #Description {
+    color: rgb(34, 34, 34);
+    font-size: 18px;
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
+    -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&guid=c4ec3fe475c822c42bd611d516f301bd&type=2#KyoboHandwriting2021sjy SDF');
+    white-space: normal;
+}
+
+.info-box > #EffectInfo {
+    color: rgb(34, 34, 34);
+    font-size: 18px;
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
+    -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&guid=c4ec3fe475c822c42bd611d516f301bd&type=2#KyoboHandwriting2021sjy SDF');
+    white-space: normal;
+}
+
+.info-box.on {
+    opacity: 1;
+    transition-property: opacity;
+    transition-delay: 0.5s;
+    transition-duration: 0.2s;
 }
