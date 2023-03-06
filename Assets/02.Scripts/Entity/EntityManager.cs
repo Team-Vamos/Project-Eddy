@@ -7,18 +7,35 @@ public class EntityManager : MonoBehaviour
     #region static methods
     public static EntityManager Instance { get; private set; }
 
-    [RuntimeInitializeOnLoadMethod]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+        CreateInstance();
     }
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (Instance != null || mode != LoadSceneMode.Single) return;
+        CreateInstance();
+    }
+    
+    private static void OnSceneUnloaded(Scene scene)
+    {
+        if (Instance == null) return;
+        Destroy(Instance.gameObject);
+        Instance = null;
+    }
+    
+    private static void CreateInstance()
+    {
+        if (Instance != null) return;
         
         var go = new GameObject("EntityManager");
         Instance = go.AddComponent<EntityManager>();
+        
+        Debug.Log("EntityManager created");
     }
     #endregion
     

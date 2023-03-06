@@ -14,7 +14,7 @@ public class StructureEntity : Entity, IDamageTaker
     
     public float Health { get; protected set; }
     
-    protected StructureEntity(float health)
+    protected StructureEntity(float health) : base(EntityType.Structure)
     {
         Health = health;
     }

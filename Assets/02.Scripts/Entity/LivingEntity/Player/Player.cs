@@ -4,6 +4,10 @@ public class Player : LivingEntity, IExpTaker
 {
     private PlayerStatStorage _statStorage;
 
+    private Player() : base(EntityType.Player)
+    {
+    }
+
     private void Awake()
     {
         _statStorage = GetComponent<PlayerStatStorage>();

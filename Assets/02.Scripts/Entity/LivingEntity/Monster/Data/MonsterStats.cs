@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Create MonsterStats", fileName = "MonsterStats", order = 0)]
 public class MonsterStats : ScriptableObject
 {
-    public TargetingType targetingType;
+    public EntityType targetType;
     public string monsterName;
     public AttackType attackType;
     public DamageType damageType;
