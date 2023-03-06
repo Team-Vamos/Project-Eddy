@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PoolStorage : MonoBehaviour
 {
@@ -12,8 +13,33 @@ public class PoolStorage : MonoBehaviour
         var go = new GameObject("PoolManager");
         go.AddComponent<PoolManager>();
         go.hideFlags = HideFlags.HideInHierarchy;
+        
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
 
         DontDestroyOnLoad(go);
+    }
+
+    private static void OnSceneUnloaded(Scene _)
+    {
+        var keys = new GameObject[PooledObjects.Keys.Count];
+        PooledObjects.Keys.CopyTo(keys, 0);
+        foreach (var key in keys)
+        {
+            if (key == null)
+            {
+                PooledObjects.Remove(key);
+            }
+        }
+        
+        var registeredKeys = new GameObject[RegisteredObjects.Keys.Count];
+        RegisteredObjects.Keys.CopyTo(registeredKeys, 0);
+        foreach (var key in registeredKeys)
+        {
+            if (key == null)
+            {
+                RegisteredObjects.Remove(key);
+            }
+        }
     }
 
     public static GameObject InstantiateObject(GameObject prefab, Transform parent = null)
