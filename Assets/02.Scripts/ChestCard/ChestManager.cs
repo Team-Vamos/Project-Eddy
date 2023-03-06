@@ -2,12 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Card;
-
+using System;
 
 public class ChestManager : MonoBehaviour
 {
-    [field: SerializeField]
-    public int CardCount { get; set; } = 3;
+    public int ChestCount
+    {
+        get => _chestCount;
+        set
+        {
+            _chestCount = value;
+            ChestCountUpdateAction?.SafeInvoke<int>(_chestCount);
+        }
+    }
+
+    public event Action<int> ChestCountUpdateAction;
+    [SerializeField]
+    private int _chestCount;
 
     [SerializeField]
     private DayWorker _dayWorker;
@@ -31,6 +42,10 @@ public class ChestManager : MonoBehaviour
 
     [field: SerializeField]
     public bool IsVote { get; private set; } = true;
+
+    private void Start() {
+        ChestCountUpdateAction?.SafeInvoke<int>(_chestCount);
+    }
 
     public void ResetVotePerson()
     {

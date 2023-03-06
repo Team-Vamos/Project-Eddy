@@ -29,4 +29,8 @@ public class LivingEntity : Entity, IDamageTaker
             OnDeath?.SafeInvoke();
         }
     }
+
+    protected LivingEntity(EntityType entityType) : base(entityType)
+    {
+    }
 }

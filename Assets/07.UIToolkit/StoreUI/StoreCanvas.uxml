@@ -41,5 +41,10 @@
             <ui:VisualElement name="StoreDesign" picking-mode="Ignore" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/StoreDesign.png?fileID=21300000&amp;guid=cd1915ebd1fd27748b1e76efcbc5dc88&amp;type=3#StoreDesign&apos;); width: 100%; height: 100%; position: absolute; transition-property: scale; transition-duration: 0.3s; transition-timing-function: ease; transition-delay: 0s;" />
             <ui:Button text="X" display-tooltip-when-elided="true" name="ExitBtn" />
         </ui:VisualElement>
+        <ui:VisualElement name="InfoBox" picking-mode="Ignore" class="info-box">
+            <ui:Label text="아내의 유혹" display-tooltip-when-elided="true" name="Title" picking-mode="Ignore" style="flex-grow: 0.3;" />
+            <ui:Label text="눈 밑에 점을 찍고 나타나 공격력이 2배 상승한다" display-tooltip-when-elided="true" name="Description" picking-mode="Ignore" style="flex-grow: 1;" />
+            <ui:Label text="눈에 점을 찍으면 공격력이 상승한다!" display-tooltip-when-elided="true" name="EffectInfo" picking-mode="Ignore" style="flex-grow: 1;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

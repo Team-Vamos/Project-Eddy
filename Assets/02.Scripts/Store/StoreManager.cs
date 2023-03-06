@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Card;
+using System;
 
 public class StoreManager : MonoBehaviour
 {
     [field: SerializeField]
     public int CardCount { get; set; } = 6;
 
-    public int Cash{ get; set; } = 100000;
+    public event Action<int> CashUpdateAction;
+    public int Cash{
+        get => _cash;
+        set
+        {
+            _cash = value;
+            CashUpdateAction.SafeInvoke<int>(_cash);
+        }
+    }
+    private int _cash;
 
     [SerializeField]
     private StoreUIDocument _uiDocument;
@@ -17,6 +27,10 @@ public class StoreManager : MonoBehaviour
 
     [field:SerializeField]
     public BabyBottleSpawner BottleSpawner{ get; set; }
+
+    private void Start() {
+        CashUpdateAction?.SafeInvoke<int>(_cash);
+    }
 
     private void Update()
     {

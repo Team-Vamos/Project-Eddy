@@ -27,27 +27,50 @@ public class StoreUIDocument : MonoBehaviour
 
     private UIDocument _uiDocument;
 
-    private VisualElement _cardContainer;
     private VisualElement _root;
+    private VisualElement _cardContainer;
     private List<StoreCard> _cardList;
-    private List<StoreCardClick> _cardClickList;
+    private List<StoreCardEvent> _cardClickList;
 
     public bool IsTween { get; set; } = false;
 
-    private void Awake() {
+    private Button _exitBtn;
+
+    private StoreInfoBox _storeInfoBox;
+
+    private void Awake()
+    {
         _uiDocument = GetComponent<UIDocument>();
         _cardList = new List<StoreCard>();
-        _cardClickList = new List<StoreCardClick>();
+        _cardClickList = new List<StoreCardEvent>();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _root = _uiDocument.rootVisualElement;
         _cardContainer = _root.Q<VisualElement>("Container");
 
-        Button exitBtn = _cardContainer.Q<Button>("ExitBtn");
+        _exitBtn = _cardContainer.Q<Button>("ExitBtn");
 
-        exitBtn.RegisterCallback<ClickEvent>(ExitContainer);
+        _storeInfoBox = new StoreInfoBox(_root.Q<VisualElement>("InfoBox"));
+
+
+        _exitBtn.RegisterCallback<ClickEvent>(ExitContainer);
+
+        _root.RegisterCallback<MouseMoveEvent>(InfoBoxMove);
         ResetCardList();
+    }
+
+    private void InfoBoxMove(MouseMoveEvent evt)
+    {
+        if (_storeInfoBox.Root == null) return;
+        if (_root == null) return;
+
+        Vector3 uiPos = RuntimePanelUtils.ScreenToPanel(_root.panel, Input.mousePosition);
+
+        Debug.Log(uiPos);
+        _storeInfoBox.Root.style.left = uiPos.x - _storeInfoBox.Root.layout.width;
+        _storeInfoBox.Root.style.top = -uiPos.y + _root.layout.height - _storeInfoBox.Root.layout.height * 0.5f;
     }
 
     private void ExitContainer(ClickEvent evt)
@@ -55,21 +78,22 @@ public class StoreUIDocument : MonoBehaviour
         StartCoroutine(RemoveContainerClass());
     }
 
+    private void OnDisable()
+    {
+        _exitBtn.UnregisterCallback<ClickEvent>(ExitContainer);
+    }
+
     private IEnumerator RemoveContainerClass()
     {
         IsTween = true;
         _cardContainer.RemoveFromClassList("on");
         yield return WaitForSeconds(_storeAnimationDuration);
-        // _cardContainer.RemoveFromClassList("horizontal-on");
-        // yield return WaitForSeconds(_horizontalDuration);
-        // _cardContainer.RemoveFromClassList("vertical-on");
-        // yield return WaitForSeconds(_verticalDuration);
 
         for (int i = 0; i < _cardList.Count; ++i)
         {
             _cardList[i].RemoveFromClassListAtRoot("on");
         }
-        
+
         _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
         IsTween = false;
         _cardManager.IsOpen = false;
@@ -83,10 +107,12 @@ public class StoreUIDocument : MonoBehaviour
         for (int i = 0; i < cardList.Count; ++i)
         {
             StoreCard card = new(cardList[i], _cardManager);
-            StoreCardClick cardClick = new(cardList[i], this, _storeManager);
+            StoreCardEvent cardEvent = new(cardList[i], this, _storeManager, _storeInfoBox);
 
-            _cardClickList.Add(cardClick);
-            cardList[i].RegisterCallback<ClickEvent>(cardClick.SelectCard);
+            _cardClickList.Add(cardEvent);
+            cardList[i].RegisterCallback<ClickEvent>(cardEvent.SelectCard);
+            cardList[i].RegisterCallback<MouseEnterEvent>(cardEvent.EnterEvent);
+            cardList[i].RegisterCallback<MouseLeaveEvent>(cardEvent.LeaveEvent);
             _cardList.Add(card);
         }
 
@@ -96,7 +122,7 @@ public class StoreUIDocument : MonoBehaviour
 
     public void ShowStore()
     {
-        if(_cardManager.IsOpen)return;
+        if (_cardManager.IsOpen) return;
         _cardManager.IsOpen = true;
 
         for (int i = 0; i < _cardList.Count; ++i)
@@ -120,10 +146,7 @@ public class StoreUIDocument : MonoBehaviour
         IsTween = true;
         _cardContainer.AddToClassList("on");
         yield return WaitForSeconds(_storeAnimationDuration);
-        // _cardContainer.AddToClassList("vertical-on");
-        // yield return WaitForSeconds(_verticalDuration);
-        // _cardContainer.AddToClassList("horizontal-on");
-        // yield return WaitForSeconds(_horizontalDuration);
+
         for (int i = 0; i < _cardList.Count; ++i)
         {
             _cardList[i].AddToClassListAtRoot("on");

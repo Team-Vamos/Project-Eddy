@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e1cad5fcc4450782a6f6ddbffc0265, type: 3}
   m_Name: MonsterStats
   m_EditorClassIdentifier: 
-  targetingType: 0
+  targetType: 7
   monsterName: 
   attackType: 0
   damageType: 0
