@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Monster : LivingEntity
 {
@@ -8,6 +10,15 @@ public class Monster : LivingEntity
     private Entity _target;
 
     private float _attackTime;
+    
+    private NavMeshAgent _navMeshAgent;
+
+    private void Awake()
+    {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.updateUpAxis = false;
+        _navMeshAgent.updateRotation = false;
+    }
 
     public void Init()
     {
@@ -18,6 +29,8 @@ public class Monster : LivingEntity
         }
 
         Health = stats.health;
+        _navMeshAgent.speed = stats.speed;
+        _navMeshAgent.stoppingDistance = stats.attackRange - 0.1f;
     }
 
     private void SearchTarget()
@@ -33,6 +46,11 @@ public class Monster : LivingEntity
             if (distance > minDistance) continue;
             _target = entity;
             minDistance = distance;
+        }
+        
+        if (_target != null)
+        {
+            _navMeshAgent.SetDestination(_target.Collider2D.ClosestPoint(transform.position));
         }
     }
 
@@ -50,12 +68,13 @@ public class Monster : LivingEntity
     {
         if (Vector3.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
             stats.attackRange) return;
+        
         Attack();
-        Debug.Log("Attack");
     }
 
     private void Attack()
     {
+        _navMeshAgent.speed = 0f;
         if (stats.attackType == AttackType.Area)
         {
             foreach (var entity in EntityManager.Instance.Entities)
@@ -72,6 +91,7 @@ public class Monster : LivingEntity
         {
             (_target as IDamageTaker)?.TakeDamage(stats.damage);
         }
+        _navMeshAgent.speed = 1f;
     }
 
     private void OnDrawGizmosSelected()

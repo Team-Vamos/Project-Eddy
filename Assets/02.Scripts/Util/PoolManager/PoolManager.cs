@@ -25,7 +25,7 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public static GameObject Instantiate(GameObject prefab, Transform parent = null)
+    public new static GameObject Instantiate(GameObject prefab, Transform parent = null)
     {
         return PoolStorage.GetObject(prefab, parent);
     }
