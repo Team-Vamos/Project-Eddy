@@ -12,6 +12,8 @@
     width: 150px;
     height: 150px;
     top: 100px;
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KOPUB%20DOTUM_PRO%20BOLD.OTF?fileID=12800000&guid=8eab38ba325c5ed419f5867f668dbb1a&type=3#KOPUB DOTUM_PRO BOLD');
+    -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KOPUB%20DOTUM_PRO%20BOLD%20SDF.asset?fileID=11400000&guid=81bc1c68de9f2de49a5fa71039be4a4f&type=2#KOPUB DOTUM_PRO BOLD SDF');
 }
 
 .card > #Name {
@@ -21,7 +23,7 @@
     -unity-text-align: middle-center;
     font-size: 35px;
     color: rgb(50, 50, 50);
-    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KOPUB%20DOTUM_PRO%20BOLD.OTF?fileID=12800000&guid=8eab38ba325c5ed419f5867f668dbb1a&type=3#KOPUB DOTUM_PRO BOLD');
     white-space: normal;
     -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.asset?fileID=11400000&guid=32d4eab7e4ad9b847900af3e2a29af07&type=2#KyoboHandwriting2021sjy');
 }
@@ -30,7 +32,7 @@
     width: 220px;
     height: 140px;
     top: 70px;
-    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KOPUB%20DOTUM_PRO%20MEDIUM.OTF?fileID=12800000&guid=45e3efa7e0daca54fa148a72ee0682a1&type=3#KOPUB DOTUM_PRO MEDIUM');
     font-size: 24px;
     -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/Pretendard-Light.asset?fileID=11400000&guid=340359ae4b66eee44afda56c15b3ffc5&type=2#Pretendard-Light');
     white-space: normal;
@@ -41,7 +43,7 @@
     width: 220px;
     height: 30px;
     top: 80px;
-    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&guid=7aa65b1d253f46f43ba4282830097472&type=3#KyoboHandwriting2021sjy');
+    -unity-font: url('project://database/Assets/03.Graphics/04.Fonts/KOPUB%20DOTUM_PRO%20LIGHT.OTF?fileID=12800000&guid=093a05cf469348042bae647368b1dda7&type=3#KOPUB DOTUM_PRO LIGHT');
     -unity-font-definition: url('project://database/Assets/03.Graphics/04.Fonts/Pretendard-Light.asset?fileID=11400000&guid=340359ae4b66eee44afda56c15b3ffc5&type=2#Pretendard-Light');
     font-size: 16px;
     color: rgb(50, 50, 50);

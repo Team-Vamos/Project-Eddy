@@ -47,7 +47,7 @@ public class PlayerAttack : NetworkBehaviour
 
     private void Start() {
         SetDefaultPlayerWeapon(_defaultWeapon);
-    }
+    }       
 
     private void SetDefaultPlayerWeapon(CardBaseSO so)
     {
