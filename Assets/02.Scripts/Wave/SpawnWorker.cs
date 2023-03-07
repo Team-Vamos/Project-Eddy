@@ -24,13 +24,13 @@ public class SpawnWorker : MonoBehaviour
             waveTime = dayWorker.nightTime;
         }
 
-        if (waveData is null || waveCount >= waveData.waveMonsters.Length)
+        if (waveData is null || waveCount - 1 >= waveData.waveMonsters.Length)
         {
             Debug.LogWarning("Wave count is out of range");
             return;
         }
 
-        foreach (var waveMonster in waveData.waveMonsters[waveCount].monsterDataList)
+        foreach (var waveMonster in waveData.waveMonsters[waveCount - 1].monsterDataList)
         {
             StartCoroutine(SpawnMonster(waveMonster, waveTime));
         }

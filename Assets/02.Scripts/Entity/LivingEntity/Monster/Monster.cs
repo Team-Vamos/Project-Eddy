@@ -10,7 +10,7 @@ public class Monster : LivingEntity
     private Entity _target;
 
     private float _attackTime;
-    
+
     private NavMeshAgent _navMeshAgent;
 
     private void Awake()
@@ -42,12 +42,12 @@ public class Monster : LivingEntity
             if (entity == this) continue;
             if (entity is not IDamageTaker damageTaker) continue;
             if (!stats.targetType.HasFlag(entity.EntityType)) continue;
-            var distance = Vector3.Distance(transform.position, entity.transform.position);
+            var distance = Vector2.Distance(transform.position, entity.transform.position);
             if (distance > minDistance) continue;
             _target = entity;
             minDistance = distance;
         }
-        
+
         if (_target != null)
         {
             _navMeshAgent.SetDestination(_target.Collider2D.ClosestPoint(transform.position));
@@ -66,9 +66,10 @@ public class Monster : LivingEntity
 
     private void TryAttack()
     {
-        if (Vector3.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
+        Debug.DrawLine(transform.position, _target.Collider2D.ClosestPoint(transform.position), Color.yellow, 1f);
+        if (Vector2.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
             stats.attackRange) return;
-        
+
         Attack();
     }
 
@@ -82,7 +83,7 @@ public class Monster : LivingEntity
                 if (entity == this) continue;
                 if (entity is not IDamageTaker damageTaker) continue;
                 if (stats.targetType.HasFlag(EntityType.Monster)) continue;
-                if (Vector3.Distance(transform.position, entity.Collider2D.ClosestPoint(transform.position)) >
+                if (Vector2.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
                     stats.attackRange) continue;
                 damageTaker.TakeDamage(stats.damage);
             }
@@ -91,6 +92,7 @@ public class Monster : LivingEntity
         {
             (_target as IDamageTaker)?.TakeDamage(stats.damage);
         }
+
         _navMeshAgent.speed = 1f;
     }
 
@@ -104,6 +106,12 @@ public class Monster : LivingEntity
             Gizmos.color = Color.green;
             var position = transform.position;
             Gizmos.DrawLine(position, _target.Collider2D.ClosestPoint(position));
+
+            if (Vector2.Distance(position, _target.Collider2D.ClosestPoint(position)) < stats.attackRange)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(position, _target.Collider2D.ClosestPoint(position));
+            }
         }
 
         if (stats.attackType == AttackType.Area)
