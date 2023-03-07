@@ -2,7 +2,7 @@
 {
     private readonly float _value;
     
-    public StatModifierMultiplicative(object source, float value, StatType statType, int order = 0) : base(source, statType, order)
+    public StatModifierMultiplicative(object source, float value, StatType statType, StatOrderType order = StatOrderType.Normal_Additive) : base(source, statType, order)
     {
         _value = value;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,14 +17,18 @@ namespace Card
 
         public override void ApplyCard()
         {
-            // _cardHandler.PlayerStat.OnStatChanged += OnStatChanged;
-            // _cardHandler.PlayerStat.OnStatChanged += OnLevelChanged;
+            for (int i = 0; i < _cardBase.cardStats.Length; ++i)
+            {
+                StatModifier modifier = _cardBase.cardStats[i].valueType switch 
+                {
+                    ValueType.Add => new StatModifierAdditive(_cardBase, _cardBase.cardStats[i].value, _cardBase.cardStats[i].statType),
+                    ValueType.Multiply => new StatModifierMultiplicative(_cardBase, _cardBase.cardStats[i].value, _cardBase.cardStats[i].statType, StatOrderType.Normal_Multiplicative),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                _cardHandler.PlayerStat.AddStatModifier(modifier);
+            }
 
             // // TODO : 카드 장착 애니메이션
-
-            // Equip(_addStats);
-
-            // Equip(_cardBase.upgrades[_level - 1].stats);
         }
 
         // TODO: 더하는 애들을 따로 스텟으로 빼놔서 곱셈 연산이 가능하게 수정해야함
@@ -64,10 +69,12 @@ namespace Card
 
         protected virtual void OnLevelChanged(StatType type){}
 
-        public override void ApplyMultipleValue(float value)
+        public override void ApplyMultipleValue(float multipleValue)
         {
-            Debug.Log("대충 Stat들에 value를 곱했다고 칩시다");
-            // throw new System.NotImplementedException();
+            for (int i = 0; i < _cardBase.cardStats.Length; ++i)
+            {
+                _cardBase.cardStats[i].value *= multipleValue;
+            }
         }
 
         public override void RemoveCard()

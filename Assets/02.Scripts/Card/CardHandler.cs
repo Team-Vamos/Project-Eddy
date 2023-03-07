@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace Card
 {
+    [RequireComponent(typeof(PlayerStatStorage))]
     public class CardHandler : MonoBehaviour
     {
-        //[NonSerialized] public PlayerStat PlayerStat;
-
         // TODO: 여기서 플레이어의 스텟 가지기
 
-        //public StatController StatController { get; set; }
+        public PlayerStatStorage PlayerStat { get; private set; }
+
+
         public Transform WeaponHolder { get; set; }
         private readonly List<CardController> _cards = new();
 
-        // private void Awake()
-        // {
-        //     //PlayerStat = GetComponent<PlayerStat>();
-        // }
+        private void Awake() {
+            PlayerStat = GetComponent<PlayerStatStorage>();
+        }
 
         public void AddCard(CardBaseSO cardBase)
         {

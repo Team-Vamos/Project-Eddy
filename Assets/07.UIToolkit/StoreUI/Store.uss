@@ -126,6 +126,10 @@
 .info-box.on {
     opacity: 1;
     transition-property: opacity;
-    transition-delay: 0.5s;
+    transition-delay: 0.3s;
     transition-duration: 0.2s;
+}
+
+.card:hover {
+    -unity-background-image-tint-color: rgba(214, 214, 214, 255);
 }

@@ -2,7 +2,7 @@
 {
     private readonly float _value;
     
-    public StatModifierAdditive(object source, float value, StatType statType, int order = 0) : base(source, statType, order)
+    public StatModifierAdditive(object source, float value, StatType statType, StatOrderType order = 0) : base(source, statType, order)
     {
         _value = value;
     }
