@@ -29,7 +29,7 @@ public class PlayerAniamation : NetworkBehaviour
     {
         attackAnimator.SetTrigger("Attack");
         SendAttack();
-        // SendAttackHit( new int[]{1,2,3}, 10);
+        SendAttackHit( new int[]{1,2,3}, 10);
     }
     private void UpdateAnimation()
     {
@@ -98,6 +98,7 @@ public class PlayerAniamation : NetworkBehaviour
             // get target by id
             // take damage
             // if dead, remove from targets
+            Debug.Log("DoAttack: " + target + " " + damage);
         }
 
     }
