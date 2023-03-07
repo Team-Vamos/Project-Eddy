@@ -11,9 +11,6 @@ namespace Card
 
         private const string Passive = "패시브";
 
-        [Range(0f, 1f)]
-        public float weaponHardness;
-
         public CardStat[] cardStats;
 
         protected PassiveCardBaseSO(string t) : base(t) {}

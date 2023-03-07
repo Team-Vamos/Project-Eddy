@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventManagers;
 using Mirror;
+using Card;
 
 
 public class PlayerAttack : NetworkBehaviour
@@ -32,11 +33,25 @@ public class PlayerAttack : NetworkBehaviour
     [SerializeField]
     private int attackDamage;
     public int AttackDamage => attackDamage;
-    
+
+    [SerializeField]
+    private WeaponCardBaseSO _defaultWeapon;
+
+    private WeaponCardController _playerWeapon;
+
     // Start is called before the first frame update
     void Awake()
     {
         playerAniamation = GetComponent<PlayerAniamation>();
+    }
+
+    private void Start() {
+        SetDefaultPlayerWeapon(_defaultWeapon);
+    }
+
+    private void SetDefaultPlayerWeapon(CardBaseSO so)
+    {
+        _playerWeapon ??= so.CreateCardController(GetComponent<CardHandler>()) as WeaponCardController;
     }
 
     // Update is called once per frame
@@ -224,10 +239,12 @@ public class PlayerAttack : NetworkBehaviour
     {
         foreach (var target in targets)
         {
-            
+
             // get target by id
             // take damage
             // if dead, remove from targets
+
+            _playerWeapon?.Attack();
             Debug.Log("DoAttack: " + target + " " + damage);
         }
     }
