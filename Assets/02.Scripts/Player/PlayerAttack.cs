@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventManagers;
+using Mirror;
 
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : NetworkBehaviour
 {
     private PlayerAniamation playerAniamation;
     [SerializeField]
@@ -41,13 +42,13 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(playerAniamation.isOwned);
         LookMouse2D();
         UpdateAttact();
-        
     }
     private void UpdateAttact()
     {
-        if(!playerAniamation.isLocal) return;
+        if(!playerAniamation.isOwned) return;
         if(Input.GetMouseButtonDown(0))
         {
             Attack();
@@ -55,7 +56,8 @@ public class PlayerAttack : MonoBehaviour
     }
     public void Attack()
     {
-        EventManager.TriggerEvent("Attack");
+        EventManager.TriggerEvent("AttackAni");
+        
     }
     private void OnDrawGizmos()
     {
@@ -157,8 +159,8 @@ public class PlayerAttack : MonoBehaviour
 
         mousePos.z = 10f;
         Vector3 lookPos;
-        Debug.Log(playerAniamation.isLocal + " " + playerAniamation.isServer);
-        if(playerAniamation.isLocal){
+        
+        if(playerAniamation.isOwned){
             lookPos = Camera.main.ScreenToWorldPoint(mousePos)-center.position;
             playerAniamation.SetMousePos(lookPos);
         }
@@ -201,5 +203,35 @@ public class PlayerAttack : MonoBehaviour
  
         return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
     }
+    // ------------------ AttackHit SyncVar ------------------
+    public void SendAttackHit(int[] targets, float damage)
+    {
+        if(!isServer) CmdAttackHit(targets, damage);
+        else RpcAttackHit(targets, damage);
+    }
+    [Command]
+    private void CmdAttackHit(int[] targets, float damage)
+    {
+        if(!isOwned)
+            DoAttack(targets, damage);
+        RpcAttackHit(targets, damage);
+    }
+    [ClientRpc]
+    private void RpcAttackHit(int[] targets, float damage)
+    {
+        if(!isOwned)
+            DoAttack(targets, damage);
+    }
+    private void DoAttack(int[] targets, float damage)
+    {
+        foreach (var target in targets)
+        {
+            
+            // get target by id
+            // take damage
+            // if dead, remove from targets
+            Debug.Log("DoAttack: " + target + " " + damage);
+        }
+    }
+
 }
-// TakeDamage(new Attack(user.AttackDamage, null));

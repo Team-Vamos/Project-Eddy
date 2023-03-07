@@ -9,6 +9,11 @@ public class PlayerMove : MonoBehaviour
     private Vector3 realMove = Vector3.zero;
     private PlayerObjectControler playerObjectControler;
     private PlayerAniamation playerAniamation;
+    private bool canMove = false;
+    private void GameStart()
+    {
+        canMove = true;
+    }
     private void Awake()
     {
         playerAniamation = GetComponent<PlayerAniamation>();

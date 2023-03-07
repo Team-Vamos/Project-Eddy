@@ -29,6 +29,7 @@ public class CustomNetworkManager : NetworkManager
             GamePlayerInstance.PlayerIdNumber = gamePlayers.Count + 1;
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, gamePlayers.Count);
             NetworkServer.AddPlayerForConnection(conn, GamePlayerInstance.gameObject);
+            
             Debug.Log("사람 추가함");
             //AnimationSync animationSync= GamePlayerInstance.GetComponent<AnimationSync>();
             //animationSync.SetPlayerByID(0, GamePlayers.Count);
@@ -38,7 +39,6 @@ public class CustomNetworkManager : NetworkManager
             //FindObjectOfType<LobbyController>().UpdateAddressButton();
         }
     }
-
     
 
     public void StartGame(string SceneName){

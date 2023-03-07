@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Steamworks;
-using System.Reflection;
+using EventManagers;
 
 public class PlayerObjectControler : NetworkBehaviour
 {
@@ -84,6 +84,7 @@ public class PlayerObjectControler : NetworkBehaviour
     //게임시작
     public void CanStartGame(string sceneName){
         if(isOwned){
+            EventManager.TriggerEvent(NetManager.StartGameCallback);
             CmdCanStartGame(sceneName);
         }
     }
