@@ -12,13 +12,21 @@ public class PlayerAniamation : NetworkBehaviour
     private Animator attackAnimator;
     private PlayerObjectControler playerObjectControler;
     private void Awake() {
+        EventManager.StopListening(NetManager.StartGameCallback, GameStart);
         EventManager.StartListening(NetManager.StartGameCallback, GameStart);
+        
     }
     private void GameStart()
     {
+        Debug.Log("PlayerAniamation GameStart");
         if(isOwned){
-            EventManager.StartListening("Attack", AttackTrigger);
+            Debug.Log("PlayerAniamation GameStart isOwned");
+            EventManager.StopListening("AttackAni", AttackTrigger);
+            EventManager.StartListening("AttackAni", AttackTrigger);
         }
+    }
+    private void OnDestroy() {
+        EventManager.StopListening("AttackAni", AttackTrigger);
     }
 
     void Update()
@@ -34,9 +42,7 @@ public class PlayerAniamation : NetworkBehaviour
     {
         playerAnimator?.SetFloat("Move", moveDir * transform.localScale.x);
     }
-    private void OnDestroy() {
-        EventManager.StopListening("AttackAni", AttackTrigger);
-    }
+    
 
     // ------------------ moveDir SyncVar ------------------
     [SyncVar]

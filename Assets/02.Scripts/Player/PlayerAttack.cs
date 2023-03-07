@@ -42,7 +42,6 @@ public class PlayerAttack : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(playerAniamation.isOwned);
         LookMouse2D();
         UpdateAttact();
     }
@@ -57,7 +56,6 @@ public class PlayerAttack : NetworkBehaviour
     public void Attack()
     {
         EventManager.TriggerEvent("AttackAni");
-        
     }
     private void OnDrawGizmos()
     {

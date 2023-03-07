@@ -9,6 +9,13 @@ public class NetManager : NetworkSingleton<NetManager>
     public static string StartGameCallback = "StartGameCallback";
     public bool gameStarted = false;
     public bool isServerStarted = false;
+    private void Awake() {
+        EventManager.StopListening(StartGameCallback, StartGame);
+        EventManager.StartListening(StartGameCallback, StartGame);
+    }
+    private void OnDestroy() {
+        EventManager.StopListening(StartGameCallback, StartGame);
+    }
     public void Go()
     {
         Debug.Log("NetManager Go");
@@ -25,7 +32,6 @@ public class NetManager : NetworkSingleton<NetManager>
     private void StartGame()
     {
         gameStarted = true;
-        EventManager.TriggerEvent(StartGameCallback);
     }
 
 
