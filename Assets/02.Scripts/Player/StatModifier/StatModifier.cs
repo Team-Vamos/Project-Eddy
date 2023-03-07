@@ -2,9 +2,9 @@
 {
     public object Source { get; }
     public StatType StatType { get; }
-    public int Order { get; }
+    public StatOrderType Order { get; }
 
-    protected StatModifier(object source, StatType statType, int order = 0)
+    protected StatModifier(object source, StatType statType, StatOrderType order = StatOrderType.Normal_Additive)
     {
         Source = source;
         StatType = statType;
