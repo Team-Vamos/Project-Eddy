@@ -10,6 +10,10 @@ public class PlayerMove : MonoBehaviour
     private PlayerObjectControler playerObjectControler;
     private PlayerAniamation playerAniamation;
     private bool canMove = false;
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
+    }
     private void GameStart()
     {
         canMove = true;
@@ -20,10 +24,16 @@ public class PlayerMove : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         playerObjectControler = GetComponent<PlayerObjectControler>();
 
+        EventManager.StopListening(NetManager.StartGameCallback, GameStart);
+        EventManager.StartListening(NetManager.StartGameCallback, GameStart);
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening(NetManager.StartGameCallback, GameStart);
     }
     private void Update()
     {
-        if (playerObjectControler.isLocal) Move();
+        if (playerObjectControler.isLocal && canMove) Move();
     }
     private void FixedUpdate() {
         if (playerObjectControler.isLocal)

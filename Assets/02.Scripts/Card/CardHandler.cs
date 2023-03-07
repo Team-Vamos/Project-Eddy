@@ -21,7 +21,7 @@ namespace Card
 
         public void AddCard(CardBaseSO cardBase)
         {
-            var cardController = cardBase.CreateCardController(this);
+            CardController cardController = cardBase.CreateCardController(this);
             cardController.ApplyCard();
             _cards.Add(cardController);
         }
@@ -36,7 +36,7 @@ namespace Card
 
         public void RemoveCard(CardBaseSO cardBase)
         {
-            var cardController = _cards.Find(c => c.CardBase == cardBase);
+            CardController cardController = _cards.Find(c => c.CardBase == cardBase);
             cardController.RemoveCard();
             _cards.Remove(cardController);
         }

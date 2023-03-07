@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class CustomNetworkManager : NetworkManager
 {
-    
+    public static CustomNetworkManager Instance{get{return CustomNetworkManager.singleton as CustomNetworkManager;}}
     [SerializeField]
     private PlayerObjectControler _gamePlayerPrefab;
     
@@ -20,9 +20,20 @@ public class CustomNetworkManager : NetworkManager
             player.connectionToClient.Disconnect();
         }
     }
+    public PlayerObjectControler GetLocalPlayer()
+    {
+        foreach (var player in gamePlayers)
+        {
+            if (player.isOwned)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
-        if(SceneManager.GetActiveScene().name == "Lobby" || SceneManager.GetActiveScene().name == "Main")
+        if(SceneManager.GetActiveScene().name == "Lobby")
         {
             PlayerObjectControler GamePlayerInstance = Instantiate(_gamePlayerPrefab);
             GamePlayerInstance.ConnectionID = conn.connectionId;

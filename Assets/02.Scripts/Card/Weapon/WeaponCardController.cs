@@ -8,12 +8,9 @@ namespace Card
     {
         // TODO: 플레이어 Attack을 가지고 있어야 함
 
-        //protected UserAttack userAttack;
-        // [Range(0f, 1f)] public float attackHardness = 1.0f;
-        // private readonly WeaponCardBase _cardBase;
-        // //private PlayerAttack _playerAttack;
-
+        protected PlayerAttack _playerAttack;
         private readonly WeaponCardBaseSO _cardBase;
+        // //private PlayerAttack _playerAttack;
         public WeaponCardController(WeaponCardBaseSO cardBase, CardHandler cardHandler) : base(cardBase, cardHandler)
         {
             _cardBase = cardBase;
@@ -26,17 +23,17 @@ namespace Card
             // TODO 무기 프리팹 장착
         }
 
-        // public override void RemoveCard()
-        // {
-        //     base.RemoveCard();
-        //     //_playerAttack.Reset();
-        // }
+        public override void RemoveCard()
+        {
+            base.RemoveCard();
+            //_playerAttack.Reset();
+        }
 
         public abstract void Attack(/*UserAttack user*/);
 
-        // internal void SetUserAttack(UserAttack userAttack)
-        // {
-        //     this.userAttack = userAttack;
-        // }
+        public void SetUserAttack(PlayerAttack playerAttack)
+        {
+            _playerAttack = playerAttack;
+        }
     }
 }

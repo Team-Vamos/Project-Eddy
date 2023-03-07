@@ -687,6 +687,7 @@ MonoBehaviour:
   _oreSpawnDuration: 0.7
   _oreSpawnScale: {x: 1, y: 1, z: 1}
   _oreGaugeBarPrefab: {fileID: 9197481963319205126, guid: 609e098a218614b49a9fb7a25de2b1f5, type: 3}
+  _waveWorker: {fileID: 1502115069}
   _debugOre:
     description: "\uC774 \uD074\uB798\uC2A4\uB294 \uB514\uBC84\uAE45\uC6A9\uC785\uB2C8\uB2E4"
     rangeCheckOre: {fileID: 137238354}
@@ -1067,13 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43b3b6354f4bac41b5f7d48b8850186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardSOList:
-  - {fileID: 11400000, guid: a405a07e5faa5da47bbe82d741873c18, type: 2}
-  - {fileID: 11400000, guid: 303ee0e3d57cd324f8de3568706fd79e, type: 2}
-  - {fileID: 11400000, guid: 0788f3743826a594996bab35240fd01e, type: 2}
-  - {fileID: 11400000, guid: 9346c9d581de63545889edbc8a499114, type: 2}
-  - {fileID: 11400000, guid: 50be8b2539452094090a52a951279ff4, type: 2}
-  - {fileID: 11400000, guid: 1742619a73290094cb5c6edd4d3e11f0, type: 2}
+  _cardSOList: []
   _cardGrades:
   - {fileID: 11400000, guid: 4cbaf305a59c08f4eabb22db279218c6, type: 2}
   - {fileID: 11400000, guid: 09c3d67f77cd8674aa1a89e6b2ddbba8, type: 2}
@@ -2731,4 +2726,4 @@ MonoBehaviour:
   m_VoxelSize: 0.42666665
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: e82dc5a7d42979a4cad2214b0d4f12f7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0c53cacf3b16cd647b03e85af78534b1, type: 2}
