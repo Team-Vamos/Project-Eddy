@@ -23,7 +23,12 @@ public class PlayerMove : MonoBehaviour
         playerAniamation = GetComponent<PlayerAniamation>();
         _rb = GetComponent<Rigidbody2D>();
         playerObjectControler = GetComponent<PlayerObjectControler>();
-        
+
+        EventManager.StopListening(NetManager.StartGameCallback, GameStart);
+        EventManager.StartListening(NetManager.StartGameCallback, GameStart);
+    }
+    private void OnDestroy()
+    {
         EventManager.StopListening(NetManager.StartGameCallback, GameStart);
     }
     private void Update()
