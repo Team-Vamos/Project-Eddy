@@ -100,12 +100,6 @@ public class OreSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            RemoveOres();
-            SpawnOre();
-        }
-
         if(Input.GetKeyDown(KeyCode.K))
         {
             foreach(var ore in _oreList)

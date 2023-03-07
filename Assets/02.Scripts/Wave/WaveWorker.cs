@@ -21,6 +21,7 @@ public class WaveWorker : MonoBehaviour
     [SerializeField] private float nightIntensity = 0.3f;
     [SerializeField] private Color bloodMoonColor = Color.red;
     [SerializeField] private float bloodMoonIntensity = 0.1f;
+    [SerializeField] private OreSpawner oreSpawner;
 
     public bool WaveProcessing { get; private set; }
     
@@ -32,11 +33,14 @@ public class WaveWorker : MonoBehaviour
         dayWorker.OnStatusChanged += OnDayStatusChanged;
         
         WaveProcessing = dayWorker.DayState == DayState.Night;
+
         
     }
 
     private void Start() {
         globalLight.SetIntensity(WaveProcessing ? nightIntensity : dayIntensity);
+        oreSpawner.RemoveOres();
+        oreSpawner.SpawnOre();
     }
 
     private void OnDayStatusChanging(DayState daystate, float duration)
@@ -51,6 +55,8 @@ public class WaveWorker : MonoBehaviour
                 {
                     globalLight.SetIntensity(bloodMoonIntensity, duration);
                     globalLight.SetColor(bloodMoonColor, duration);
+                    oreSpawner.RemoveOres();
+                    oreSpawner.SpawnOre();
                 }
                 else
                 {
