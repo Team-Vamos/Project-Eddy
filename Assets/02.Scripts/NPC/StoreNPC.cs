@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StoreNPC : BaseNPC
 {
+    [SerializeField]
+    private StoreUIDocument _storeUIDocument;
     private bool _isCollide = false;
 
     private const string shopEndCallback = "ShopEndCallback";
@@ -13,6 +15,7 @@ public class StoreNPC : BaseNPC
         if(_isCollide)return;
         _isCollide = true;
         StopNPC();
+        _storeUIDocument.ShowStore();
         // TODO: 상점 카드 보여주기
         Debug.Log("상점 카드 보여줌");
     }

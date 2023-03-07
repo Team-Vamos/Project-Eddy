@@ -14,7 +14,7 @@ namespace Card
         [Range(0f, 1f)]
         public float weaponHardness;
 
-        // TODO: 먹었을 때 적용될 스텟들(List or Array) 가지고 있기
+        public CardStat[] cardStats;
 
         protected PassiveCardBaseSO(string t) : base(t) {}
         protected PassiveCardBaseSO() : base(Passive) {}

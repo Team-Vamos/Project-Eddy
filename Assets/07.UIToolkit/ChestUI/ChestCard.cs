@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 namespace Card
 {
-    // TODO: 나중에 ShopCard하고 모양이 겹칠경우 부모 클래스 만들기
     public class ChestCard
     {
         private VisualElement _cardTemplate;
