@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using static Yields;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
 
@@ -21,37 +23,27 @@ public class CheckOre
 
 public class OreSpawner : MonoBehaviour
 {
-    [Header("OreSprites")]
-    [SerializeField]
+    [Header("OreSprites")] [SerializeField]
     private List<Sprite> _oreSprites;
+
     public IReadOnlyList<Sprite> OreSprites => _oreSprites;
 
-    [SerializeField]
-    private GameObject _holdOrePrefab;
+    [SerializeField] private GameObject _holdOrePrefab;
 
-    [SerializeField]
-    private float _holdOreSpawnDuration = 0.7f;
-    [SerializeField]
-    private float _holdOreSpawnInnerRange = 1;
-    [SerializeField]
-    private float _holdOreSpawnOuterRange = 1.5f;
-    [SerializeField]
-    private Vector3 _holdOreSpawnScale = Vector3.one;
+    [SerializeField] private float _holdOreSpawnDuration = 0.7f;
+    [SerializeField] private float _holdOreSpawnInnerRange = 1;
+    [SerializeField] private float _holdOreSpawnOuterRange = 1.5f;
+    [SerializeField] private Vector3 _holdOreSpawnScale = Vector3.one;
 
-    [Header("Ore")]
-    [SerializeField]
-    private List<Bound> _bounds;
+    [Header("Ore")] [SerializeField] private List<Bound> _bounds;
 
-    [SerializeField]
-    private Ore _orePrefab;
-    [SerializeField]
-    private int _oreSpawnCount = 3;
-    [SerializeField]
-    private float _oreSpawnDuration = 0.7f;
-    [SerializeField]
-    private Vector3 _oreSpawnScale = Vector3.one;
-    [SerializeField]
-    private VisualTreeAsset _oreGaugeBarPrefab;
+    [SerializeField] private Ore _orePrefab;
+    [SerializeField] private int _oreSpawnCount = 3;
+    [SerializeField] private float _oreSpawnDuration = 0.7f;
+    [SerializeField] private Vector3 _oreSpawnScale = Vector3.one;
+    [SerializeField] private VisualTreeAsset _oreGaugeBarPrefab;
+
+    [SerializeField] private WaveWorker _waveWorker;
 
     public VisualElement Root { get; private set; }
 
@@ -59,15 +51,32 @@ public class OreSpawner : MonoBehaviour
 
 
 #if UNITY_EDITOR
-    [Space]
-
-    [SerializeField]
-    private CheckOre _debugOre;
+    [Space] [SerializeField] private CheckOre _debugOre;
 
     private Coroutine _checkOreCoroutine;
 #endif
-    [SerializeField]
-    private float _testDamage = 30f;
+    [SerializeField] private float _testDamage = 30f;
+
+
+    private void Awake()
+    {
+        _waveWorker.OnWaveEnd += OnWaveEnd;
+    }
+
+    private void Start()
+    {
+        RemoveOres();
+        SpawnOre();
+    }
+
+    private void OnWaveEnd()
+    {
+        if (_waveWorker.IsBloodMoon)
+        {
+            RemoveOres();
+            SpawnOre();
+        }
+    }
 
     public void SetRootVisualElement(VisualElement root)
     {
@@ -79,7 +88,8 @@ public class OreSpawner : MonoBehaviour
     {
         for (int i = 0; i < _oreSpawnCount; ++i)
         {
-            Ore g = Instantiate(_orePrefab, Define.GetRandomBound(_bounds.ToArray()).GetRandomPos(), Quaternion.identity);
+            Ore g = Instantiate(_orePrefab, Define.GetRandomBound(_bounds.ToArray()).GetRandomPos(),
+                Quaternion.identity);
             g.gameObject.SetActive(true);
 
             g.transform.localScale = Vector3.zero;
@@ -87,28 +97,26 @@ public class OreSpawner : MonoBehaviour
             g.transform.DOScale(_oreSpawnScale, _oreSpawnDuration).SetEase(Ease.InOutElastic);
 
             VisualElement gaugeBar = _oreGaugeBarPrefab.Instantiate().Q<VisualElement>("GaugeBar");
-            
-            
+
+
             Root.Add(gaugeBar);
 
             g.SetGaugeBar(gaugeBar);
 
             _oreList.Add(g);
-
         }
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            foreach(var ore in _oreList)
+            foreach (var ore in _oreList)
             {
                 Debug.Log("데미지 줌");
                 ore.TakeDamage(_testDamage);
             }
         }
-
     }
 
 
@@ -129,7 +137,6 @@ public class OreSpawner : MonoBehaviour
 
         holdOre.SetActive(true);
         holdOre.transform.DOScale(_holdOreSpawnScale, _holdOreSpawnDuration).SetEase(Ease.InOutElastic);
-
     }
 
 #if UNITY_EDITOR
@@ -153,6 +160,7 @@ public class OreSpawner : MonoBehaviour
         {
             StopCoroutine(_checkOreCoroutine);
         }
+
         _debugOre.isChecking = false;
     }
 
@@ -168,7 +176,8 @@ public class OreSpawner : MonoBehaviour
         if (_debugOre.isChecking)
         {
             Gizmos.color = Color.gray;
-            Gizmos.DrawWireSphere(_debugOre.rangeCheckOre.transform.position, _holdOreSpawnOuterRange + _holdOreSpawnInnerRange);
+            Gizmos.DrawWireSphere(_debugOre.rangeCheckOre.transform.position,
+                _holdOreSpawnOuterRange + _holdOreSpawnInnerRange);
             Gizmos.DrawWireSphere(_debugOre.rangeCheckOre.transform.position, _holdOreSpawnInnerRange);
 
             Gizmos.color = Color.cyan;
@@ -180,6 +189,4 @@ public class OreSpawner : MonoBehaviour
     }
 
 #endif
-
-
 }
