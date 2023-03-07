@@ -85,8 +85,13 @@ public class PlayerObjectControler : NetworkBehaviour
     public void CanStartGame(string sceneName){
         if(isOwned){
             EventManager.TriggerEvent(NetManager.StartGameCallback);
+            RpcCanStartGame();
             CmdCanStartGame(sceneName);
         }
+    }
+    [ClientRpc]
+    public void RpcCanStartGame(){
+        EventManager.TriggerEvent(NetManager.StartGameCallback);
     }
     [Command]
     public void CmdCanStartGame(string sceneName){
