@@ -6,7 +6,7 @@ using Mirror;
 
 public class PlayerAniamation : NetworkBehaviour
 {
-    public bool isLocal {get{if(NetworkServer.active) return isLocalPlayer; else return false;}}
+    public bool isLocal {get{if(NetworkServer.active) return isOwned; else return false;}}
     [SerializeField]
     private Animator playerAnimator;
     [SerializeField]
