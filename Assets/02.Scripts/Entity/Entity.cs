@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Entity : MonoBehaviour
 {
@@ -9,6 +10,18 @@ public class Entity : MonoBehaviour
     protected Entity(EntityType entityType)
     {
         EntityType = entityType;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void OnSceneUnloaded(Scene scene)
+    {
+        gameObject.SetActive(false);
     }
 
     public EntityType EntityType { get; }

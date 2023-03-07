@@ -15,11 +15,11 @@ MonoBehaviour:
   waveMonsters:
   - monsterDataList:
     - type: 0
-      count: 10
+      count: 2
     - type: 1
-      count: 5
+      count: 1
   - monsterDataList:
     - type: 0
-      count: 20
+      count: 4
     - type: 1
-      count: 10
+      count: 2

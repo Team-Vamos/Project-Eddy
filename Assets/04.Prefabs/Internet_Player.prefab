@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 5000189682279932266}
   - component: {fileID: 4426633733839371188}
   - component: {fileID: 1687857864822557068}
+  - component: {fileID: 4948193929680204607}
   m_Layer: 3
   m_Name: Internet_Player
   m_TagString: Player
@@ -625,6 +626,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   dropHoldTime: 1
+--- !u!114 &4948193929680204607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121089938371734311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1c602cd7ec43b580ead74a77eeaf5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderers:
+  - {fileID: 4467091404021652538}
+  - {fileID: 3765351891752449427}
+  - {fileID: 4383229397354716920}
+  - {fileID: 2265334587880991279}
+  - {fileID: 9196304746903341185}
 --- !u!1 &4467091404021652539
 GameObject:
   m_ObjectHideFlags: 0
