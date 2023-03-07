@@ -1,23 +1,13 @@
 ﻿using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public static class PoolManager
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void Init()
-    {
-        var go = new GameObject("PoolManager");
-        go.AddComponent<PoolManager>();
-        go.hideFlags = HideFlags.HideInHierarchy;
-
-        DontDestroyOnLoad(go);
-    }
-
     public static GameObject GetObject(GameObject prefab)
     {
         return PoolStorage.GetObject(prefab);
     }
 
-    public void PreloadObject(GameObject prefab, int count)
+    public static void PreloadObject(GameObject prefab, int count)
     {
         for (int i = 0; i < count; i++)
         {
@@ -25,20 +15,21 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public new static GameObject Instantiate(GameObject prefab, Transform parent = null)
+    public static GameObject Instantiate(GameObject prefab, Transform parent = null)
     {
         return PoolStorage.GetObject(prefab, parent);
+    }
+    
+    public static GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        var obj = PoolStorage.GetObject(prefab, parent);
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        return obj;
     }
 
     public static void Destroy(GameObject instance)
     {
         PoolStorage.ReturnObject(instance);
-    }
-
-    public static PoolManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        Instance = this;
     }
 }

@@ -11,7 +11,7 @@ public class PoolStorage : MonoBehaviour
     private static void Init()
     {
         var go = new GameObject("PoolManager");
-        go.AddComponent<PoolManager>();
+        go.AddComponent<PoolStorage>();
         go.hideFlags = HideFlags.HideInHierarchy;
         
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -57,6 +57,7 @@ public class PoolStorage : MonoBehaviour
             RegisteredObjects.Add(prefab, new List<GameObject>());
         }
 
+        go.name = $"{prefab.name} [{RegisteredObjects[prefab].Count}]";
         RegisteredObjects[prefab].Add(go);
 
         if (isPooled)
@@ -81,6 +82,7 @@ public class PoolStorage : MonoBehaviour
         }
 
         var instance = InstantiateObject(prefab, parent);
+        instance.hideFlags = HideFlags.None;
         return instance;
     }
 
@@ -100,6 +102,7 @@ public class PoolStorage : MonoBehaviour
 
         PooledObjects[prefab].Push(instance);
         instance.SetActive(false);
+        instance.hideFlags = HideFlags.HideInHierarchy;
     }
 
     private static GameObject GetPrefab(GameObject instance)
