@@ -29,14 +29,13 @@ public class PlayerAniamation : NetworkBehaviour
     {
         attackAnimator.SetTrigger("Attack");
         SendAttack();
-        SendAttackHit( new int[]{1,2,3}, 10);
     }
     private void UpdateAnimation()
     {
         playerAnimator?.SetFloat("Move", moveDir * transform.localScale.x);
     }
     private void OnDestroy() {
-        EventManager.StopListening("Attack", AttackTrigger);
+        EventManager.StopListening("AttackAni", AttackTrigger);
     }
 
     // ------------------ moveDir SyncVar ------------------
@@ -69,38 +68,7 @@ public class PlayerAniamation : NetworkBehaviour
     {
         return mousePos;
     }
-    // ------------------ AttackHit SyncVar ------------------
-    public void SendAttackHit(int[] targets, float damage)
-    {
-        if(!isServer) CmdAttackHit(targets, damage);
-        else RpcAttackHit(targets, damage);
-    }
-    [Command]
-    private void CmdAttackHit(int[] targets, float damage)
-    {
-        if(!isOwned)
-            DoAttack(targets, damage);
-        RpcAttackHit(targets, damage);
-    }
-    [ClientRpc]
-    private void RpcAttackHit(int[] targets, float damage)
-    {
-        if(!isOwned)
-            DoAttack(targets, damage);
-    }
-    private void DoAttack(int[] targets, float damage)
-    {
-        attackAnimator.SetTrigger("Attack");
-
-        foreach (var target in targets)
-        {
-            // get target by id
-            // take damage
-            // if dead, remove from targets
-            Debug.Log("DoAttack: " + target + " " + damage);
-        }
-
-    }
+    
     // ------------------ AttackAni SyncVar ------------------
     public void SendAttack()
     {
