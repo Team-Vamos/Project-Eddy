@@ -33,8 +33,6 @@ public class WaveWorker : MonoBehaviour
         dayWorker.OnStatusChanged += OnDayStatusChanged;
         
         WaveProcessing = dayWorker.DayState == DayState.Night;
-
-        
     }
 
     private void Start() {

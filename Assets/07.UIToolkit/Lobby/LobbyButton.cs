@@ -59,7 +59,7 @@ public class LobbyButton : MonoBehaviour
     }
     private void OnClickSetting(ClickEvent evt)
     {
-        //º≥¡§ ∆–≥Œ
+        //ÏÑ§Ï†ï Ìå®ÎÑê
     }
     private void OnClickQuit(ClickEvent evt)
     {
