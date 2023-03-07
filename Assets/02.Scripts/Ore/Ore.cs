@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.AI;
 
 // TODO: Monobehaviour -> Entity
 public class Ore : MonoBehaviour, IDamageTaker
@@ -24,12 +24,15 @@ public class Ore : MonoBehaviour, IDamageTaker
     private VisualElement _bar;
 
     private SpriteRenderer _spriteRenderer;
+    private NavMeshObstacle _obstacle;
+    public NavMeshObstacle Obstacle => _obstacle;
     private float _currentOreGauge;
     private int _currentOreHp;
 
 
     private void Awake()
     {
+        _obstacle = GetComponentInChildren<NavMeshObstacle>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         if (_spriteRenderer == null)
@@ -46,6 +49,7 @@ public class Ore : MonoBehaviour, IDamageTaker
 
     private void OnDisable()
     {
+        _obstacle.enabled = false;
         _oreSpawner.Root.Remove(_gaugeBar);
     }
 

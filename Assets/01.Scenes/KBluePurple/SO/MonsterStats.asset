@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 10
   attackSpeed: 1
   speed: 1
-  attackRange: 2
+  attackRange: 1
   dropExp: 10
   dropBoxRarity: 0
   dropBoxChance: 0

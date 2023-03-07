@@ -6,6 +6,7 @@ using DG.Tweening;
 using static Yields;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
+using UnityEngine.AI;
 
 #if UNITY_EDITOR
 
@@ -91,6 +92,8 @@ public class OreSpawner : MonoBehaviour
             Ore g = Instantiate(_orePrefab, Define.GetRandomBound(_bounds.ToArray()).GetRandomPos(),
                 Quaternion.identity);
             g.gameObject.SetActive(true);
+
+            g.Obstacle.enabled = true;
 
             g.transform.localScale = Vector3.zero;
 
