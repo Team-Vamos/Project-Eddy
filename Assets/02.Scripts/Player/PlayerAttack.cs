@@ -41,9 +41,10 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerAniamation.isLocal)
+            Debug.Log(playerAniamation.isLocal + " " + playerAniamation.isServer);
         LookMouse2D();
         UpdateAttact();
-        
     }
     private void UpdateAttact()
     {
@@ -157,7 +158,7 @@ public class PlayerAttack : MonoBehaviour
 
         mousePos.z = 10f;
         Vector3 lookPos;
-        Debug.Log(playerAniamation.isLocal + " " + playerAniamation.isServer);
+        
         if(playerAniamation.isLocal){
             lookPos = Camera.main.ScreenToWorldPoint(mousePos)-center.position;
             playerAniamation.SetMousePos(lookPos);
