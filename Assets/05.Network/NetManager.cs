@@ -12,6 +12,7 @@ public class NetManager : NetworkSingleton<NetManager>
     private void Awake() {
         EventManager.StopListening(StartGameCallback, StartGame);
         EventManager.StartListening(StartGameCallback, StartGame);
+        (CustomNetworkManager.singleton as CustomNetworkManager).GetLocalPlayer();
     }
     private void OnDestroy() {
         EventManager.StopListening(StartGameCallback, StartGame);
