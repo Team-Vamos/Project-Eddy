@@ -6,7 +6,6 @@ using Mirror;
 
 public class PlayerAniamation : NetworkBehaviour
 {
-    public bool isLocal {get{if(NetworkServer.active) return isOwned; else return false;}}
     [SerializeField]
     private Animator playerAnimator;
     [SerializeField]
@@ -17,7 +16,7 @@ public class PlayerAniamation : NetworkBehaviour
     }
     private void SetLocal()
     {
-        if(isLocal){
+        if(isOwned){
             EventManager.StartListening("Attack", AttackTrigger);
         }
     }
@@ -79,14 +78,14 @@ public class PlayerAniamation : NetworkBehaviour
     [Command]
     private void CmdAttackHit(int[] targets, int damage)
     {
-        if(!isLocal)
+        if(!isOwned)
             DoAttack(targets, damage);
         RpcAttackHit(targets, damage);
     }
     [ClientRpc]
     private void RpcAttackHit(int[] targets, int damage)
     {
-        if(!isLocal)
+        if(!isOwned)
             DoAttack(targets, damage);
     }
     private void DoAttack(int[] targets, int damage)
@@ -111,14 +110,14 @@ public class PlayerAniamation : NetworkBehaviour
     [Command]
     private void CmdAttack()
     {
-        if(!isLocal)
+        if(!isOwned)
             attackAnimator.SetTrigger("Attack");
         RpcAttack();
     }
     [ClientRpc]
     private void RpcAttack()
     {
-        if(!isLocal)
+        if(!isOwned)
             attackAnimator.SetTrigger("Attack");
     }
 }
