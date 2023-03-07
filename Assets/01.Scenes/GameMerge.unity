@@ -2957,7 +2957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -489.99957}
+  m_AnchoredPosition: {x: 0, y: -490}
   m_SizeDelta: {x: -5, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &685031866
@@ -8656,7 +8656,7 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 8
-  _storeUIDocument: {fileID: 0}
+  _storeUIDocument: {fileID: 726738164}
 --- !u!195 &2136681361
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8667,7 +8667,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.5
+  m_Speed: 0.3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
