@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class NexusUI : MonoBehaviour
 {
-    public float range = 5f;
-    
     private Nexus _nexus;
-    
+
     [SerializeField] private NexusHpUI hpBar;
     [SerializeField] private NexusUpgradeUI upgradeUI;
     [SerializeField] private GlobalNexusHpUI globalHpBar;
@@ -14,7 +12,7 @@ public class NexusUI : MonoBehaviour
     private void Awake()
     {
         _nexus = GetComponentInParent<Nexus>();
-        
+
         hpBar.SetTarget(_nexus);
         upgradeUI.SetTarget(_nexus);
         globalHpBar.SetTarget(_nexus);
@@ -22,7 +20,11 @@ public class NexusUI : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+#if UNITY_EDITOR
+        _nexus ??= GetComponentInParent<Nexus>();
+#endif
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, _nexus.interactRange);
     }
 }

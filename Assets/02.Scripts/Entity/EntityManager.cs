@@ -10,14 +10,7 @@ public class EntityManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
-        CreateInstance();
-    }
-
-    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (Instance != null || mode != LoadSceneMode.Single) return;
         CreateInstance();
     }
     
@@ -26,6 +19,7 @@ public class EntityManager : MonoBehaviour
         if (Instance == null) return;
         Destroy(Instance.gameObject);
         Instance = null;
+        CreateInstance();
     }
     
     private static void CreateInstance()
@@ -34,8 +28,6 @@ public class EntityManager : MonoBehaviour
         
         var go = new GameObject("EntityManager");
         Instance = go.AddComponent<EntityManager>();
-        
-        Debug.Log("EntityManager created");
     }
     #endregion
     
