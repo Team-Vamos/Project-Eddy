@@ -12,14 +12,15 @@ public class PlayerAniamation : NetworkBehaviour
     private Animator attackAnimator;
     private PlayerObjectControler playerObjectControler;
     private void Awake() {
-        EventManager.StartListening(NetManager.StartNetworkCallback, SetLocal);
+        EventManager.StartListening(NetManager.StartGameCallback, GameStart);
     }
-    private void SetLocal()
+    private void GameStart()
     {
         if(isOwned){
             EventManager.StartListening("Attack", AttackTrigger);
         }
     }
+
     void Update()
     {
         UpdateAnimation();
@@ -35,7 +36,6 @@ public class PlayerAniamation : NetworkBehaviour
         playerAnimator?.SetFloat("Move", moveDir * transform.localScale.x);
     }
     private void OnDestroy() {
-        EventManager.StopListening(NetManager.StartNetworkCallback, SetLocal);
         EventManager.StopListening("Attack", AttackTrigger);
     }
 
@@ -70,25 +70,25 @@ public class PlayerAniamation : NetworkBehaviour
         return mousePos;
     }
     // ------------------ AttackHit SyncVar ------------------
-    public void SendAttackHit(int[] targets, int damage)
+    public void SendAttackHit(int[] targets, float damage)
     {
         if(!isServer) CmdAttackHit(targets, damage);
         else RpcAttackHit(targets, damage);
     }
     [Command]
-    private void CmdAttackHit(int[] targets, int damage)
+    private void CmdAttackHit(int[] targets, float damage)
     {
         if(!isOwned)
             DoAttack(targets, damage);
         RpcAttackHit(targets, damage);
     }
     [ClientRpc]
-    private void RpcAttackHit(int[] targets, int damage)
+    private void RpcAttackHit(int[] targets, float damage)
     {
         if(!isOwned)
             DoAttack(targets, damage);
     }
-    private void DoAttack(int[] targets, int damage)
+    private void DoAttack(int[] targets, float damage)
     {
         attackAnimator.SetTrigger("Attack");
 

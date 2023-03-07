@@ -6,36 +6,26 @@ using EventManagers;
 
 public class NetManager : NetworkSingleton<NetManager>
 {
-    public static string StartNetworkCallback = "StartNetworkCallback";
-    public bool networkStarted = false;
+    public static string StartGameCallback = "StartGameCallback";
+    public bool gameStarted = false;
+    public bool isServerStarted = false;
     public void Go()
     {
         Debug.Log("NetManager Go");
     }
-    private void Awake() {
-        EventManager.StartListening(StartNetworkCallback, SetNetwork);
-    }
-    private void OnDestroy() {
-        EventManager.StopListening(StartNetworkCallback, SetNetwork);
-    }
-    private void Start() {
-        StartCoroutine(WaitForNetwork());
-    }
-    private void SetNetwork()
+    public override void OnStartServer()
     {
-        
+        isServerStarted = true;
     }
-    private IEnumerator WaitForNetwork()
+    public override void OnStartClient()
     {
-        while(!NetworkServer.active){
-            yield return new WaitForEndOfFrame();
-        }
-        StartNetwork();
+        isServerStarted = true;
     }
-    private void StartNetwork()
+
+    private void StartGame()
     {
-        networkStarted = true;
-        EventManager.TriggerEvent(StartNetworkCallback);
+        gameStarted = true;
+        EventManager.TriggerEvent(StartGameCallback);
     }
 
 
