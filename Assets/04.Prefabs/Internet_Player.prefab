@@ -616,7 +616,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackDamage: 15
-  _defaultWeapon: {fileID: 0}
+  _defaultWeapon: {fileID: 11400000, guid: a405a07e5faa5da47bbe82d741873c18, type: 2}
 --- !u!114 &1687857864822557068
 MonoBehaviour:
   m_ObjectHideFlags: 0
