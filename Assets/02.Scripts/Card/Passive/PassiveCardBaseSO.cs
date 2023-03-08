@@ -7,11 +7,11 @@ namespace Card
 
     public abstract class PassiveCardBaseSO : CardBaseSO
     {
-        public CardUpgrade[] upgrades = new CardUpgrade[1];
+        public CardUpgrade[] upgrades = new CardUpgrade[4];
 
         private const string Passive = "패시브";
 
-        public CardStat[] cardStats;
+        //public CardStat[] cardStats;
 
         protected PassiveCardBaseSO(string t) : base(t) {}
         protected PassiveCardBaseSO() : base(Passive) {}

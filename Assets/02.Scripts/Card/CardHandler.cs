@@ -15,7 +15,8 @@ namespace Card
         public Transform WeaponHolder { get; set; }
         private readonly List<CardController> _cards = new();
 
-        private void Awake() {
+        private void Awake()
+        {
             PlayerStat = GetComponent<PlayerStatStorage>();
         }
 
@@ -29,9 +30,20 @@ namespace Card
 
         public void AddCard(CardController controller)
         {
-            controller.SetCardHandler(this);
-            controller.ApplyCard();
-            _cards.Add(controller);
+            CardController findCard = _cards.Find(c => c.CardBase == controller.CardBase);
+            if (findCard == null)
+            {
+                controller.SetCardHandler(this);
+                controller.ApplyCard();
+                _cards.Add(controller);
+            }
+            else
+            {
+                if (findCard is PassiveCardController passiveCardController)
+                {
+                    passiveCardController.OnLevelChanged();
+                }
+            }
         }
 
         public void RemoveCard(CardBaseSO cardBase)
