@@ -43,15 +43,12 @@ public class PlayerAttack : NetworkBehaviour
     void Awake()
     {
         playerAniamation = GetComponent<PlayerAniamation>();
+        EventManager.StartListening(NetManager.StartGameCallback, SetDefaultPlayerWeapon);
     }
 
-    private void Start() {
-        SetDefaultPlayerWeapon(_defaultWeapon);
-    }
-
-    private void SetDefaultPlayerWeapon(CardBaseSO so)
+    private void SetDefaultPlayerWeapon()
     {
-        _playerWeapon ??= so.CreateCardController(GetComponent<CardHandler>()) as WeaponCardController;
+        _playerWeapon ??= _defaultWeapon.CreateCardController(GetComponent<CardHandler>()) as WeaponCardController;
     }
 
     // Update is called once per frame

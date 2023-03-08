@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class TestCollisionObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField]
+    private float _speed = 8f;
+
+    private void Update() {
+        Move();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Move()
     {
-        
+        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        transform.Translate(dir * _speed * Time.deltaTime);
     }
 }
