@@ -12,7 +12,7 @@ namespace Card
             _cardBase = cardBase;
         }
 
-        protected override void OnLevelChanged(StatType type)
+        public override void OnLevelChanged()
         {
             if (_level == 1)
             {
