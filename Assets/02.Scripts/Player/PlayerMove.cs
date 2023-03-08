@@ -41,11 +41,11 @@ public class PlayerMove : MonoBehaviour
     }
     private void Move()
     {
-        inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        realMove = /* stat * */inputDir;
-        float aniDir = realMove.x;
+        inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        realMove = (/* stat * */inputDir).normalized;
+        float aniDir = inputDir.x;
         if(aniDir == 0)
-            aniDir = realMove.y;
+            aniDir = inputDir.y;
         playerAniamation.SetDir(aniDir);
     }
 }

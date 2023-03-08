@@ -21,11 +21,20 @@ public class PlayerObjectControler : NetworkBehaviour
     [SerializeField]
     private Color[] _playerColors;
     [SerializeField]
-    private SpriteRenderer _playerColorSprite;
+    public SpriteRenderer playerColorSpriteRenderer;
+    [SerializeField]
+    public SpriteRenderer playerSkinSpriteRenderer;
+    [SerializeField]
+    public SpriteRenderer playerFaceSpriteRenderer;
     private void SetPlayerColorByID(int oldValue, int newValue){
         PlayerIdNumber = newValue;
+        if(PlayerIdNumber == 0){
+            playerFaceSpriteRenderer.sprite = Resources.Load<Sprite>("Player/BeerForDaddy");
+            playerSkinSpriteRenderer.sprite = Resources.Load<Sprite>("Player/Crown");
+            
+        }
         if(_playerColors.Length > newValue)
-            _playerColorSprite.color = _playerColors[newValue];
+            playerColorSpriteRenderer.color = _playerColors[newValue];
     }
 
     private CustomNetworkManager manager;
