@@ -500,6 +500,16 @@ MonoBehaviour:
   PlayerSteamID: 0
   PlayerName: 
   Ready: 0
+  _playerColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.63529414, g: 0.1490196, b: 0.21086219, a: 1}
+  - {r: 0.1490196, g: 0.29787213, b: 0.63529414, a: 1}
+  - {r: 0.6314591, g: 0.6320754, b: 0.14609292, a: 1}
+  - {r: 0.23703703, g: 0.63529414, b: 0.1490196, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  _playerColorSprite: {fileID: 0}
 --- !u!114 &5164943189130932251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +616,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackDamage: 15
-  _defaultWeapon: {fileID: 0}
+  _defaultWeapon: {fileID: 11400000, guid: a405a07e5faa5da47bbe82d741873c18, type: 2}
 --- !u!114 &1687857864822557068
 MonoBehaviour:
   m_ObjectHideFlags: 0

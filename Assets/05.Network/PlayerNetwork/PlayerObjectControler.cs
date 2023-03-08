@@ -13,11 +13,20 @@ public class PlayerObjectControler : NetworkBehaviour
     public bool isLocal { get { return isLocalPlayer; } }
     //Player data
     [SyncVar] public int ConnectionID;
-    [SyncVar] public int PlayerIdNumber;
+    [SyncVar(hook = nameof(SetPlayerColorByID))] public int PlayerIdNumber;
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool Ready;
 
+    [SerializeField]
+    private Color[] _playerColors;
+    [SerializeField]
+    private SpriteRenderer _playerColorSprite;
+    private void SetPlayerColorByID(int oldValue, int newValue){
+        PlayerIdNumber = newValue;
+        if(_playerColors.Length > newValue)
+            _playerColorSprite.color = _playerColors[newValue];
+    }
 
     private CustomNetworkManager manager;
     private CustomNetworkManager Manager{
