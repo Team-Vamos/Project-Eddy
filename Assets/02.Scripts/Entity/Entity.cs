@@ -16,12 +16,26 @@ public class Entity : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        gameObject.SetActive(true);
+        try
+        {
+            gameObject.SetActive(true);
+        }
+        catch
+        {
+            // ignored
+        }
     }
 
     private void OnSceneUnloaded(Scene scene)
     {
-        gameObject.SetActive(false);
+        try
+        {
+            gameObject.SetActive(false);
+        }
+        catch
+        {
+            // ignored
+        }
     }
 
     public EntityType EntityType { get; }
