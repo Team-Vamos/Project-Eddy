@@ -11,7 +11,7 @@ public class MonsterPrefabListData : ScriptableObject
         {
             if (_instance == null)
             {
-                _instance = Resources.Load<MonsterPrefabListData>("MonsterPrefabListData");
+                _instance = Resources.Load<MonsterPrefabListData>("MonsterPrefabListData/MonsterPrefabListData");
             }
 
             return _instance;
