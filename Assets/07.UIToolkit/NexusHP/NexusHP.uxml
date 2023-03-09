@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Canvas" picking-mode="Ignore" style="width: 100%; height: 100%;">
+        <ui:VisualElement name="HPbar" picking-mode="Ignore" style="position: absolute; width: 600px; height: 50px; background-color: rgb(34, 34, 34); padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+            <ui:VisualElement name="Fillbar" picking-mode="Ignore" style="background-color: rgb(255, 0, 0); width: 100%; height: 100%; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
