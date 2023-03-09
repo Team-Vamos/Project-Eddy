@@ -670,7 +670,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSkinListSO: {fileID: 11400000, guid: 673d97f988001e94c92ba063d72a236b, type: 2}
-  playerSkinSO: {fileID: 0}
   defaultSkin: {fileID: 11400000, guid: 716afcdffa56b4641acd90dc04cb8dda, type: 2}
 --- !u!1 &3445391800063369686
 GameObject:
