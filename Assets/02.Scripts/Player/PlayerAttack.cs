@@ -50,6 +50,10 @@ public class PlayerAttack : NetworkBehaviour
     {
         _playerWeapon ??= _defaultWeapon.CreateCardController(GetComponent<CardHandler>()) as WeaponCardController;
     }
+    public void DoAttack()
+    {
+        _playerWeapon.Attack();
+    }
 
     // Update is called once per frame
     void Update()
@@ -111,33 +115,27 @@ public class PlayerAttack : NetworkBehaviour
 
     public static IDamageTaker[] GetArcTargetsAll(Vector3 position, float anglesRange, float radius, float attackAngle, LayerMask layerMask)
     {
-        int maxStep = 4;
-        var srcAngles = GetAnglesFromDir(position, Quaternion.AngleAxis(attackAngle, Vector3.down) 
-            * Vector3.left);
-        var initialPos = position;
-        var posA = initialPos;
-        var stepAngles = anglesRange / maxStep;
-        var angle = srcAngles - anglesRange / 2;
         List<IDamageTaker> targets = new List<IDamageTaker>();
         RaycastHit2D[] raycastHit2Ds;
-        for (var i = 0; i <= maxStep; i++)
+
+        var angle = attackAngle - anglesRange / 2;
+        var rad = Mathf.Deg2Rad * angle;
+        var initialPos = new Vector3(position.x + radius * Mathf.Cos(rad), position.y + radius * Mathf.Sin(rad), 0);
+
+        raycastHit2Ds = Physics2D.LinecastAll(position, initialPos, layerMask);
+        Debug.DrawLine(position, initialPos, Color.red, 1f);
+        foreach (var raycastHit2D in raycastHit2Ds)
         {
-            var rad = Mathf.Deg2Rad * angle;
-            var posB = initialPos;
-            posB += new Vector3(radius * Mathf.Cos(rad), radius * Mathf.Sin(rad), 0);
-
-            raycastHit2Ds = Physics2D.LinecastAll(posA, posB, layerMask);
-            foreach (var raycastHit2D in raycastHit2Ds)
-            {
-                IDamageTaker iDamageTaker = raycastHit2D.collider.gameObject.GetComponent<IDamageTaker>();
-                if(iDamageTaker != null && !targets.Contains(iDamageTaker))
-                    targets.Add(iDamageTaker);
-            }
-
-            angle += stepAngles;
-            posA = posB;
+            IDamageTaker iDamageTaker = raycastHit2D.collider.gameObject.GetComponent<IDamageTaker>();
+            if(iDamageTaker != null && !targets.Contains(iDamageTaker))
+                targets.Add(iDamageTaker);
         }
-        raycastHit2Ds = Physics2D.LinecastAll(posA, initialPos, layerMask);
+
+        angle = attackAngle + anglesRange / 2;
+        rad = Mathf.Deg2Rad * angle;
+        initialPos = new Vector3(position.x + radius * Mathf.Cos(rad), position.y + radius * Mathf.Sin(rad), 0);
+        raycastHit2Ds = Physics2D.LinecastAll(position, initialPos, layerMask);
+        Debug.DrawLine(position, initialPos, Color.red, 1f);
         foreach (var raycastHit2D in raycastHit2Ds)
         {
             IDamageTaker iDamageTaker = raycastHit2D.collider.gameObject.GetComponent<IDamageTaker>();

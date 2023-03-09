@@ -8,7 +8,10 @@ namespace Card
     public class PassiveCardController : CardController
     {
         private readonly PassiveCardBaseSO _cardBase;
-        protected int _level;
+        protected int _level = 1;
+        
+        // 투표을 위해 빼둔 스텟
+        protected CardUpgrade _currentCardStat;
 
         public PassiveCardController(PassiveCardBaseSO cardBase, CardHandler cardHandler) : base(cardBase, cardHandler) 
         {
@@ -17,16 +20,12 @@ namespace Card
 
         public override void ApplyCard()
         {
-            for (int i = 0; i < _cardBase.cardStats.Length; ++i)
-            {
-                StatModifier modifier = _cardBase.cardStats[i].valueType switch 
-                {
-                    ValueType.Add => new StatModifierAdditive(_cardBase, _cardBase.cardStats[i].value, _cardBase.cardStats[i].statType),
-                    ValueType.Multiply => new StatModifierMultiplicative(_cardBase, _cardBase.cardStats[i].value, _cardBase.cardStats[i].statType, StatOrderType.Normal_Multiplicative),
-                    _ => throw new ArgumentOutOfRangeException()
-                };
-                _cardHandler.PlayerStat.AddStatModifier(modifier);
-            }
+            _currentCardStat = _cardBase.upgrades[_level - 1];
+            // TODO : 플레이어에서 CardHandler의 cardImage의 sprite로 sprite를 변경하는거로 코드가 필요 nullable하는게 좋을 듯
+            
+            List<StatModifier> modifierList = _currentCardStat.GetStatModifiers(_cardBase);
+
+            modifierList.ForEach(modifier => _cardHandler.PlayerStat.AddStatModifier(modifier));
 
             // // TODO : 카드 장착 애니메이션
         }
@@ -36,15 +35,20 @@ namespace Card
             _cardHandler.PlayerStat.RemoveAllStatModifiersFromSource(_cardBase);
         }
 
-        // TODO: 더하는 애들을 따로 스텟으로 빼놔서 곱셈 연산이 가능하게 수정해야함
 
-        protected virtual void OnLevelChanged(StatType type){}
+        public virtual void OnLevelChanged(){
+            _level++;
+
+            RemoveCard();
+
+            ApplyCard();
+        }
 
         public override void ApplyMultipleValue(float multipleValue)
         {
-            for (int i = 0; i < _cardBase.cardStats.Length; ++i)
+            for (int i = 0; i < _currentCardStat.cardStats.Length; ++i)
             {
-                _cardBase.cardStats[i].value += _cardBase.cardStats[i].value * multipleValue;
+                _currentCardStat.cardStats[i].value += _currentCardStat.cardStats[i].value * multipleValue;
             }
         }
 
