@@ -9,6 +9,8 @@ public class StoreManager : MonoBehaviour
     [field: SerializeField]
     public int CardCount { get; set; } = 6;
 
+    public const string StoreEndCallback = "StoreEndCallBack";
+
     public event Action<int> CashUpdateAction;
     public int Cash{
         get => _cash;

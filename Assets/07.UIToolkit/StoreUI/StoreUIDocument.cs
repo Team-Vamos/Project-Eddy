@@ -96,6 +96,8 @@ public class StoreUIDocument : MonoBehaviour
         _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
         IsTween = false;
         _cardManager.IsOpen = false;
+
+        EventManagers.EventManager.TriggerEvent(StoreManager.StoreEndCallback);
     }
 
     private void ResetCardList()
