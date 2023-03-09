@@ -37,8 +37,7 @@
     overflow: hidden;
 }
 
-.card > #Price {
-    position: absolute;
+.card > #PriceBackground > #Price {
     font-size: 80px;
     color: rgb(255, 185, 0);
     -unity-text-align: middle-center;
@@ -131,5 +130,13 @@
 }
 
 .card:hover {
-    -unity-background-image-tint-color: rgba(214, 214, 214, 255);
+    -unity-background-image-tint-color: rgb(214, 214, 214);
+}
+
+.card > #PriceBackground {
+    position: absolute;
+    top: 300px;
+    left: 35px;
+    width: 235px;
+    height: 100px;
 }
