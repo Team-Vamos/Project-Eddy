@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/07.UIToolkit/StoreUI/Store.uss?fileID=7433441132597879392&amp;guid=524489ce71ecc364b8a7437bf9fbe925&amp;type=3#Store" />
     <ui:VisualElement name="Canvas" style="width: 100%; height: 100%; display: flex;">
-        <ui:VisualElement name="Container" class="on" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Store.png?fileID=21300000&amp;guid=d3bfd715021503f41a3b0460f65b620f&amp;type=3#Store&apos;);">
-            <ui:VisualElement name="Card" class="card on" style="top: 210px; left: 196px; position: absolute;">
+        <ui:VisualElement name="Container" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Store.png?fileID=21300000&amp;guid=d3bfd715021503f41a3b0460f65b620f&amp;type=3#Store&apos;);">
+            <ui:VisualElement name="Card" class="card" style="top: 210px; left: 196px; position: absolute;">
                 <ui:VisualElement name="Mask" style="border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; overflow: hidden; scale: 0.9 0.9; translate: -1px 6px;">
                     <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/08.Effect/Blood%20splash%20sprite%20effects/Textures/bl_03/bl_03_0-Sheet-export.png?fileID=7505083396253228915&amp;guid=c223bb76b0844a04d805e291905e508f&amp;type=3#bl_03_0-Sheet-export_2&apos;);" />
                 </ui:VisualElement>
@@ -10,7 +10,7 @@
                     <ui:Label text="10000" display-tooltip-when-elided="true" name="Price" style="font-size: 75px; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&amp;guid=7aa65b1d253f46f43ba4282830097472&amp;type=3#KyoboHandwriting2021sjy&apos;); -unity-font-definition: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&amp;guid=c4ec3fe475c822c42bd611d516f301bd&amp;type=2#KyoboHandwriting2021sjy SDF&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Card" class="card on" style="top: 212px; left: 813px; position: absolute;">
+            <ui:VisualElement name="Card" class="card" style="top: 212px; left: 813px; position: absolute;">
                 <ui:VisualElement name="Mask" style="border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; overflow: hidden; scale: 0.9 0.9; translate: -1px 6px;">
                     <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/08.Effect/Blood%20splash%20sprite%20effects/Textures/bl_03/bl_03_0-Sheet-export.png?fileID=7505083396253228915&amp;guid=c223bb76b0844a04d805e291905e508f&amp;type=3#bl_03_0-Sheet-export_2&apos;);" />
                 </ui:VisualElement>
@@ -18,7 +18,7 @@
                     <ui:Label text="10000" display-tooltip-when-elided="true" name="Price" style="font-size: 75px; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&amp;guid=7aa65b1d253f46f43ba4282830097472&amp;type=3#KyoboHandwriting2021sjy&apos;); -unity-font-definition: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&amp;guid=c4ec3fe475c822c42bd611d516f301bd&amp;type=2#KyoboHandwriting2021sjy SDF&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Card" class="card on" style="top: 205px; left: 1435px; position: absolute;">
+            <ui:VisualElement name="Card" class="card" style="top: 205px; left: 1435px; position: absolute;">
                 <ui:VisualElement name="Mask" style="border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; overflow: hidden; scale: 0.9 0.9; translate: -1px 6px;">
                     <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/08.Effect/Blood%20splash%20sprite%20effects/Textures/bl_03/bl_03_0-Sheet-export.png?fileID=7505083396253228915&amp;guid=c223bb76b0844a04d805e291905e508f&amp;type=3#bl_03_0-Sheet-export_2&apos;);" />
                 </ui:VisualElement>
@@ -26,7 +26,7 @@
                     <ui:Label text="10000" display-tooltip-when-elided="true" name="Price" style="font-size: 75px; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&amp;guid=7aa65b1d253f46f43ba4282830097472&amp;type=3#KyoboHandwriting2021sjy&apos;); -unity-font-definition: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&amp;guid=c4ec3fe475c822c42bd611d516f301bd&amp;type=2#KyoboHandwriting2021sjy SDF&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Card" class="card on" style="top: 653px; left: 212px; position: absolute;">
+            <ui:VisualElement name="Card" class="card" style="top: 653px; left: 212px; position: absolute;">
                 <ui:VisualElement name="Mask" style="border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; overflow: hidden; scale: 0.9 0.9; translate: -1px 6px;">
                     <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/08.Effect/Blood%20splash%20sprite%20effects/Textures/bl_03/bl_03_0-Sheet-export.png?fileID=7505083396253228915&amp;guid=c223bb76b0844a04d805e291905e508f&amp;type=3#bl_03_0-Sheet-export_2&apos;);" />
                 </ui:VisualElement>
@@ -34,7 +34,7 @@
                     <ui:Label text="10000" display-tooltip-when-elided="true" name="Price" style="font-size: 75px; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&amp;guid=7aa65b1d253f46f43ba4282830097472&amp;type=3#KyoboHandwriting2021sjy&apos;); -unity-font-definition: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&amp;guid=c4ec3fe475c822c42bd611d516f301bd&amp;type=2#KyoboHandwriting2021sjy SDF&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Card" class="card on" style="top: 648px; left: 835px; position: absolute;">
+            <ui:VisualElement name="Card" class="card" style="top: 648px; left: 835px; position: absolute;">
                 <ui:VisualElement name="Mask" style="border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; overflow: hidden; scale: 0.9 0.9; translate: -1px 6px;">
                     <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/08.Effect/Blood%20splash%20sprite%20effects/Textures/bl_03/bl_03_0-Sheet-export.png?fileID=7505083396253228915&amp;guid=c223bb76b0844a04d805e291905e508f&amp;type=3#bl_03_0-Sheet-export_2&apos;);" />
                 </ui:VisualElement>
@@ -42,7 +42,7 @@
                     <ui:Label text="10000" display-tooltip-when-elided="true" name="Price" style="font-size: 75px; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&amp;guid=7aa65b1d253f46f43ba4282830097472&amp;type=3#KyoboHandwriting2021sjy&apos;); -unity-font-definition: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&amp;guid=c4ec3fe475c822c42bd611d516f301bd&amp;type=2#KyoboHandwriting2021sjy SDF&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Card" class="card on" style="top: 650px; left: 1435px; position: absolute;">
+            <ui:VisualElement name="Card" class="card" style="top: 650px; left: 1435px; position: absolute;">
                 <ui:VisualElement name="Mask" style="border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; overflow: hidden; scale: 0.9 0.9; translate: -1px 6px;">
                     <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/02.Player/01.Body/Base%20Player.png?fileID=1349740146&amp;guid=ec3c94d5cf75a1c4a91042bc6bfdf752&amp;type=3#Base Player_0&apos;);" />
                 </ui:VisualElement>
