@@ -308,6 +308,8 @@ GameObject:
   - component: {fileID: 1687857864822557068}
   - component: {fileID: 4948193929680204607}
   - component: {fileID: 5800408348277181493}
+  - component: {fileID: 3923852787868681728}
+  - component: {fileID: 8004384462225004920}
   m_Layer: 3
   m_Name: Internet_Player
   m_TagString: Player
@@ -617,7 +619,7 @@ MonoBehaviour:
   maxAnimationAngle: 66.4
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   attackDamage: 15
   _defaultWeapon: {fileID: 11400000, guid: a405a07e5faa5da47bbe82d741873c18, type: 2}
 --- !u!114 &1687857864822557068
@@ -671,6 +673,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSkinListSO: {fileID: 11400000, guid: 673d97f988001e94c92ba063d72a236b, type: 2}
   defaultSkin: {fileID: 11400000, guid: 716afcdffa56b4641acd90dc04cb8dda, type: 2}
+--- !u!114 &3923852787868681728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121089938371734311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c73d045c4aa4a01a2a20fd5d8707b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatData: {fileID: 0}
+  level: 1
+  exp: 0
+  expToNextLevel: 0
+  statPoint: 0
+--- !u!114 &8004384462225004920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121089938371734311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8cb8c962a9d9a48a4b20e233d4a5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3445391800063369686
 GameObject:
   m_ObjectHideFlags: 0

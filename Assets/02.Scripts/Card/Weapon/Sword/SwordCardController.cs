@@ -27,9 +27,9 @@ namespace Card
             {
                 damageTaker.TakeDamage(_cardHandler.PlayerStat.Stat.Atk.Value);
                 Vector3 EffectDir = _playerAttack.GetHitDir((damageTaker as MonoBehaviour).transform, _cardBase.weaponHardness);
-                //EffectManager.Instance.CreateEffect((damageTaker as MonoBehaviour).transform.position, EffectDir);
-                //EffectManager.Instance.CreateHit_1Effect((damageTaker as MonoBehaviour).transform.position, EffectDir);
-                //EffectManager.Instance.CreateHit_2Effect((damageTaker as MonoBehaviour).transform.position, EffectDir);
+                EffectManager.Instance.CreateEffect((damageTaker as MonoBehaviour).transform.position, EffectDir);
+                EffectManager.Instance.CreateHit_1Effect((damageTaker as MonoBehaviour).transform.position, EffectDir);
+                EffectManager.Instance.CreateHit_2Effect((damageTaker as MonoBehaviour).transform.position, EffectDir);
             }
             //if (iDamageTaker.Length > 0)
                 //CinemachineShake.Instance.GoShake(1.3f, 0.3f);
