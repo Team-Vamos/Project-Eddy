@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fe9c33fd8a503409e44e7737e11cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkinSO: {fileID: 0}
+  playerSkinListSO: {fileID: 11400000, guid: 673d97f988001e94c92ba063d72a236b, type: 2}
   defaultSkin: {fileID: 11400000, guid: 716afcdffa56b4641acd90dc04cb8dda, type: 2}
 --- !u!1 &3445391800063369686
 GameObject:

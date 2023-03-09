@@ -44,11 +44,13 @@ public class PlayerAttack : NetworkBehaviour
     {
         playerAniamation = GetComponent<PlayerAniamation>();
         EventManager.StartListening(NetManager.StartGameCallback, SetDefaultPlayerWeapon);
+        
     }
 
     private void SetDefaultPlayerWeapon()
     {
         _playerWeapon ??= _defaultWeapon.CreateCardController(GetComponent<CardHandler>()) as WeaponCardController;
+        _playerWeapon?.SetUserAttack(this);
     }
     public void DoAttack()
     {
@@ -120,10 +122,9 @@ public class PlayerAttack : NetworkBehaviour
 
         var angle = attackAngle - anglesRange / 2;
         var rad = Mathf.Deg2Rad * angle;
-        var initialPos = new Vector3(position.x + radius * Mathf.Cos(rad), position.y + radius * Mathf.Sin(rad), 0);
+        var initialPos = new Vector3(position.x - radius * Mathf.Cos(rad), position.y - radius * Mathf.Sin(rad), 0);
 
         raycastHit2Ds = Physics2D.LinecastAll(position, initialPos, layerMask);
-        Debug.DrawLine(position, initialPos, Color.red, 1f);
         foreach (var raycastHit2D in raycastHit2Ds)
         {
             IDamageTaker iDamageTaker = raycastHit2D.collider.gameObject.GetComponent<IDamageTaker>();
@@ -133,9 +134,8 @@ public class PlayerAttack : NetworkBehaviour
 
         angle = attackAngle + anglesRange / 2;
         rad = Mathf.Deg2Rad * angle;
-        initialPos = new Vector3(position.x + radius * Mathf.Cos(rad), position.y + radius * Mathf.Sin(rad), 0);
+        initialPos = new Vector3(position.x - radius * Mathf.Cos(rad), position.y - radius * Mathf.Sin(rad), 0);
         raycastHit2Ds = Physics2D.LinecastAll(position, initialPos, layerMask);
-        Debug.DrawLine(position, initialPos, Color.red, 1f);
         foreach (var raycastHit2D in raycastHit2Ds)
         {
             IDamageTaker iDamageTaker = raycastHit2D.collider.gameObject.GetComponent<IDamageTaker>();

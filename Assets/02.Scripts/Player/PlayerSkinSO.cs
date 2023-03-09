@@ -7,6 +7,8 @@ using System;
 [Serializable]
 public class PlayerSkinSO : ScriptableObject
 {
+    public string skinName;
+    public int skinIndex;
     public Sprite playerColorSprite;
     public Sprite playerSkinSprite;
 }

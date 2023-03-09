@@ -6,7 +6,8 @@ public class PlayerSkin : MonoBehaviour
 {
     private PlayerObjectControler _playerObjectControler;
     [SerializeField]
-    public PlayerSkinSO playerSkinSO;
+    private PlayerSkinListSO playerSkinListSO;
+    private PlayerSkinSO playerSkinSO;
     [SerializeField]
     private PlayerSkinSO defaultSkin;
     

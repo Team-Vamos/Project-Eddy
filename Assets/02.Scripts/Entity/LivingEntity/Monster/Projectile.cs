@@ -43,6 +43,7 @@ public class Projectile : MonoBehaviour
         if (!other.TryGetComponent(out IDamageTaker damageTaker)) return;
         
         var entity = damageTaker as Entity;
+        if (entity == null) return;
         if (entity.EntityType.HasFlag(EntityType.Monster)) return;
         damageTaker.TakeDamage(damage);
         Destroy(gameObject);
