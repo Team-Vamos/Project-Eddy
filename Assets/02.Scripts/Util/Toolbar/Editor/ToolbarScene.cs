@@ -67,8 +67,9 @@ public class ToolbarScene
                     menu.AddItem(new GUIContent($"{addPath}{extension}"), false, () =>
                     {
                         Scene currentScene = SceneManager.GetActiveScene();
-                        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-                        EditorSceneManager.OpenScene(scene.Substring(assetsIndex));
+                        if(EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()){
+                            EditorSceneManager.OpenScene(scene.Substring(assetsIndex));
+                        }
                     });
                 }
                 else

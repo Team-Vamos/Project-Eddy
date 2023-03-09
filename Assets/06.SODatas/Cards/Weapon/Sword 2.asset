@@ -20,6 +20,29 @@ MonoBehaviour:
   rank: 1
   description: "\uD5C8\uC811\uD574\uBCF4\uC774\uC9C0\uB9CC \uB098\uB984 \uC4F8\uB9CC\uD558\uB2E4
     \uAC80"
+  effectInfo: 
   upgrades:
-  - cardImage: {fileID: 0}
+  - cardImage:
+      icon: {fileID: 0}
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+    cardStats:
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
   weaponHardness: 0
