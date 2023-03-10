@@ -51,7 +51,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="StoreDesign" picking-mode="Ignore" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/StoreDesign.png?fileID=21300000&amp;guid=cd1915ebd1fd27748b1e76efcbc5dc88&amp;type=3#StoreDesign&apos;); width: 100%; height: 100%; position: absolute; transition-property: scale; transition-duration: 0.3s; transition-timing-function: ease; transition-delay: 0s;" />
-            <ui:Button text="X" display-tooltip-when-elided="true" name="ExitBtn" />
+            <ui:Button display-tooltip-when-elided="true" name="ExitBtn" enable-rich-text="false" style="background-image: none; color: rgba(188, 0, 0, 0); background-color: rgb(255, 255, 255);">
+                <ui:VisualElement style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/ExitIcon.png?fileID=21300000&amp;guid=ba6f7235e0dada542b35f3212179c9d8&amp;type=3#ExitIcon&apos;); width: 100%; height: 100%; -unity-background-scale-mode: scale-to-fit;" />
+            </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement name="InfoBox" picking-mode="Ignore" class="info-box">
             <ui:Label text="아내의 유혹" display-tooltip-when-elided="true" name="Title" picking-mode="Ignore" style="flex-grow: 0.3; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KOPUB%20DOTUM_PRO%20BOLD.OTF?fileID=12800000&amp;guid=8eab38ba325c5ed419f5867f668dbb1a&amp;type=3#KOPUB DOTUM_PRO BOLD&apos;); -unity-font-definition: none;" />
