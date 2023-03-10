@@ -29,19 +29,19 @@ MonoBehaviour:
     - statType: 0
       valueType: 0
       value: 0
-    - statType: 1
+    - statType: 0
       valueType: 0
       value: 0
-    - statType: 2
+    - statType: 0
       valueType: 0
       value: 0
-    - statType: 3
-      valueType: 1
-      value: 0
-    - statType: 4
+    - statType: 0
       valueType: 0
       value: 0
-    - statType: 5
+    - statType: 0
       valueType: 0
       value: 0
-  weaponHardness: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+  weaponHardness: 0.525

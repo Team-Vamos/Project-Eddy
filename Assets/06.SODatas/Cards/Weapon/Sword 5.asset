@@ -19,6 +19,29 @@ MonoBehaviour:
   name: "\uAC80"
   rank: 0
   description: "\uD5C8\uC811\uD574\uBCF4\uC774\uC9C0\uB9CC \uAC1C\uCA4C\uB294 \uAC80"
+  effectInfo: 
   upgrades:
-  - cardImage: {fileID: 0}
-  weaponHardness: 0
+  - cardImage:
+      icon: {fileID: 0}
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+    cardStats:
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+  weaponHardness: 1
