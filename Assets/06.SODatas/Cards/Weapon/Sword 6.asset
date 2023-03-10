@@ -19,5 +19,6 @@ MonoBehaviour:
   name: "\uC9F1\uB3CC"
   rank: 0
   description: "\"\uBA4B.\uC788.\uB2E4!\""
+  effectInfo: 
   upgrades: []
-  weaponHardness: 0
+  weaponHardness: 0.891

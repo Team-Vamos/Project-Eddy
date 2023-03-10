@@ -21,12 +21,27 @@ MonoBehaviour:
   description: "\uD5C8\uC811\uD574\uBCF4\uC774\uC9C0\uB9CC \uAC1C\uCA4C\uB294 \uAC80"
   effectInfo: "\uCC98\uC74C\uC73C\uB85C \uC8FC\uC6CC\uC9C0\uB294 \uAE30\uBCF8 \uBB34\uAE30"
   upgrades:
-  - cardImage: {fileID: 21300000, guid: 896d88f2bfc38604da78f4beb74e8546, type: 3}
-  cardStats:
-  - statType: 0
-    valueType: 0
-    value: 0
-  - statType: 0
-    valueType: 0
-    value: 0
-  weaponHardness: 0
+  - cardImage:
+      icon: {fileID: 0}
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+    cardStats:
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+    - statType: 0
+      valueType: 0
+      value: 0
+  weaponHardness: 0.525

@@ -45,4 +45,4 @@ MonoBehaviour:
     - statType: 0
       valueType: 0
       value: 0
-  weaponHardness: 0
+  weaponHardness: 0.326
