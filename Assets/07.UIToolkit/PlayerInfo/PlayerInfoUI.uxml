@@ -3,7 +3,7 @@
     <ui:VisualElement name="Canvas" style="width: 100%; height: 100%;">
         <ui:VisualElement name="Container">
             <ui:VisualElement name="InfoContainer" style="height: 100%; width: 780px;">
-                <ui:VisualElement name="CardContainer" style="height: 150px; width: 620px;">
+                <ui:VisualElement name="CardContainer">
                     <ui:VisualElement name="Card" class="info-card" />
                     <ui:VisualElement name="Card" class="info-card" />
                     <ui:VisualElement name="Card" class="info-card" />
@@ -26,29 +26,24 @@
                     <ui:VisualElement name="Card" class="info-card" />
                 </ui:VisualElement>
                 <ui:VisualElement name="StatContainer" style="height: 150px; padding-left: 25px; padding-right: 10px; padding-bottom: 10px; justify-content: center; width: 630px; padding-top: 10px; top: -20px;">
-                    <ui:VisualElement name="HpBar" class="bar" style="width: 100%; margin-bottom: 5px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Slider.png?fileID=21300000&amp;guid=3884a7654b6a28a4b8cbb60d614d2ef1&amp;type=3#Slider&apos;); -unity-background-image-tint-color: rgb(0, 0, 0);">
-                        <ui:VisualElement name="FillbarMask" style="width: 100%; height: 100%; overflow: hidden;">
-                            <ui:VisualElement name="Fillbar" style="width: 595px; height: 100px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Slider.png?fileID=21300000&amp;guid=3884a7654b6a28a4b8cbb60d614d2ef1&amp;type=3#Slider&apos;); -unity-background-image-tint-color: rgb(192, 0, 0);" />
-                        </ui:VisualElement>
-                        <ui:Label text="CurrentHp / MaxHp" display-tooltip-when-elided="true" name="ValueText" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="ExpBar" class="bar" style="width: 100%; margin-bottom: 5px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Slider.png?fileID=21300000&amp;guid=3884a7654b6a28a4b8cbb60d614d2ef1&amp;type=3#Slider&apos;); -unity-background-image-tint-color: rgb(0, 0, 0);">
-                        <ui:VisualElement name="FillbarMask" style="width: 100%; height: 100%; overflow: hidden;">
-                            <ui:VisualElement name="Fillbar" style="width: 595px; height: 100px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Slider.png?fileID=21300000&amp;guid=3884a7654b6a28a4b8cbb60d614d2ef1&amp;type=3#Slider&apos;); -unity-background-image-tint-color: rgb(112, 173, 71);" />
-                        </ui:VisualElement>
-                        <ui:Label text="CurrentExp / MaxExp" display-tooltip-when-elided="true" name="ValueText" />
-                    </ui:VisualElement>
+                    <Fillbar name="HpBar" ValueText="CurrentHp / MaxHp" FillTintColor="#C00000FF" BackgroundTintColor="#000000FF" class="bar" />
+                    <Fillbar name="ExpBar" ValueText="CurrentExp / MaxExp" FillTintColor="#70AD47FF" class="bar" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="EquipmentContainer" style="height: 100%; width: 150px; align-items: center; justify-content: center; margin-right: 25px;">
-                <ui:VisualElement name="ToolImage" style="width: 100px; height: 100px; justify-content: center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; align-items: center; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/SmallSquare.png?fileID=21300000&amp;guid=f8f266740d4e3d24199bf8629555dbea&amp;type=3#SmallSquare&apos;);">
-                    <ui:Label text="Label" display-tooltip-when-elided="true" />
+            <ui:VisualElement name="EquipmentContainer">
+                <ui:VisualElement name="ToolImage">
+                    <ui:Label text="Lv. 1" display-tooltip-when-elided="true" name="Level" />
                 </ui:VisualElement>
-                <ui:VisualElement name="ActiveImage" style="width: 100px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/SmallSquare.png?fileID=21300000&amp;guid=f8f266740d4e3d24199bf8629555dbea&amp;type=3#SmallSquare&apos;); height: 100px; -unity-background-image-tint-color: rgb(111, 111, 111);">
-                    <ui:VisualElement name="CooldownMask" style="width: 100%; overflow: hidden; flex-direction: row-reverse; justify-content: flex-end; height: 100%;">
-                        <ui:VisualElement name="CooldownImage" style="width: 100px; height: 100px; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/SmallSquare.png?fileID=21300000&amp;guid=f8f266740d4e3d24199bf8629555dbea&amp;type=3#SmallSquare&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.77);" />
+                <ui:VisualElement name="CooldownGray" class="fill-image">
+                    <ui:VisualElement name="CooldownMask">
+                        <ui:VisualElement name="CooldownWhite" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/SmallSquare.png?fileID=21300000&amp;guid=f8f266740d4e3d24199bf8629555dbea&amp;type=3#SmallSquare&apos;); -unity-background-image-tint-color: rgb(255, 255, 255);" />
                     </ui:VisualElement>
-                    <ui:Label text="Q" display-tooltip-when-elided="true" name="Keycode" style="position: absolute; top: 40px; left: 15px; color: rgb(0, 0, 0); font-size: 45px; -unity-font: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy.ttf?fileID=12800000&amp;guid=7aa65b1d253f46f43ba4282830097472&amp;type=3#KyoboHandwriting2021sjy&apos;); -unity-font-definition: url(&apos;project://database/Assets/03.Graphics/04.Fonts/KyoboHandwriting2021sjy%20SDF.asset?fileID=11400000&amp;guid=c4ec3fe475c822c42bd611d516f301bd&amp;type=2#KyoboHandwriting2021sjy SDF&apos;);" />
+                    <ui:VisualElement name="SkillImageGray" class="fill-image" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/02.Player/01.Body/Idle_Player.png?fileID=-1796878587&amp;guid=ab3f5ba9cfe86d6488c643a0c0227510&amp;type=3#Idle_Player_0&apos;); -unity-background-image-tint-color: rgba(171, 171, 171, 255);">
+                        <ui:VisualElement name="SkillImageMask" style="overflow: hidden;">
+                            <ui:VisualElement name="SkillImageWhite" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/02.Player/01.Body/Idle_Player.png?fileID=-1796878587&amp;guid=ab3f5ba9cfe86d6488c643a0c0227510&amp;type=3#Idle_Player_0&apos;);" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:Label text="Q" display-tooltip-when-elided="true" name="Keycode" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

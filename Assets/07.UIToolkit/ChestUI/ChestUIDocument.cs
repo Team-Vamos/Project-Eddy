@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Card;
 
-[RequireComponent(typeof(UIDocument))]
-public class ChestUIDocument : MonoBehaviour
+public class ChestUIDocument : UIDocumentMono
 {
     [SerializeField]
     private VisualTreeAsset _card;
@@ -20,22 +19,21 @@ public class ChestUIDocument : MonoBehaviour
 
     private UIDocument _document;
     private VisualElement _cardContainer;
-    private VisualElement _root;
 
     public bool IsTweening { get; private set; } = false;
 
     private List<ChestCard> _cardList;
     private List<ChestCardClick> _cardClickList;
-    private void Awake()
+    protected override void Awake()
     {
-        _document = GetComponent<UIDocument>();
+        base.Awake();
         _cardList = new List<ChestCard>();
         _cardClickList = new List<ChestCardClick>();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        _root = _document.rootVisualElement;
+        base.OnEnable();
         _cardContainer = _root.Q<VisualElement>("CardContainer");
         InitCard();
     }
@@ -53,7 +51,7 @@ public class ChestUIDocument : MonoBehaviour
         {
             AddCard();
         }
-        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+        DisappearRootVisualElement();
 
     }
 
@@ -90,7 +88,7 @@ public class ChestUIDocument : MonoBehaviour
         _cardManager.IsOpen = true;
 
         _cardContainer.AddToClassList("on");
-        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+        AppearRootVisualElement();
 
         // _cardContainer.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
         // _cardContainer.style.opacity = new StyleFloat(1f);
@@ -127,7 +125,7 @@ public class ChestUIDocument : MonoBehaviour
             card.DisableVotePerson();
         });
 
-        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+        DisappearRootVisualElement();
 
         _cardManager.ResetCardList();
     }

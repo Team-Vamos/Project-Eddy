@@ -6,8 +6,7 @@ using Card;
 using static Yields;
 using System;
 
-[RequireComponent(typeof(UIDocument))]
-public class StoreUIDocument : MonoBehaviour
+public class StoreUIDocument : UIDocumentMono
 {
     [SerializeField]
     private CardManager _cardManager;
@@ -27,7 +26,6 @@ public class StoreUIDocument : MonoBehaviour
 
     private UIDocument _uiDocument;
 
-    private VisualElement _root;
     private VisualElement _cardContainer;
     private List<StoreCard> _cardList;
     private List<StoreCardEvent> _cardClickList;
@@ -38,16 +36,16 @@ public class StoreUIDocument : MonoBehaviour
 
     private StoreInfoBox _storeInfoBox;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _uiDocument = GetComponent<UIDocument>();
+        base.Awake();
         _cardList = new List<StoreCard>();
         _cardClickList = new List<StoreCardEvent>();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        _root = _uiDocument.rootVisualElement;
+        base.OnEnable();
         _cardContainer = _root.Q<VisualElement>("Container");
 
         _exitBtn = _cardContainer.Q<Button>("ExitBtn");
@@ -93,7 +91,7 @@ public class StoreUIDocument : MonoBehaviour
             _cardList[i].RemoveFromClassListAtRoot("on");
         }
 
-        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+        DisappearRootVisualElement();
         IsTween = false;
         _cardManager.IsOpen = false;
 
@@ -117,7 +115,7 @@ public class StoreUIDocument : MonoBehaviour
             _cardList.Add(card);
         }
 
-        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+        DisappearRootVisualElement();
 
     }
 
@@ -137,7 +135,7 @@ public class StoreUIDocument : MonoBehaviour
             _cardList[i].UpdateInfo(price);
         }
 
-        _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+        AppearRootVisualElement();
 
         StartCoroutine(AddClassToCardContainer());
     }
