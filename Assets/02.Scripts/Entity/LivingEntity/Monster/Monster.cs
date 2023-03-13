@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Monster : LivingEntity
 {
+    public delegate void InitDelegate();
+
+    public event InitDelegate OnInit;
+
     public MonsterStats stats;
     public Entity Target => _target;
     private Entity _target;
@@ -37,13 +42,16 @@ public class Monster : LivingEntity
             return;
         }
 
+        _attackTime = 0f;
+        _target = null;
+
         Health = stats.health;
         _navMeshAgent.speed = stats.speed;
         _navMeshAgent.stoppingDistance = stats.attackRange - 0.1f;
 
         _monsterAttack = gameObject.GetComponent<MonsterAttack>();
         _monsterAttack.Init(this);
-        
+
         CanAttack = true;
         CanMove = true;
     }
@@ -63,10 +71,10 @@ public class Monster : LivingEntity
             minDistance = distance;
         }
 
-        if (_target != null)
-        {
+        if (_target == null) return;
+        
+        if (_navMeshAgent.isOnNavMesh)
             _navMeshAgent.SetDestination(_target.Collider2D.ClosestPoint(transform.position));
-        }
     }
 
     private void Update()

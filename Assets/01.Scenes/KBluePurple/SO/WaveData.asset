@@ -20,6 +20,8 @@ MonoBehaviour:
       count: 1
     - type: 2
       count: 1
+    - type: 3
+      count: 1
   - monsterDataList:
     - type: 0
       count: 4
@@ -27,3 +29,5 @@ MonoBehaviour:
       count: 2
     - type: 2
       count: 10
+    - type: 3
+      count: 5
