@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class Monster : LivingEntity
 {
@@ -9,11 +8,19 @@ public class Monster : LivingEntity
     private Entity _target;
 
     public float AttackTime => _attackTime;
+    public bool CanAttack { get; set; }
+
+    public bool CanMove
+    {
+        get => _navMeshAgent.enabled;
+        set => _navMeshAgent.enabled = value;
+    }
+
     private float _attackTime;
 
     private NavMeshAgent _navMeshAgent;
 
-    private MonsterRangeAttack _rangeAttack;
+    private MonsterAttack _monsterAttack;
 
     private void Awake()
     {
@@ -34,11 +41,11 @@ public class Monster : LivingEntity
         _navMeshAgent.speed = stats.speed;
         _navMeshAgent.stoppingDistance = stats.attackRange - 0.1f;
 
-        if (stats.damageType == DamageType.Ranged)
-        {
-            _rangeAttack = gameObject.GetComponent<MonsterRangeAttack>();
-            _rangeAttack.Init(this);
-        }
+        _monsterAttack = gameObject.GetComponent<MonsterAttack>();
+        _monsterAttack.Init(this);
+        
+        CanAttack = true;
+        CanMove = true;
     }
 
     private void SearchTarget()
@@ -48,7 +55,7 @@ public class Monster : LivingEntity
         foreach (var entity in EntityManager.Instance.Entities)
         {
             if (entity == this) continue;
-            if (entity is not IDamageTaker damageTaker) continue;
+            if (entity is not IDamageTaker) continue;
             if (!stats.targetType.HasFlag(entity.EntityType)) continue;
             var distance = Vector2.Distance(transform.position, entity.transform.position);
             if (distance > minDistance) continue;
@@ -64,8 +71,9 @@ public class Monster : LivingEntity
 
     private void Update()
     {
-        _attackTime += Time.deltaTime;
         SearchTarget();
+        if (!CanAttack) return;
+        _attackTime += Time.deltaTime;
         if (_target == null) return;
         if (_attackTime < stats.attackSpeed) return;
         TryAttack();
@@ -74,7 +82,8 @@ public class Monster : LivingEntity
 
     private void TryAttack()
     {
-        Debug.DrawLine(transform.position, _target.Collider2D.ClosestPoint(transform.position), Color.yellow, 1f);
+        var position = transform.position;
+        Debug.DrawLine(position, _target.Collider2D.ClosestPoint(position), Color.yellow, 1f);
         if (Vector2.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
             stats.attackRange) return;
 
@@ -84,30 +93,7 @@ public class Monster : LivingEntity
     private void Attack()
     {
         _navMeshAgent.speed = 0f;
-
-        if (stats.damageType == DamageType.Ranged)
-        {
-            _rangeAttack.Attack(_target.Collider2D.ClosestPoint(transform.position));
-            return;
-        }
-
-        if (stats.attackType == AttackType.Area)
-        {
-            foreach (var entity in EntityManager.Instance.Entities)
-            {
-                if (entity == this) continue;
-                if (entity is not IDamageTaker damageTaker) continue;
-                if (entity.EntityType.HasFlag(EntityType.Monster)) continue;
-                if (Vector2.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
-                    stats.attackRange) continue;
-                damageTaker.TakeDamage(stats.damage);
-            }
-        }
-        else
-        {
-            (_target as IDamageTaker)?.TakeDamage(stats.damage);
-        }
-
+        _monsterAttack.Attack(_target);
         _navMeshAgent.speed = 1f;
     }
 
