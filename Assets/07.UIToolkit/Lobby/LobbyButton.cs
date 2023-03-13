@@ -30,6 +30,8 @@ public class LobbyButton : MonoBehaviour
         Button host = back.Q<Button>("HostBtn");
         Button client = back.Q<Button>("JoinBtn");
         Button settings = back.Q<Button>("SettingBtn");
+        Button store = back.Q<Button>("StoreBtn");
+        Button skin = back.Q<Button>("SkinBtn");
         Button quit = back.Q<Button>("QuitBtn");
         host.RegisterCallback<ClickEvent>(OnClickHost);
         client.RegisterCallback<ClickEvent>(OnClickClient);
