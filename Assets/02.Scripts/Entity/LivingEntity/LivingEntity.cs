@@ -10,6 +10,7 @@ public class LivingEntity : Entity, IDamageTaker
     public OnDeathDelegate OnDeath;
     
     [SerializeField] private Renderer[] _renderers;
+    public Renderer[] Renderers => _renderers;
     
     public float Health { get; protected set; }
     

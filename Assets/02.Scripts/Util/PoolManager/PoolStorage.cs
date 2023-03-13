@@ -45,8 +45,12 @@ public class PoolStorage : MonoBehaviour
     public static GameObject InstantiateObject(GameObject prefab, Transform parent = null)
     {
         var go = Instantiate(prefab, parent);
-        go.AddComponent<PoolObject>().prefab = prefab;
         RegisterObject(go, prefab);
+        if (go.TryGetComponent(out PoolObject _))
+        {
+            return go;
+        }
+        go.AddComponent<PoolObject>().prefab = prefab;
         return go;
     }
 
@@ -82,13 +86,17 @@ public class PoolStorage : MonoBehaviour
         }
 
         var instance = InstantiateObject(prefab, parent);
+        var poolObject = instance.GetComponent<PoolObject>();
+        poolObject.onInit.Invoke();
         instance.hideFlags = HideFlags.None;
         return instance;
     }
 
     public static void ReturnObject(GameObject instance)
     {
-        var prefab = GetPrefab(instance);
+        var poolObject = instance.GetComponent<PoolObject>();
+        poolObject.onReturn.Invoke();
+        var prefab = poolObject.prefab;
         if (prefab == null)
         {
             Debug.LogError("Prefab not found for instance " + instance.name);
@@ -103,11 +111,5 @@ public class PoolStorage : MonoBehaviour
         PooledObjects[prefab].Push(instance);
         instance.SetActive(false);
         instance.hideFlags = HideFlags.HideInHierarchy;
-    }
-
-    private static GameObject GetPrefab(GameObject instance)
-    {
-        var poolObject = instance.GetComponent<PoolObject>();
-        return poolObject != null ? poolObject.prefab : null;
     }
 }
