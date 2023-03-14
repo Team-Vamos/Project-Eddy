@@ -1,0 +1,14 @@
+#CheckExist {
+}
+
+#CheckExist > VisualElement > VisualElement {
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#CheckExist > VisualElement > VisualElement > #unity-checkmark {
+    width: 24px;
+    height: 24px;
+}

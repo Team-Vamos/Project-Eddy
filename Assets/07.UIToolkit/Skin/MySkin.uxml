@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/07.UIToolkit/Skin/MYSKin.uss?fileID=7433441132597879392&amp;guid=0c612996c1ab23143abeac074ba935c9&amp;type=3#MYSKin" />
+    <ui:VisualElement name="Root" style="width: 100%; height: 100%; align-items: center;">
+        <ui:VisualElement name="Back" style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/01.TileMaps/TileMap.png?fileID=627789610&amp;guid=5c1fdbd3ce6a67f408021095b0b3ff3e&amp;type=3#TileMap_0&apos;); width: 100%; height: 100%; align-items: center; visibility: visible; display: flex; position: absolute; top: 15px; left: -16px; flex-direction: row; justify-content: flex-start; background-color: rgba(0, 0, 0, 0);">
+            <ui:VisualElement style="position: relative; height: 85%; width: 34%; top: 0; left: 0; margin-left: 83px; justify-content: flex-start; align-items: stretch;">
+                <ui:Label text="애기 스킨" display-tooltip-when-elided="true" style="width: 100%; height: 14%; -unity-text-align: middle-left; font-size: 71%; white-space: normal;" />
+                <ui:Label text="스킨 이름" display-tooltip-when-elided="true" style="width: 100%; height: 14%; font-size: 71%; -unity-text-align: middle-center; white-space: normal;" />
+                <ui:VisualElement style="width: 100%; height: 36%; flex-direction: row; align-items: center; justify-content: space-around;">
+                    <ui:Button display-tooltip-when-elided="true" style="height: 64px; width: 62px; background-image: url(&apos;project://database/Assets/07.UIToolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=c950c6e612c3fd746a3a927ce7271d7b&amp;type=3#arrow-left@2x&apos;);" />
+                    <ui:VisualElement style="align-items: center; width: 300px; height: 300px; flex-direction: column; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/02.Player/01.Body/Eggy-Base.png?fileID=1349740146&amp;guid=68c06313ee43b964ca4e7ec645db1cb9&amp;type=3#Base Player_0&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" style="height: 64px; width: 62px; background-image: url(&apos;project://database/Assets/07.UIToolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=c950c6e612c3fd746a3a927ce7271d7b&amp;type=3#arrow-right@2x&apos;);" />
+                </ui:VisualElement>
+                <ui:Label text="스킨 설명 스킨 설명 스킨 설명 스킨 설명 스킨 설명 스킨 설명 스킨 설명 스킨 설명 " display-tooltip-when-elided="true" enable-rich-text="true" focusable="false" usage-hints="None" style="width: 100%; height: 182px; font-size: 35%; -unity-text-align: upper-left; white-space: normal;" />
+                <ui:RadioButton label="보유중인 스킨만 보기" name="CheckExist" style="flex-direction: row-reverse; height: 60px; font-size: 36px; -unity-text-align: upper-left; margin-right: 10px; margin-left: 5px; width: 100%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="width: 42%; height: 85%; margin-left: 230px; background-image: none; align-items: center;">
+                <ui:VisualElement style="background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/Square.png?fileID=21300000&amp;guid=825e92ae419d4e94cbc44b5f789396e9&amp;type=3#Square&apos;); width: 100%; height: 85%; opacity: 1;" />
+                <ui:VisualElement style="width: 440px; height: 90px; flex-direction: row; align-items: center; justify-content: space-around; position: absolute; top: 55px; left: 71px;">
+                    <ui:Button display-tooltip-when-elided="true" style="height: 64px; width: 62px; background-image: url(&apos;project://database/Assets/07.UIToolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=c950c6e612c3fd746a3a927ce7271d7b&amp;type=3#arrow-left@2x&apos;);" />
+                    <ui:VisualElement style="align-items: center; width: 300px; height: 112px; flex-direction: column; background-image: url(&apos;project://database/Assets/03.Graphics/01.Sprites/07.UI/BtnUIs.png?fileID=-350182814&amp;guid=322dd594c38dd29409ed490fa06daa9e&amp;type=3#BtnUIs_1&apos;); max-width: 245px;" />
+                    <ui:Button display-tooltip-when-elided="true" style="height: 64px; width: 62px; background-image: url(&apos;project://database/Assets/07.UIToolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=c950c6e612c3fd746a3a927ce7271d7b&amp;type=3#arrow-right@2x&apos;);" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-direction: row-reverse; height: 27px; position: absolute; width: 82%; top: 624px; left: 78px; justify-content: center;">
+                    <ui:Button text="공격" display-tooltip-when-elided="true" style="width: 30%; height: 274%; margin-left: 9px; margin-right: 9px; font-size: 42px;" />
+                    <ui:Button text="걷기" display-tooltip-when-elided="true" style="width: 30%; height: 274%; margin-left: 9px; margin-right: 9px; font-size: 42px;" />
+                    <ui:Button text="기본" display-tooltip-when-elided="true" style="width: 30%; height: 274%; margin-left: 9px; margin-right: 9px; font-size: 42px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-direction: row-reverse; height: 27px; width: 651px;">
+                    <ui:Button text="장착" display-tooltip-when-elided="true" style="width: 30%; height: 274%; margin-left: 9px; margin-right: 9px; font-size: 42px;" />
+                    <ui:Button text="구매" display-tooltip-when-elided="true" style="width: 30%; height: 274%; margin-left: 9px; margin-right: 9px; font-size: 42px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

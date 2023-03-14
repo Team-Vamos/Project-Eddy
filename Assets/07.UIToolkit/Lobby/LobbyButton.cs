@@ -49,6 +49,7 @@ public class LobbyButton : MonoBehaviour
         join.RegisterCallback<ClickEvent>(OnClickJoin);
 
 
+
         lobbyScrollView = list.Q<ScrollView>("Servers");
         
     }
