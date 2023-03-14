@@ -1,18 +1,24 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : LivingEntity
+public class Monster : LivingEntity, IPoolable
 {
     public delegate void InitDelegate();
 
-    public event InitDelegate OnInit;
-
     public MonsterStats stats;
-    public Entity Target => _target;
-    private Entity _target;
 
-    public float AttackTime => _attackTime;
+    private MonsterAttack _monsterAttack;
+
+    private NavMeshAgent _navMeshAgent;
+
+    protected Monster() : base(EntityType.Monster)
+    {
+    }
+
+    public Entity Target { get; private set; }
+
+    public float AttackTime { get; private set; }
+
     public bool CanAttack { get; set; }
 
     public bool CanMove
@@ -21,17 +27,43 @@ public class Monster : LivingEntity
         set => _navMeshAgent.enabled = value;
     }
 
-    private float _attackTime;
-
-    private NavMeshAgent _navMeshAgent;
-
-    private MonsterAttack _monsterAttack;
-
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.updateUpAxis = false;
         _navMeshAgent.updateRotation = false;
+    }
+
+    private void Update()
+    {
+        SearchTarget();
+        if (!CanAttack) return;
+        AttackTime += Time.deltaTime;
+        if (Target == null) return;
+        if (AttackTime < stats.attackSpeed) return;
+        TryAttack();
+        AttackTime = 0f;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
+
+        if (Target != null)
+        {
+            Gizmos.color = Color.green;
+            var position = transform.position;
+            Gizmos.DrawLine(position, Target.Collider2D.ClosestPoint(position));
+
+            if (Vector2.Distance(position, Target.Collider2D.ClosestPoint(position)) < stats.attackRange)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(position, Target.Collider2D.ClosestPoint(position));
+            }
+        }
+
+        if (stats.attackType == AttackType.Area) Gizmos.color = Color.red;
     }
 
     public void Init()
@@ -42,8 +74,8 @@ public class Monster : LivingEntity
             return;
         }
 
-        _attackTime = 0f;
-        _target = null;
+        AttackTime = 0f;
+        Target = null;
 
         Health = stats.health;
         _navMeshAgent.speed = stats.speed;
@@ -67,32 +99,21 @@ public class Monster : LivingEntity
             if (!stats.targetType.HasFlag(entity.EntityType)) continue;
             var distance = Vector2.Distance(transform.position, entity.transform.position);
             if (distance > minDistance) continue;
-            _target = entity;
+            Target = entity;
             minDistance = distance;
         }
 
-        if (_target == null) return;
-        
-        if (_navMeshAgent.isOnNavMesh)
-            _navMeshAgent.SetDestination(_target.Collider2D.ClosestPoint(transform.position));
-    }
+        if (Target == null) return;
 
-    private void Update()
-    {
-        SearchTarget();
-        if (!CanAttack) return;
-        _attackTime += Time.deltaTime;
-        if (_target == null) return;
-        if (_attackTime < stats.attackSpeed) return;
-        TryAttack();
-        _attackTime = 0f;
+        if (_navMeshAgent.isOnNavMesh)
+            _navMeshAgent.SetDestination(Target.Collider2D.ClosestPoint(transform.position));
     }
 
     private void TryAttack()
     {
         var position = transform.position;
-        Debug.DrawLine(position, _target.Collider2D.ClosestPoint(position), Color.yellow, 1f);
-        if (Vector2.Distance(transform.position, _target.Collider2D.ClosestPoint(transform.position)) >
+        Debug.DrawLine(position, Target.Collider2D.ClosestPoint(position), Color.yellow, 1f);
+        if (Vector2.Distance(transform.position, Target.Collider2D.ClosestPoint(transform.position)) >
             stats.attackRange) return;
 
         Attack();
@@ -101,35 +122,18 @@ public class Monster : LivingEntity
     private void Attack()
     {
         _navMeshAgent.speed = 0f;
-        _monsterAttack.Attack(_target);
+        _monsterAttack.Attack(Target);
         _navMeshAgent.speed = 1f;
     }
 
-    private void OnDrawGizmosSelected()
+    public void OnInit()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
-
-        if (_target != null)
-        {
-            Gizmos.color = Color.green;
-            var position = transform.position;
-            Gizmos.DrawLine(position, _target.Collider2D.ClosestPoint(position));
-
-            if (Vector2.Distance(position, _target.Collider2D.ClosestPoint(position)) < stats.attackRange)
-            {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawLine(position, _target.Collider2D.ClosestPoint(position));
-            }
-        }
-
-        if (stats.attackType == AttackType.Area)
-        {
-            Gizmos.color = Color.red;
-        }
     }
 
-    protected Monster() : base(EntityType.Monster)
+    public void OnReturn()
     {
+        CanAttack = false;
+        CanMove = false;
+        Target = null;
     }
 }

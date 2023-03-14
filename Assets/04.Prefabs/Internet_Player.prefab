@@ -653,12 +653,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1c602cd7ec43b580ead74a77eeaf5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderers:
-  - {fileID: 4467091404021652538}
-  - {fileID: 3765351891752449427}
-  - {fileID: 4383229397354716920}
-  - {fileID: 2265334587880991279}
-  - {fileID: 9196304746903341185}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  renderers: []
 --- !u!114 &5800408348277181493
 MonoBehaviour:
   m_ObjectHideFlags: 0
