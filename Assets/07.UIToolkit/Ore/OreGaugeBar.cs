@@ -14,6 +14,6 @@ public class OreGaugeBar : MonoBehaviour
         _document = GetComponent<UIDocument>();
     }
     private void OnEnable() {
-        _spawner.SetRootVisualElement(_document.rootVisualElement.Q<VisualElement>("Canvas"));
+        // _spawner.SetRootVisualElement(_document.rootVisualElement.Q<VisualElement>("Canvas"));
     }
 }

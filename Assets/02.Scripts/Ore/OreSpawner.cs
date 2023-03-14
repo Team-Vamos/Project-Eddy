@@ -1,195 +1,103 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using _02.Scripts.Ore;
 using DG.Tweening;
-using static Yields;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
-using UnityEngine.AI;
+using UnityEngine;
+using UnityEngine.Serialization;
 
-#if UNITY_EDITOR
-
-[System.Serializable]
-public class CheckOre
-{
-    public string description = "이 클래스는 디버깅용입니다";
-    public Ore rangeCheckOre;
-    public float rangeCheckDuration;
-
-    public bool isChecking;
-}
-#endif
-
-
+// TODO: OreSpawner를 UI부분을 삭제, OreSpriteManagerClass를 가지고 있기, OreSpawnerClass를 따로 가지고 있기 OreDebuggerClass 가지고 있기, Class이름을 OreSpawner가 아닌 OreManager로 바꾸기
 public class OreSpawner : MonoBehaviour
 {
-    [Header("OreSprites")] [SerializeField]
-    private List<Sprite> _oreSprites;
+    [SerializeField]
+    private Bound[] _oreSpawnBounds;
 
-    public IReadOnlyList<Sprite> OreSprites => _oreSprites;
+    [SerializeField]
+    private Ore _orePrefab;
 
-    [SerializeField] private GameObject _holdOrePrefab;
+    [SerializeField]
+    private OreSpriteManager _oreSpriteManager;
+    [SerializeField]
+    private HoldOreSpawner _holdOreOreSpawner;
 
-    [SerializeField] private float _holdOreSpawnDuration = 0.7f;
-    [SerializeField] private float _holdOreSpawnInnerRange = 1;
-    [SerializeField] private float _holdOreSpawnOuterRange = 1.5f;
-    [SerializeField] private Vector3 _holdOreSpawnScale = Vector3.one;
+    [SerializeField]
+    private float _oreSpawnDuration = 0.7f;
+    [SerializeField]
+    private Vector3 _oreSpawnScale = Vector3.one;
+    [SerializeField]
+    private int _oreSpawnCount = 3;
 
-    [Header("Ore")] [SerializeField] private List<Bound> _bounds;
-
-    [SerializeField] private Ore _orePrefab;
-    [SerializeField] private int _oreSpawnCount = 3;
-    [SerializeField] private float _oreSpawnDuration = 0.7f;
-    [SerializeField] private Vector3 _oreSpawnScale = Vector3.one;
-    [SerializeField] private VisualTreeAsset _oreGaugeBarPrefab;
-
-    [SerializeField] private WaveWorker _waveWorker;
-
-    public VisualElement Root { get; private set; }
-
-    private List<Ore> _oreList = new List<Ore>();
-
-
-#if UNITY_EDITOR
-    [Space] [SerializeField] private CheckOre _debugOre;
-
-    private Coroutine _checkOreCoroutine;
-#endif
-    [SerializeField] private float _testDamage = 30f;
-
+    private List<Ore> _oreList;
 
     private void Awake()
     {
-        _waveWorker.OnWaveEnd += OnWaveEnd;
-    }
-
-    private void Start()
-    {
-        RemoveOres();
-        SpawnOre();
-    }
-
-    private void OnWaveEnd()
-    {
-        if (_waveWorker.IsBloodMoon)
-        {
-            RemoveOres();
-            SpawnOre();
-        }
-    }
-
-    public void SetRootVisualElement(VisualElement root)
-    {
-        Root = root;
-        // GameObject.FindObjectOfType<Card>();
-    }
-
-    public void SpawnOre()
-    {
-        for (int i = 0; i < _oreSpawnCount; ++i)
-        {
-            Ore g = Instantiate(_orePrefab, Define.GetRandomBound(_bounds.ToArray()).GetRandomPos(),
-                Quaternion.identity);
-            g.gameObject.SetActive(true);
-
-            g.Obstacle.enabled = true;
-
-            g.transform.localScale = Vector3.zero;
-
-            g.transform.DOScale(_oreSpawnScale, _oreSpawnDuration).SetEase(Ease.InOutElastic);
-
-            VisualElement gaugeBar = _oreGaugeBarPrefab.Instantiate().Q<VisualElement>("GaugeBar");
-
-
-            Root.Add(gaugeBar);
-
-            g.SetGaugeBar(gaugeBar);
-
-            _oreList.Add(g);
-        }
+        _oreList = new();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if(Input.GetKeyDown(KeyCode.K))
         {
-            foreach (var ore in _oreList)
+            SpawnOre();
+        }
+
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            _oreList.ForEach(ore => ore.TakeDamage(30f));
+        }
+        
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            DestroyAllOre();
+        }
+    }
+
+    public void SpawnOre()
+    {
+        Bound bound = Define.GetRandomBound(_oreSpawnBounds);
+        for (int i = 0; i < _oreSpawnCount; ++i)
+        {
+            Vector2 position = bound.GetRandomPos();
+            Ore ore = NetworkPoolManager.Instantiate(_orePrefab.gameObject, position, Quaternion.identity).GetComponent<Ore>();
+            
+            ore.Init(_holdOreOreSpawner,_oreSpriteManager);
+
+            ore.transform.localScale = Vector3.zero;
+
+            ore.transform.DOScale(_oreSpawnScale, _oreSpawnDuration).SetEase(Ease.InOutElastic);
+
+            _oreList.Add(ore);
+        }
+    }
+
+    public void DestroyAllOre()
+    {
+        foreach (Ore ore in _oreList)
+        {
+            ore.transform.DOScale(Vector3.zero, _oreSpawnDuration).OnComplete(() =>
             {
-                Debug.Log("데미지 줌");
-                ore.TakeDamage(_testDamage);
-            }
+                NetworkPoolManager.Destroy(ore.gameObject);
+            });
         }
     }
-
-
-    public void RemoveOres()
-    {
-        _oreList.ForEach(x => x.gameObject.SetActive(false));
-        _oreList.Clear();
-    }
-
-    public void SpawnHoldOre(Vector2 pos)
-    {
-        GameObject holdOre = Instantiate(_holdOrePrefab);
-
-        Vector2 dir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-        float distance = Random.Range(0f, _holdOreSpawnOuterRange) + _holdOreSpawnInnerRange;
-
-        holdOre.transform.position = (Vector2)pos + dir * distance;
-
-        holdOre.SetActive(true);
-        holdOre.transform.DOScale(_holdOreSpawnScale, _holdOreSpawnDuration).SetEase(Ease.InOutElastic);
-    }
-
+    
 #if UNITY_EDITOR
-
-    [ContextMenu("광석 드롭 범위 확인")]
-    private void CheckSpawnRange()
-    {
-        if (_debugOre.rangeCheckOre == null)
-        {
-            Debug.LogError("범위를 확인할 광석을 넣지 않았습니다. 범위를 확인할 오브젝트를 매니저에 넣어주세요");
-            return;
-        }
-
-        _checkOreCoroutine = StartCoroutine(CheckOreRange());
-    }
-
-    [ContextMenu("범위 확인 강제 종료")]
-    private void StopDebugingCheckOre()
-    {
-        if (_checkOreCoroutine != null)
-        {
-            StopCoroutine(_checkOreCoroutine);
-        }
-
-        _debugOre.isChecking = false;
-    }
-
-    private IEnumerator CheckOreRange()
-    {
-        _debugOre.isChecking = true;
-        yield return WaitForSeconds(_debugOre.rangeCheckDuration);
-        _debugOre.isChecking = false;
-    }
-
+    
+    [SerializeField]
+    private bool _isDebug = false;
+    
+    [SerializeField]
+    private Color _debugColor = Color.cyan;
     private void OnDrawGizmos()
     {
-        if (_debugOre.isChecking)
+        if(_isDebug)
         {
-            Gizmos.color = Color.gray;
-            Gizmos.DrawWireSphere(_debugOre.rangeCheckOre.transform.position,
-                _holdOreSpawnOuterRange + _holdOreSpawnInnerRange);
-            Gizmos.DrawWireSphere(_debugOre.rangeCheckOre.transform.position, _holdOreSpawnInnerRange);
-
-            Gizmos.color = Color.cyan;
-            foreach (var bound in _bounds)
+            Gizmos.color = _debugColor;
+            foreach (var bound in _oreSpawnBounds)
             {
                 Gizmos.DrawWireCube(bound.Center, bound.Size);
             }
         }
     }
-
+    
 #endif
 }

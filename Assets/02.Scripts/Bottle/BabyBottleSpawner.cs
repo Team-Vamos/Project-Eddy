@@ -44,7 +44,7 @@ public class BabyBottleSpawner : MonoBehaviour
 
     public void SpawnBabyBottle(CardController controller)
     {
-        BabyBottle babyBottle = Instantiate(BottlePrefab);
+        BabyBottle babyBottle = PoolManager.GetObject(_bottlePrefab.gameObject).GetComponent<BabyBottle>();
 
         Vector2 dir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
         float distance = Random.Range(0f, _babyBottleOutterRadius) + _babyBottleInnerRadius;

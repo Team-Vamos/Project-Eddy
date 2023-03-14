@@ -24,7 +24,7 @@ public class BabyBottle : MonoBehaviour
             CardHandler handler = other.transform.GetComponent<CardHandler>();
             handler.AddCard(_cardController);
             // TODO: 풀링
-            gameObject.SetActive(false);
+            PoolManager.Destroy(gameObject);
         }
     }
 }

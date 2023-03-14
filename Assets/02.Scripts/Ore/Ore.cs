@@ -1,108 +1,115 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using _02.Scripts.Ore;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
+[DisallowMultipleComponent]
 // TODO: Monobehaviour -> Entity
-public class Ore : MonoBehaviour, IDamageTaker
+public class Ore : StructureEntity
 {
     [SerializeField]
-    private float _oreGauge = 100;
+    private float _oregauge = 100f;
 
     [SerializeField]
     private int _oreHp = 5;
 
+    private OreSpriteManager _oreSpriteManager;
+    private HoldOreSpawner _holdOreSpawner;
+
+    private int _currentOreSpriteIndex;
+
+    private NavMeshObstacle _navMeshObstacle;
+    
     [SerializeField]
-    private OreSpawner _oreSpawner;
+    private SpriteRenderer _oreSprite;
 
     [SerializeField]
-    private Vector2 _uiOffset = new Vector2(0f, -100f);
+    private SpriteRenderer _oreBreakSprite;
 
-    private VisualElement _gaugeBar;
-    private VisualElement _bar;
+    private SpriteMask _spriteMask;
+    
+    protected Ore() : base(100) {}
+    protected Ore(float health) : base(health) {}
 
-    private SpriteRenderer _spriteRenderer;
-    private NavMeshObstacle _obstacle;
-    public NavMeshObstacle Obstacle => _obstacle;
-    private float _currentOreGauge;
-    private int _currentOreHp;
+    private int _currentHp;
 
-
+    private bool _initialize = false;
     private void Awake()
     {
-        _obstacle = GetComponentInChildren<NavMeshObstacle>();
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
+        _spriteMask = GetComponentInChildren<SpriteMask>();
+        Health = _oregauge;
+        _currentHp = _oreHp;
+    }
 
-        if (_spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer is Null");
-        }
+    public void Init(HoldOreSpawner holdOreSpawner, OreSpriteManager oreSpriteManager)
+    {
+        if(_initialize) return;
+        _initialize = true;
+        _oreSpriteManager = oreSpriteManager;
+        _holdOreSpawner = holdOreSpawner;
+    }
+    
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        _navMeshObstacle.enabled = true;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        _navMeshObstacle.enabled = false;
     }
 
     private void Start()
     {
-        _currentOreGauge = _oreGauge;
-        _currentOreHp = _oreHp;
+        // TODO: OnDestroyed에 사라지는 것 넣어두기
+        OnDestroyed += DestroyObject;        
+    }
+    
+    private void DestroyObject()
+    {
+        NetworkPoolManager.Destroy(gameObject);
     }
 
-    private void OnDisable()
+    public override void TakeDamage(float damage)
     {
-        _obstacle.enabled = false;
-        _oreSpawner.Root.Remove(_gaugeBar);
-    }
+        Health -= damage;
 
-    private void LateUpdate()
-    {
-        Vector3 uiPos = RuntimePanelUtils.CameraTransformWorldToPanel(_oreSpawner.Root.panel, transform.position, Define.MainCam);
+        Debug.Log(Health);
+        Debug.Log(_oregauge * _oreSpriteManager.OreOreBreakSprites[_currentOreSpriteIndex].breakDamagePercent / 100);
 
-        _gaugeBar.style.left = uiPos.x - _gaugeBar.layout.width * 0.5f + _uiOffset.x;
-        _gaugeBar.style.top = uiPos.y + _gaugeBar.layout.height + _uiOffset.y;
-    }
-
-    public void SetGaugeBar(VisualElement gaugeBar)
-    {
-        _gaugeBar = gaugeBar;
-        _bar = gaugeBar.Q<VisualElement>("Bar");
-        Debug.Log(gaugeBar.style.transitionDuration);
-        Debug.Log(_bar.style.transitionDuration);
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _currentOreGauge -= damage;
-        if (_currentOreGauge <= 0)
+        if(Health <= _oregauge * _oreSpriteManager.OreOreBreakSprites[_currentOreSpriteIndex].breakDamagePercent / 100 && Health > 0)
         {
-            _currentOreHp--;
-
-            _oreSpawner.SpawnHoldOre(transform.position);
-            // 원석 소환
-            if (_currentOreHp <= 0)
-            {
-                // TODO: 풀링
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                // 스프라이트 변경
-                _spriteRenderer.sprite = _oreSpawner.OreSprites[_currentOreHp - 1];
-                _currentOreGauge = _oreGauge;
-            }
+            _currentOreSpriteIndex++;
+            ChangeSpriteByHealth();
         }
-        _bar.style.width = new Length(_currentOreGauge / _oreGauge * 100f, LengthUnit.Percent);
+        else if(Health <= 0)
+        {
+            _currentOreSpriteIndex = 0;
+            
+            Health = _oregauge;
+            
+            _currentHp--;
+            
+            _holdOreSpawner.SpawnHoldOre(transform.position);
+        }
+        
+        OnDamageTaken?.SafeInvoke(damage);
+        if(_currentHp <= 0)
+            OnDestroyed?.SafeInvoke();
+        else
+        {
+            _oreSprite.sprite = _oreSpriteManager.OreSprites[^_currentHp];
+            _spriteMask.sprite = _oreSprite.sprite;
+        }
     }
 
-    // private void ChangeSprite()
-    // {
-    //     _spriteRenderer.sprite = OreManager.Instance.OreSprites[_currentOreHp - 1];
-
-    // }
-
-    // public void SetHealth(Attack attack)
-    // {
-    // }
-
-    // [SerializeField]
-    // private float _oreGauge;
+    private void ChangeSpriteByHealth()
+    {
+        _oreBreakSprite.sprite = _oreSpriteManager.OreOreBreakSprites[_currentOreSpriteIndex].breakSprite;
+    }
 }
+ 
