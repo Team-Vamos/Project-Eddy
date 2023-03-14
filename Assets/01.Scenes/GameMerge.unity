@@ -4139,7 +4139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -489.99973}
+  m_AnchoredPosition: {x: 0, y: -489.9992}
   m_SizeDelta: {x: -5, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &685031866
@@ -12227,7 +12227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc674159783a4cc4b97d9466b12e40f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nexusPrefab: {fileID: 8181436341515041013, guid: 81a1d9503e4875f47875bc6c38836875, type: 3}
 --- !u!1 &1926063747
 GameObject:
   m_ObjectHideFlags: 0
@@ -13920,6 +13919,14 @@ PrefabInstance:
     - target: {fileID: 2272963312734690517, guid: 81a1d9503e4875f47875bc6c38836875, type: 3}
       propertyPath: sceneId
       value: 3619188047
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272963313133591930, guid: 81a1d9503e4875f47875bc6c38836875, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272963313133591930, guid: 81a1d9503e4875f47875bc6c38836875, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81a1d9503e4875f47875bc6c38836875, type: 3}

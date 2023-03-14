@@ -13,6 +13,6 @@ public class Explosion : MonoBehaviour
     {
         _time += Time.deltaTime;
         if (_time > 2)
-            PoolManager.Destroy(gameObject);
+            NetworkPoolManager.Destroy(gameObject);
     }
 }

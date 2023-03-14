@@ -14,13 +14,13 @@ public class MonsterAttackSelfDestruct : MonsterAttack, IPoolable
         Monster.CanMove = false;
         StartCoroutine(SelfDestruct());
     }
- 
+
     private IEnumerator SelfDestruct()
     {
         foreach (var monsterRenderer in Monster.Renderers)
             monsterRenderer.material.DOColor(Color.red, explosionTime).SetEase(Ease.Linear);
         yield return new WaitForSeconds(explosionTime);
-        PoolManager.Instantiate(explosionEffect, Monster.transform.position, Quaternion.identity);
+        NetworkPoolManager.Instantiate(explosionEffect, Monster.transform.position, Quaternion.identity);
         foreach (var entity in EntityManager.Instance.Entities)
         {
             if (entity == Monster) continue;
@@ -33,14 +33,14 @@ public class MonsterAttackSelfDestruct : MonsterAttack, IPoolable
         }
 
         Monster.Init();
-        PoolManager.Destroy(Monster.gameObject);
+        NetworkPoolManager.Destroy(Monster.gameObject);
     }
 
     public void OnInit()
     {
         StartCoroutine(Initialize());
     }
-    
+
     private IEnumerator Initialize()
     {
         yield return null;
@@ -50,6 +50,5 @@ public class MonsterAttackSelfDestruct : MonsterAttack, IPoolable
 
     public void OnReturn()
     {
-        
     }
 }

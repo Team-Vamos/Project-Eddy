@@ -45,6 +45,6 @@ public class Projectile : MonoBehaviour
         if (entity == null) return;
         if (entity.EntityType.HasFlag(EntityType.Monster)) return;
         damageTaker.TakeDamage(damage);
-        PoolManager.Destroy(gameObject);
+        NetworkPoolManager.Destroy(gameObject);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using EventManagers;
 using UnityEngine;
 
 public class SpawnWorker : MonoBehaviour
@@ -11,18 +12,23 @@ public class SpawnWorker : MonoBehaviour
 
     private void Awake()
     {
-        waveWorker.OnWaveStart += OnWaveStart;
+        EventManager.StartListening(NetManager.NetworkConnected, () => { });
 
         if (!NetManager.Instance.isServer)
+        {
             enabled = false;
+            return;
+        }
+
+        waveWorker.OnWaveStart += OnWaveStart;
+
+        Debug.Log("SpawnWorker Awake");
     }
 
     private void OnWaveStart(int waveCount, bool isBloodMoon)
     {
         var waveTime = dayWorker.nightTime / 2;
-
         if (isBloodMoon) waveTime = dayWorker.nightTime;
-
         if (waveData is null || waveCount - 1 >= waveData.waveMonsters.Length)
         {
             Debug.LogWarning("Wave count is out of range");
@@ -45,7 +51,7 @@ public class SpawnWorker : MonoBehaviour
     private void SpawnMonster(MonsterData monsterData)
     {
         var spawnPoint = GetSpawnPoint();
-        var monsterObject = PoolManager.Instantiate(monsterData.Prefab, spawnPoint, Quaternion.identity);
+        var monsterObject = NetworkPoolManager.Instantiate(monsterData.Prefab, spawnPoint, Quaternion.identity);
         var monster = monsterObject.GetComponent<Monster>();
         monster.Init();
     }
