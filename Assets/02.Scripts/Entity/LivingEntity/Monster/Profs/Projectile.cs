@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private float time;
     [SerializeField] private Vector2 targetPosition;
-    
+
     private void Awake()
     {
         time = 0f;
@@ -41,11 +40,11 @@ public class Projectile : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.TryGetComponent(out IDamageTaker damageTaker)) return;
-        
+
         var entity = damageTaker as Entity;
         if (entity == null) return;
         if (entity.EntityType.HasFlag(EntityType.Monster)) return;
         damageTaker.TakeDamage(damage);
-        Destroy(gameObject);
+        PoolManager.Destroy(gameObject);
     }
 }

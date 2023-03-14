@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class SpawnWorker : MonoBehaviour
@@ -13,16 +12,16 @@ public class SpawnWorker : MonoBehaviour
     private void Awake()
     {
         waveWorker.OnWaveStart += OnWaveStart;
+
+        if (!NetManager.Instance.isServer)
+            enabled = false;
     }
 
     private void OnWaveStart(int waveCount, bool isBloodMoon)
     {
         var waveTime = dayWorker.nightTime / 2;
-        
-        if (isBloodMoon)
-        {
-            waveTime = dayWorker.nightTime;
-        }
+
+        if (isBloodMoon) waveTime = dayWorker.nightTime;
 
         if (waveData is null || waveCount - 1 >= waveData.waveMonsters.Length)
         {
@@ -31,9 +30,7 @@ public class SpawnWorker : MonoBehaviour
         }
 
         foreach (var waveMonster in waveData.waveMonsters[waveCount - 1].monsterDataList)
-        {
             StartCoroutine(SpawnMonster(waveMonster, waveTime));
-        }
     }
 
     private IEnumerator SpawnMonster(MonsterData monsterData, float waveTime)
@@ -56,16 +53,17 @@ public class SpawnWorker : MonoBehaviour
     private Vector3 GetSpawnPoint()
     {
         var spawnPoint = new Vector3(0, 0, 0);
-        if (UnityEngine.Random.Range(0, 2) == 0)
+        if (Random.Range(0, 2) == 0)
         {
-            spawnPoint.x = UnityEngine.Random.Range(-spawnRange.x / 2, spawnRange.x / 2);
-            spawnPoint.y = UnityEngine.Random.Range(0, 2) == 0 ? spawnRange.y / 2 : -spawnRange.y / 2;
+            spawnPoint.x = Random.Range(-spawnRange.x / 2, spawnRange.x / 2);
+            spawnPoint.y = Random.Range(0, 2) == 0 ? spawnRange.y / 2 : -spawnRange.y / 2;
         }
         else
         {
-            spawnPoint.x = UnityEngine.Random.Range(0, 2) == 0 ? spawnRange.x / 2 : -spawnRange.x / 2;
-            spawnPoint.y = UnityEngine.Random.Range(-spawnRange.y / 2, spawnRange.y / 2);
+            spawnPoint.x = Random.Range(0, 2) == 0 ? spawnRange.x / 2 : -spawnRange.x / 2;
+            spawnPoint.y = Random.Range(-spawnRange.y / 2, spawnRange.y / 2);
         }
+
         return spawnPoint;
     }
 
