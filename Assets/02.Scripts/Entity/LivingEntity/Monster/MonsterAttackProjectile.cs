@@ -6,7 +6,8 @@ public class MonsterAttackProjectile : MonsterAttack
 
     public override void Attack(Entity target)
     {
-        var projectile = Instantiate(projectilePrefab, Monster.transform.position, Quaternion.identity);
+        var projectile =
+            NetworkPoolManager.Instantiate(projectilePrefab, Monster.transform.position, Quaternion.identity);
         var projectileComponent = projectile.GetComponent<Projectile>();
         projectileComponent.Init(Monster);
         projectileComponent.Fire(target.transform.position);

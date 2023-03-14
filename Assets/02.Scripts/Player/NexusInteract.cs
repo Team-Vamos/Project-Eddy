@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 public class NexusInteract : MonoBehaviour
 {
@@ -18,11 +16,11 @@ public class NexusInteract : MonoBehaviour
         {
             case Resource resource:
                 Nexus.Instance.ResourceStorage.AddResource(resource.amount);
-                PoolManager.Destroy(resource.gameObject);
+                NetworkPoolManager.Destroy(resource.gameObject);
                 break;
             case Chest chest:
                 // TODO: chest open implementation
-                PoolManager.Destroy(chest.gameObject);
+                NetworkPoolManager.Destroy(chest.gameObject);
                 break;
         }
     }

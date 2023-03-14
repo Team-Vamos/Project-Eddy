@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class MonsterAttackSelfDestruct : MonsterAttack
+public class MonsterAttackSelfDestruct : MonsterAttack, IPoolable
 {
     [SerializeField] private float explosionTime;
     [SerializeField] private float explosionRadius;
     [SerializeField] private GameObject explosionEffect;
-
-    private void Awake()
-    {
-        OnInit += () =>
-        {
-            foreach (var monsterRenderer in Monster.Renderers)
-            {
-                monsterRenderer.material.color = Color.white;
-            }
-        };
-    }
 
     public override void Attack(Entity _)
     {
@@ -30,11 +18,9 @@ public class MonsterAttackSelfDestruct : MonsterAttack
     private IEnumerator SelfDestruct()
     {
         foreach (var monsterRenderer in Monster.Renderers)
-        {
             monsterRenderer.material.DOColor(Color.red, explosionTime).SetEase(Ease.Linear);
-        }
         yield return new WaitForSeconds(explosionTime);
-        Instantiate(explosionEffect, Monster.transform.position, Quaternion.identity);
+        NetworkPoolManager.Instantiate(explosionEffect, Monster.transform.position, Quaternion.identity);
         foreach (var entity in EntityManager.Instance.Entities)
         {
             if (entity == Monster) continue;
@@ -45,7 +31,24 @@ public class MonsterAttackSelfDestruct : MonsterAttack
                 explosionRadius) continue;
             damageTaker.TakeDamage(Monster.stats.damage);
         }
+
         Monster.Init();
-        Destroy(Monster.gameObject);
+        NetworkPoolManager.Destroy(Monster.gameObject);
+    }
+
+    public void OnInit()
+    {
+        StartCoroutine(Initialize());
+    }
+
+    private IEnumerator Initialize()
+    {
+        yield return null;
+        foreach (var monsterRenderer in Monster.Renderers)
+            monsterRenderer.material.DOColor(Color.white, 0.1f).SetEase(Ease.Linear);
+    }
+
+    public void OnReturn()
+    {
     }
 }

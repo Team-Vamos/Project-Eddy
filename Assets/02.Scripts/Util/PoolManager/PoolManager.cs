@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
 public static class PoolManager
 {
@@ -9,18 +10,16 @@ public static class PoolManager
 
     public static void PreloadObject(GameObject prefab, int count)
     {
-        for (int i = 0; i < count; i++)
-        {
-            PoolStorage.InstantiateObject(prefab);
-        }
+        for (var i = 0; i < count; i++) PoolStorage.InstantiateObject(prefab);
     }
 
     public static GameObject Instantiate(GameObject prefab, Transform parent = null)
     {
         return PoolStorage.GetObject(prefab, parent);
     }
-    
-    public static GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent = null)
+
+    public static GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation,
+        Transform parent = null)
     {
         var obj = PoolStorage.GetObject(prefab, parent);
         obj.transform.position = position;
@@ -31,5 +30,33 @@ public static class PoolManager
     public static void Destroy(GameObject instance)
     {
         PoolStorage.ReturnObject(instance);
+    }
+}
+
+public static class NetworkPoolManager
+{
+    [Command(requiresAuthority = false)]
+    public static GameObject Instantiate(GameObject prefab, Transform parent = null)
+    {
+        var instance = PoolManager.Instantiate(prefab, parent);
+        if (NetManager.Instance.isServer)
+            NetworkServer.Spawn(instance);
+        return instance;
+    }
+
+    [Command(requiresAuthority = false)]
+    public static GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation,
+        Transform parent = null)
+    {
+        var instance = PoolManager.Instantiate(prefab, position, rotation, parent);
+        if (NetManager.Instance.isServer)
+            NetworkServer.Spawn(instance);
+        return instance;
+    }
+
+    [Command(requiresAuthority = false)]
+    public static void Destroy(GameObject instance)
+    {
+        PoolManager.Destroy(instance);
     }
 }

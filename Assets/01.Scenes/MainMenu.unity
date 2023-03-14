@@ -339,6 +339,11 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 3121089938371734311, guid: 2a2387b02e1ca2845b05e1c39fd62ae1, type: 3}
+  - {fileID: 7196350025202754858, guid: c2028703d586999458e9f4c0266f9730, type: 3}
+  - {fileID: 7196350025202754858, guid: 64c0e2cb5732ad54f87c4e3f86b3c17f, type: 3}
+  - {fileID: 7196350025202754858, guid: 4b8b207b3d7de964e80eed8b564ec99c, type: 3}
+  - {fileID: 7196350025202754858, guid: 04d456161b60fcc4ea5a2a331c4d164b, type: 3}
+  - {fileID: 2272963312734690516, guid: 81a1d9503e4875f47875bc6c38836875, type: 3}
   timeInterpolationGui: 0
   _gamePlayerPrefab: {fileID: 7582323079745734672, guid: 2a2387b02e1ca2845b05e1c39fd62ae1, type: 3}
   gamePlayers: []

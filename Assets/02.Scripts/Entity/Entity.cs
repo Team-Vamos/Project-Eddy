@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Entity : MonoBehaviour
+public class Entity : NetworkBehaviour
 {
-    private Collider2D _collider2D;
-    public Collider2D Collider2D => _collider2D;
+    public Collider2D Collider2D { get; private set; }
 
     protected Entity(EntityType entityType)
     {
@@ -38,11 +37,11 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public EntityType EntityType { get; }
+    [field: SyncVar] public EntityType EntityType { get; }
 
     protected virtual void OnEnable()
     {
-        _collider2D = GetComponent<Collider2D>();
+        Collider2D = GetComponent<Collider2D>();
         this.Register();
     }
 
